@@ -212,6 +212,8 @@ gnome_vfs_result_to_string (class, result)
 	GnomeVFSResult result
     C_ARGS:
 	result
+
+#if GNOME_VFS_CHECK_VERSION (2, 3, 1)
  
 ##  char *gnome_vfs_get_mime_type (const char *text_uri)
 char *
@@ -227,3 +229,5 @@ gnome_vfs_get_mime_type (class, text_uri)
 #gnome_vfs_get_mime_type_for_data (data, data_size)
 #	gconstpointer data
 #	int data_size
+
+#endif
