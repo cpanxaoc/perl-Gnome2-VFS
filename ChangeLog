@@ -1,3 +1,7 @@
+2003/12/02 22:14 (-0500) muppetman
+
+	* t/GnomeVFSUtils.t: updated the skip count
+
 2003/12/01 23:42 (+0100) kaffeetisch
 
 	* t/GnomeVFSMime: Remove a blank.

@@ -21,7 +21,7 @@ Gnome2::VFS -> init();
 is(Gnome2::VFS -> format_file_size_for_display(1200000000), "1.1 GB");
 
 SKIP: {
-  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.1.3", 7)
+  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.1.3", 10)
     unless (Gnome2::VFS -> check_version(2, 1, 3));
 
   is(Gnome2::VFS -> escape_string('%$§'), '%25%24%A7');
