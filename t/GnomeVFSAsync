@@ -121,6 +121,20 @@ my $callback_progress_update = sub {
 
 ###############################################################################
 
+my $callback_find_directory = sub {
+  my ($handle, $results) = @_;
+
+  foreach (@{$results}) {
+    if ($_ -> { result } eq "ok") {
+      isa_ok($_ -> { uri }, "Gnome2::VFS::URI");
+    }
+  }
+
+  $handle -> cancel();
+};
+
+###############################################################################
+
 foreach (Gnome2::VFS::Async -> open("/usr/bin/perl", qw(read), 0, $callback_open),
          Gnome2::VFS::Async -> open_uri(Gnome2::VFS::URI -> new("/usr/bin/perl"), qw(read), 0, $callback_open),
          Gnome2::VFS::Async -> create("/tmp/bla", [qw(read write)], 1, 0666, 0, $callback_create),
@@ -134,9 +148,14 @@ foreach (Gnome2::VFS::Async -> open("/usr/bin/perl", qw(read), 0, $callback_open
 Gnome2::VFS::Async -> load_directory("/tmp", qw(default), 2, 0, $callback_directory_open);
 Gnome2::VFS::Async -> load_directory_uri(Gnome2::VFS::URI -> new("/tmp"), qw(default), 2, 0, $callback_directory_open);
 
-Gnome2::VFS::Async -> get_file_info([Gnome2::VFS::URI -> new("/tmp/bla"),
-                                     Gnome2::VFS::URI -> new("/tmp/ble"),
-                                     Gnome2::VFS::URI -> new("/tmp/bli")], qw(default), 0, $callback_file_info);
+###############################################################################
+
+my $files = [Gnome2::VFS::URI -> new("/tmp/bla"),
+             Gnome2::VFS::URI -> new("/tmp/ble"),
+             Gnome2::VFS::URI -> new("/tmp/bli")];
+
+Gnome2::VFS::Async -> get_file_info($files, qw(default), 0, $callback_file_info);
+Gnome2::VFS::Async -> find_directory($files, "desktop", 0, 1, 0777, 0, $callback_find_directory);
 
 ###############################################################################
 

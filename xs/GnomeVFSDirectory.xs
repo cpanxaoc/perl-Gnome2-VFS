@@ -94,30 +94,6 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
 
 /* ------------------------------------------------------------------------- */
 
-GList *
-SvPVGList (SV *ref)
-{
-	int i;
-
-	AV *array;
-	SV **value;
-
-	GList *list = NULL;
-
-	if (! (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV))
-		croak ("URI list has to be a reference to an array");
-
-	array = (AV *) SvRV (ref);
-
-	for (i = 0; i <= av_len (array); i++)
-		if ((value = av_fetch (array, i, 0)) && SvOK (*value))
-			list = g_list_append(list, SvPV_nolen (*value));
-
-	return list;
-}
-
-/* ------------------------------------------------------------------------- */
-
 MODULE = Gnome2::VFS::Directory	PACKAGE = Gnome2::VFS::Directory	PREFIX = gnome_vfs_directory_
 
 ##  GnomeVFSResult gnome_vfs_directory_open (GnomeVFSDirectoryHandle **handle, const gchar *text_uri, GnomeVFSFileInfoOptions options) 
@@ -213,6 +189,7 @@ gnome_vfs_directory_visit_files (class, text_uri, file_ref, info_options, visit_
 	                                            vfs2perl_directory_visit_func,
 	                                          callback);
 
+	g_list_free (file_list);
 	gperl_callback_destroy (callback);
     OUTPUT:
 	RETVAL
@@ -238,6 +215,7 @@ gnome_vfs_directory_visit_files_at_uri (class, uri, file_ref, info_options, visi
 	                                                   vfs2perl_directory_visit_func,
 	                                                 callback);
 
+	g_list_free (file_list);
 	gperl_callback_destroy (callback);
     OUTPUT:
 	RETVAL
@@ -249,19 +227,17 @@ gnome_vfs_directory_list_load (class, text_uri, options)
 	GnomeVFSFileInfoOptions options
     PREINIT:
 	GnomeVFSResult result;
-	GList *list = NULL;
+	GList *i, *list = NULL;
     PPCODE:
 	result = gnome_vfs_directory_list_load (&list, text_uri, options);
 
 	EXTEND (sp, 1);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 
-	for (; list != NULL; list = list->next) {
-		XPUSHs (sv_2mortal (newSVGnomeVFSFileInfo (list->data)));
-		g_free (list->data);
-	}
+	for (i = list; i != NULL; i = i->next)
+		XPUSHs (sv_2mortal (newSVGnomeVFSFileInfo (i->data)));
 
-	g_list_free (list);
+	gnome_vfs_file_info_list_free (list);
 
 # --------------------------------------------------------------------------- #
 
@@ -291,6 +267,7 @@ gnome_vfs_directory_read_next (handle)
 	EXTEND (sp, 2);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSFileInfo (file_info)));
+	gnome_vfs_file_info_unref (file_info);
 
 ##  GnomeVFSResult gnome_vfs_directory_close (GnomeVFSDirectoryHandle *handle) 
 GnomeVFSResult

@@ -20,8 +20,6 @@
 
 #include "vfs2perl.h"
 
-typedef const char GnomeVFSApplication;
-
 const char *
 SvGnomeVFSApplication (SV *object)
 {
@@ -83,11 +81,12 @@ void
 gnome_vfs_application_registry_get_applications (class, mime_type=NULL)
 	const char *mime_type
     PREINIT:
-	GList *result;
+	GList *i, *results = NULL;
     PPCODE:
-	result = gnome_vfs_application_registry_get_applications (mime_type);
-	for (; result != NULL; result = result->next)
-		XPUSHs (sv_2mortal (newSVpv (result->data, PL_na)));
+	results = gnome_vfs_application_registry_get_applications (mime_type);
+	for (i = results; i != NULL; i = i->next)
+		XPUSHs (sv_2mortal (newSVpv (i->data, PL_na)));
+	g_list_free (results);
 
 MODULE = Gnome2::VFS::ApplicationRegistry	PACKAGE = Gnome2::VFS::Application	PREFIX = gnome_vfs_application_registry_
 
@@ -101,11 +100,12 @@ void
 gnome_vfs_application_registry_get_keys (app_id)
 	GnomeVFSApplication *app_id
     PREINIT:
-	GList *results;
+	GList *i, *results = NULL;
     PPCODE:
 	results = gnome_vfs_application_registry_get_keys (app_id);
-	for (; results != NULL; results = results->next)
-		XPUSHs (sv_2mortal (newSVpv (results->data, PL_na)));
+	for (i = results; i != NULL; i = i->next)
+		XPUSHs (sv_2mortal (newSVpv (i->data, PL_na)));
+	g_list_free (results);
 
 ##  const char *gnome_vfs_application_registry_peek_value (const char *app_id, const char *key)
 const char *
@@ -157,11 +157,12 @@ void
 gnome_vfs_application_registry_get_mime_types (app_id)
 	GnomeVFSApplication *app_id
     PREINIT:
-	GList *result;
+	GList *i, *results = NULL;
     PPCODE:
-	result = gnome_vfs_application_registry_get_mime_types (app_id);
-	for (result = result; result != NULL; result = result->next)
-		XPUSHs (sv_2mortal (newSVpv (result->data, PL_na)));
+	results = gnome_vfs_application_registry_get_mime_types (app_id);
+	for (i = results; i != NULL; i = i->next)
+		XPUSHs (sv_2mortal (newSVpv (i->data, PL_na)));
+	g_list_free (results);
 
 ##  gboolean gnome_vfs_application_registry_supports_mime_type (const char *app_id, const char *mime_type) 
 gboolean

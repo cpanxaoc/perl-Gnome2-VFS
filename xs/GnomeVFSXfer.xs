@@ -108,30 +108,6 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 
 /* ------------------------------------------------------------------------- */
 
-GList *
-SvGnomeVFSURIGList (SV *ref)
-{
-	int i;
-
-	AV *array;
-	SV **value;
-
-	GList *list = NULL;
-
-	if (! (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV))
-		croak ("URI list has to be a reference to an array");
-
-	array = (AV *) SvRV (ref);
-
-	for (i = 0; i <= av_len (array); i++)
-		if ((value = av_fetch (array, i, 0)) && SvOK (*value))
-			list = g_list_append(list, SvGnomeVFSURI (*value));
-
-	return list;
-}
-
-/* ------------------------------------------------------------------------- */
-
 MODULE = Gnome2::VFS::Xfer	PACKAGE = Gnome2::VFS::Xfer	PREFIX = gnome_vfs_xfer_
 
 # FIXME: these function names are UGLY.

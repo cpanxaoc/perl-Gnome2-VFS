@@ -240,20 +240,17 @@ gnome_vfs_uri_extract_short_path_name (uri)
 #gnome_vfs_uri_hash (p)
 #	gconstpointer p
 
-# FIXME, FIXME, FIXME: memory leak!
 ##  GList *gnome_vfs_uri_list_parse (const gchar* uri_list) 
 void
 gnome_vfs_uri_list_parse (class, uri_list)
 	const gchar *uri_list
     PREINIT:
-	GList *list;
+	GList *i, *list = NULL;
     PPCODE:
 	list = gnome_vfs_uri_list_parse (uri_list);
-	for (; list != NULL; list = list->next) {
-		XPUSHs (sv_2mortal (newSVGnomeVFSURI (list->data)));
-		/* Can't do that: g_free (list->data); */
-	}
-	gnome_vfs_uri_list_free (list);
+	for (i = list; i != NULL; i = i->next)
+		XPUSHs (sv_2mortal (newSVGnomeVFSURI (i->data)));
+	g_list_free (list);
 
 ###  GList *gnome_vfs_uri_list_ref (GList *list) 
 #GList *

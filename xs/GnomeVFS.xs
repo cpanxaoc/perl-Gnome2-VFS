@@ -20,6 +20,8 @@
 
 #include "vfs2perl.h"
 
+/* ------------------------------------------------------------------------- */
+
 SV *
 newSVGnomeVFSFileSize (GnomeVFSFileSize size)
 {
@@ -43,6 +45,111 @@ SvGnomeVFSFileOffset (SV *offset)
 {
 	return SvUV (offset);
 }
+
+/* ------------------------------------------------------------------------- */
+
+GList *
+SvPVGList (SV *ref)
+{
+	int i;
+
+	AV *array;
+	SV **value;
+
+	GList *list = NULL;
+
+	if (! (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV))
+		croak ("URI list has to be a reference to an array");
+
+	array = (AV *) SvRV (ref);
+
+	for (i = 0; i <= av_len (array); i++)
+		if ((value = av_fetch (array, i, 0)) && SvOK (*value))
+			list = g_list_append(list, SvPV_nolen (*value));
+
+	return list;
+}
+
+GList *
+SvGnomeVFSURIGList (SV *ref)
+{
+	int i;
+
+	AV *array;
+	SV **value;
+
+	GList *list = NULL;
+
+	if (! (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV))
+		croak ("URI list has to be a reference to an array");
+
+	array = (AV *) SvRV (ref);
+
+	for (i = 0; i <= av_len (array); i++)
+		if ((value = av_fetch (array, i, 0)) && SvOK (*value))
+			list = g_list_append(list, SvGnomeVFSURI (*value));
+
+	return list;
+}
+
+/* FIXME: does that AV leak? */
+SV *
+newSVGnomeVFSFileInfoGList (GList *list)
+{
+	AV *array = newAV ();
+
+	for (; list != NULL; list = list->next)
+		av_push (array, newSVGnomeVFSFileInfo (list->data));
+
+	return newRV_noinc ((SV *) array);
+}
+
+/* FIXME: leak? */
+SV *
+newSVGnomeVFSGetFileInfoResultGList (GList *list)
+{
+	AV *array = newAV ();
+
+	for (; list != NULL; list = list->next) {
+		HV *hash = newHV ();
+		GnomeVFSGetFileInfoResult* result = list->data;
+
+		gnome_vfs_uri_ref (result->uri);
+
+		hv_store (hash, "uri", 3, newSVGnomeVFSURI (result->uri), 0);
+		hv_store (hash, "result", 6, newSVGnomeVFSResult (result->result), 0);
+		hv_store (hash, "file_info", 9, newSVGnomeVFSFileInfo (result->file_info), 0);
+
+		av_push (array, newRV_noinc ((SV *) hash));
+	}
+
+	return newRV_noinc ((SV *) array);
+}
+
+/* FIXME: leak? */
+SV *
+newSVGnomeVFSFindDirectoryResultGList (GList *list)
+{
+	AV *array = newAV ();
+
+	for (; list != NULL; list = list->next) {
+		HV *hash = newHV ();
+		GnomeVFSFindDirectoryResult* result = list->data;
+
+		hv_store (hash, "result", 6, newSVGnomeVFSResult (result->result), 0);
+
+		if (result->uri) {
+			gnome_vfs_uri_ref (result->uri);
+			hv_store (hash, "uri", 3, newSVGnomeVFSURI (result->uri), 0);
+		}
+
+		av_push (array, newRV_noinc ((SV *) hash));
+	}
+
+	return newRV_noinc ((SV *) array);
+}
+
+/* ------------------------------------------------------------------------- */
 
 MODULE = Gnome2::VFS	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 

@@ -1,3 +1,23 @@
+2003/11/14 19:09 (+0100) kaffeetisch
+
+	* xs/GnomeVFSApplicationRegistry.xs
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSURI.xs: Plug some memory leaks
+
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSUtils.xs: Add the license boilerplate.
+
+	* xs/GnomeVFS.xs
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSXfer.xs: Centralize helper functions in GnomeVFS.xs.
+
+	* vfs2perl.h
+	* t/GnomeVFSAsync
+	* xs/GnomeVFSAsync.xs: Implement and test
+	gnome_vfs_async_find_directory.
+
 2003/11/13 23:01 (+0100) kaffeetisch
 
 	* vfs2perl.h

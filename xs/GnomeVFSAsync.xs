@@ -1,3 +1,23 @@
+/*
+ * Copyright (C) 2003 by the gtk2-perl team
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * $Header$
+ */
+
 #include "vfs2perl.h"
 
 /* ------------------------------------------------------------------------- */
@@ -205,40 +225,30 @@ vfs2perl_async_xfer_progress_callback (GnomeVFSAsyncHandle *handle,
 extern gint vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
                                              GPerlCallback *callback);
 
-/* ------------------------------------------------------------------------- */
-
-/* FIXME: does that AV leak? */
-SV *
-newSVGnomeVFSFileInfoGList (GList *list)
+void
+vfs2perl_async_find_directory_callback (GnomeVFSAsyncHandle *handle,
+                                        GList *results,
+                                        GPerlCallback *callback)
 {
-	AV *array = newAV ();
+	dSP;
 
-	for (; list != NULL; list = list->next)
-		av_push (array, newSVGnomeVFSFileInfo (list->data));
+	ENTER;
+	SAVETMPS;
 
-	return newRV_noinc ((SV *) array);
-}
+	PUSHMARK (SP);
 
-/* FIXME: leak? */
-SV *
-newSVGnomeVFSGetFileInfoResultGList (GList *list)
-{
-	AV *array = newAV ();
+	EXTEND (SP, 2);
+	PUSHs (sv_2mortal (newSVGnomeVFSAsyncHandle (handle)));
+	PUSHs (sv_2mortal (newSVGnomeVFSFindDirectoryResultGList (results)));
+	if (callback->data)
+		XPUSHs (sv_2mortal (newSVsv (callback->data)));
 
-	for (; list != NULL; list = list->next) {
-		HV *hash = newHV ();
-		GnomeVFSGetFileInfoResult* result = list->data;
+	PUTBACK;
 
-		gnome_vfs_uri_ref (result->uri);
+	call_sv (callback->func, G_DISCARD);
 
-		hv_store (hash, "uri", 3, newSVGnomeVFSURI (result->uri), 0);
-		hv_store (hash, "result", 6, newSVGnomeVFSResult (result->result), 0);
-		hv_store (hash, "file_info", 9, newSVGnomeVFSFileInfo (result->file_info), 0);
-
-		av_push (array, newRV_noinc ((SV *) hash));
-	}
-
-	return newRV_noinc ((SV *) array);
+	FREETMPS;
+	LEAVE;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -423,6 +433,8 @@ gnome_vfs_async_get_file_info (class, uri_ref, options, priority, func, data=NUL
 	                                 vfs2perl_async_get_file_info_callback,
 	                               callback);
 
+	g_list_free (uri_list);
+
 	/* FIXME, FIXME, FIXME: what about callback destruction? */
     OUTPUT:
 	RETVAL
@@ -535,6 +547,38 @@ gnome_vfs_async_xfer (class, source_ref, target_ref, xfer_options, error_mode, o
 
 	/* FIXME, FIXME, FIXME: what about callback destruction? */
 
+##  void gnome_vfs_async_find_directory (GnomeVFSAsyncHandle **handle_return, GList *near_uri_list, GnomeVFSFindDirectoryKind kind, gboolean create_if_needed, gboolean find_if_needed, guint permissions, int priority, GnomeVFSAsyncFindDirectoryCallback callback, gpointer user_data) 
+GnomeVFSAsyncHandle *
+gnome_vfs_async_find_directory (class, near_ref, kind, create_if_needed, find_if_needed, permissions, priority, func, data=NULL)
+	SV *near_ref
+	GnomeVFSFindDirectoryKind kind
+	gboolean create_if_needed
+	gboolean find_if_needed
+	guint permissions
+	int priority
+	SV *func
+	SV *data
+    CODE:
+	GList *near_uri_list = SvGnomeVFSURIGList (near_ref);
+	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, 0);
+
+	gnome_vfs_async_find_directory (&RETVAL,
+	                                near_uri_list,
+	                                kind,
+	                                create_if_needed,
+	                                find_if_needed,
+	                                permissions,
+	                                priority,
+	                                (GnomeVFSAsyncFindDirectoryCallback)
+	                                  vfs2perl_async_find_directory_callback,
+	                                callback);
+
+	g_list_free (near_uri_list);
+
+	/* FIXME, FIXME, FIXME: what about callback destruction? */
+    OUTPUT:
+	RETVAL
+
 ###  void gnome_vfs_async_create_as_channel (GnomeVFSAsyncHandle **handle_return, const gchar *text_uri, GnomeVFSOpenMode open_mode, gboolean exclusive, guint perm, int priority, GnomeVFSAsyncCreateAsChannelCallback callback, gpointer callback_data) 
 #void
 #gnome_vfs_async_create_as_channel (handle_return, text_uri, open_mode, exclusive, perm, priority, callback, callback_data)
@@ -558,19 +602,6 @@ gnome_vfs_async_xfer (class, source_ref, target_ref, xfer_options, error_mode, o
 #	int priority
 #	GnomeVFSAsyncCreateAsChannelCallback callback
 #	gpointer callback_data
-
-###  void gnome_vfs_async_find_directory (GnomeVFSAsyncHandle **handle_return, GList *near_uri_list, GnomeVFSFindDirectoryKind kind, gboolean create_if_needed, gboolean find_if_needed, guint permissions, int priority, GnomeVFSAsyncFindDirectoryCallback callback, gpointer user_data) 
-#void
-#gnome_vfs_async_find_directory (handle_return, near_uri_list, kind, create_if_needed, find_if_needed, permissions, priority, callback, user_data)
-#	GnomeVFSAsyncHandle **handle_return
-#	GList *near_uri_list
-#	GnomeVFSFindDirectoryKind kind
-#	gboolean create_if_needed
-#	gboolean find_if_needed
-#	guint permissions
-#	int priority
-#	GnomeVFSAsyncFindDirectoryCallback callback
-#	gpointer user_data
 
 ###  void gnome_vfs_async_file_control (GnomeVFSAsyncHandle *handle, const char *operation, gpointer operation_data, GDestroyNotify operation_data_destroy_func, GnomeVFSAsyncFileControlCallback callback, gpointer callback_data) 
 #void

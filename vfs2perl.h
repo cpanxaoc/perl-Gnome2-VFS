@@ -41,6 +41,8 @@ GnomeVFSFileOffset SvGnomeVFSFileOffset (SV *offset);
 
 /* ------------------------------------------------------------------------- */
 
+typedef const char GnomeVFSApplication;
+
 const char * SvGnomeVFSApplication (SV *object);
 SV * newSVGnomeVFSApplication (const char *app_id);
 
@@ -75,6 +77,8 @@ GList * SvGnomeVFSURIGList (SV *ref);
 SV * newSVGnomeVFSFileInfoGList (GList *list);
 
 SV * newSVGnomeVFSGetFileInfoResultGList (GList *list);
+
+SV * newSVGnomeVFSFindDirectoryResultGList (GList *list);
 
 /* ------------------------------------------------------------------------- */
 
