@@ -1,3 +1,8 @@
+2004/06/13 22:05 (+0200) kaffeetisch
+
+	* NEWS
+	* VFS.pm: Version 1.002.
+
 2004/06/13 21:52 (+0200) kaffeetisch
 
 	* Makefile.PL: Add guards around our custom GType definitions to
