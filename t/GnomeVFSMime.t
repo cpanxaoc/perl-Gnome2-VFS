@@ -18,15 +18,22 @@ isa_ok($monitor, "Gnome2::VFS::Mime::Monitor");
 my $type = Gnome2::VFS::Mime::Type -> new("text/html");
 
 my $application = $type -> get_default_application();
-isa_ok($application, "Gnome2::VFS::Mime::Application");
-ok(defined($application -> { id }));
-isa_ok($application -> { supported_uri_schemes }, "ARRAY");
 
-# FIXME: ok(Gnome2::VFS::Mime -> id_in_application_list("galeon", $application, $application));
-# FIXME: isa_ok(Gnome2::VFS::Mime -> remove_application_from_list("galeon", $application, $application), "Gnome2::VFS::Mime::Application");
-# FIXME: is(Gnome2::VFS::Mime -> id_list_from_application_list($application), "galeon");
+SKIP: {
+  skip("you don't seem to have a default application associated with text/html", 3)
+    unless (defined($application));
 
-# is($application -> launch("http://gtk2-perl.sf.net"), "ok");
+  isa_ok($application, "Gnome2::VFS::Mime::Application");
+  ok(defined($application -> { id }));
+  isa_ok($application -> { supported_uri_schemes }, "ARRAY");
+
+  # FIXME: ok(Gnome2::VFS::Mime -> id_in_application_list("galeon", $application, $application));
+  # FIXME: isa_ok(Gnome2::VFS::Mime -> remove_application_from_list("galeon", $application, $application), "Gnome2::VFS::Mime::Application");
+  # FIXME: is(Gnome2::VFS::Mime -> id_list_from_application_list($application), "galeon");
+
+  # is($application -> launch("http://gtk2-perl.sf.net"), "ok");
+}
+
 # isa_ok(Gnome2::VFS::Mime::Application -> new_from_id("xmms"), "Gnome2::VFS::Mime::Application");
 
 isa_ok(($type -> get_short_list_applications())[0], "Gnome2::VFS::Mime::Application");

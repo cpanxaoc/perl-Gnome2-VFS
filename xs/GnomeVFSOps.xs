@@ -29,14 +29,13 @@ vfs2perl_monitor_callback_create (SV *func, SV *data)
 	return gperl_callback_new (func, data, 0, NULL, 0);
 }
 
-static gboolean
+static void
 vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
                            const gchar *monitor_uri,
                            const gchar *info_uri,
                            GnomeVFSMonitorEventType event_type,
                            GPerlCallback *callback)
 {
-	gboolean ret;
 	dGPERL_CALLBACK_MARSHAL_SP;
 	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
@@ -55,16 +54,12 @@ vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
 
 	PUTBACK;
 
-	call_sv (callback->func, G_SCALAR);
+	call_sv (callback->func, G_DISCARD);
 
 	SPAGAIN;
-	ret = SvTRUE (POPs);
-	PUTBACK;
 
 	FREETMPS;
 	LEAVE;
-
-	return ret;
 }
 
 /* ------------------------------------------------------------------------- */
