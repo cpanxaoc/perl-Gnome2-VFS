@@ -86,6 +86,7 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
 	*recurse = POPi;
 	stop = POPi;
 
+	PUTBACK;
 	FREETMPS;
 	LEAVE;
 

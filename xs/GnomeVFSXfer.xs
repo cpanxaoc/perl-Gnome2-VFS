@@ -100,6 +100,7 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 	else
 		retval = POPi;
 
+	PUTBACK;
 	FREETMPS;
 	LEAVE;
 
