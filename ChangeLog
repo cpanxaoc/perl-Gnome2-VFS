@@ -1,3 +1,8 @@
+2004/09/25 21:14 (+0200) kaffeetisch
+
+	* doctypes: Add types for GnomeVFSApplication and
+	GnomeVFSMimeType.
+
 2004/09/15 12:31 (+0200) kaffeetisch
 
 	* xs/GnomeVFSVolumeMonitor.xs: Add a FIXME comment with a
