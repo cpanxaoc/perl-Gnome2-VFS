@@ -51,8 +51,11 @@ MODULE = Gnome2::VFS	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 =cut
 
 BOOT:
+{
 #include "register.xsh"
 #include "boot.xsh"
+	gperl_handle_logs_for ("libgnomevfs");
+}
 
 void
 gnome_vfs_get_version_info (class)

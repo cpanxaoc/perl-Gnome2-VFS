@@ -1,3 +1,10 @@
+2003/11/13 17:47 (+0100) kaffeetisch
+
+	* Makefile.PL: Install the manpage as Gnome2::VFS.3pm, not as
+	VFS.3pm.
+
+	* xs/GnomeVFS.xs: Use gperl_handle_logs_for.
+
 2003/11/12 22:16 (+0100) kaffeetisch
 
 	* xs/GnomeIconSelection.xs: Look at the two main members of the

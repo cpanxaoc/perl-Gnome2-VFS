@@ -26,10 +26,10 @@ unless (eval "use ExtUtils::Depends;"
    WriteMakefile(
          PREREQ_FATAL => 1,
          PREREQ_PM    => {
-            "Gtk2::"                => $build_reqs{'perl-Gtk2'},
-            "Glib::"                => $build_reqs{'perl-Glib'},
-            "ExtUtils::Depends::"   => $build_reqs{'perl-ExtUtils-Depends'},
-            "ExtUtils::PkgConfig::" => $build_reqs{'perl-ExtUtils-PkgConfig'},
+            "Gtk2"                => $build_reqs{'perl-Gtk2'},
+            "Glib"                => $build_reqs{'perl-Glib'},
+            "ExtUtils::Depends"   => $build_reqs{'perl-ExtUtils-Depends'},
+            "ExtUtils::PkgConfig" => $build_reqs{'perl-ExtUtils-PkgConfig'},
          },
    );
    exit 1; # not reached
@@ -78,7 +78,7 @@ system("perl -pi -e 's/GNOME_TYPE_VFSURI_HIDE_OPTIONS/GNOME_TYPE_VFS_URI_HIDE_OP
 
 our @xs_files = <xs/*.xs>;
 our %pod_files = (
-	'VFS.pm' => '$(INST_MAN3DIR)/VFS.$(MAN3EXT)',
+	'VFS.pm' => '$(INST_MAN3DIR)/Gnome2::VFS.$(MAN3EXT)',
 	Glib::MakeHelper->do_pod_files (@xs_files),
 );
 
