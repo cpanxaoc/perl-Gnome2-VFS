@@ -1,3 +1,8 @@
+2003/11/29 17:03 (+0100) kaffeetisch
+
+	* vfs2perl.h: Include
+	libgnomevfs/gnome-vfs-application-registry.h.
+
 2003/11/29 14:15 (+0100) kaffeetisch
 
 	R t/GnomeVFSMime.t

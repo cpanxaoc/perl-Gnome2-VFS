@@ -28,6 +28,7 @@
 #include <libgnomevfs/gnome-vfs-handle.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <libgnomevfs/gnome-vfs-mime-monitor.h>
+#include <libgnomevfs/gnome-vfs-application-registry.h>
 
 /* ------------------------------------------------------------------------- */
 
