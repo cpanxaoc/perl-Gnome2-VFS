@@ -104,7 +104,7 @@ Returns a GnomeVFSResult and a GnomeVFSDirectoryHandle.
 
 =cut
 ##  GnomeVFSResult gnome_vfs_directory_open_from_uri (GnomeVFSDirectoryHandle **handle, GnomeVFSURI *uri, GnomeVFSFileInfoOptions options) 
-GnomeVFSResult
+void
 gnome_vfs_directory_open_from_uri (class, uri, options)
 	GnomeVFSURI *uri
 	GnomeVFSFileInfoOptions options

@@ -239,7 +239,7 @@ Returns a GnomeVFSResult and the number of bytes written.
 
 =cut
 ##  GnomeVFSResult gnome_vfs_write (GnomeVFSHandle *handle, gconstpointer buffer, GnomeVFSFileSize bytes, GnomeVFSFileSize *bytes_written) 
-GnomeVFSResult
+void
 gnome_vfs_write (handle, buffer, bytes)
 	GnomeVFSHandle *handle
 	char *buffer;
@@ -284,7 +284,7 @@ Returns a GnomeVFSResult and a GnomeVFSFileInfo.
 
 =cut
 ##  GnomeVFSResult gnome_vfs_get_file_info_from_handle (GnomeVFSHandle *handle, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
-GnomeVFSResult
+void
 gnome_vfs_get_file_info (handle, options)
 	GnomeVFSHandle *handle
 	GnomeVFSFileInfoOptions options
@@ -338,7 +338,7 @@ Returns a GnomeVFSResult and a GnomeVFSHandle.
 
 =cut
 ##  GnomeVFSResult gnome_vfs_create_uri (GnomeVFSHandle **handle, GnomeVFSURI *uri, GnomeVFSOpenMode open_mode, gboolean exclusive, guint perm) 
-GnomeVFSResult
+void
 gnome_vfs_uri_create (uri, open_mode, exclusive, perm)
 	GnomeVFSURI *uri
 	GnomeVFSOpenMode open_mode
