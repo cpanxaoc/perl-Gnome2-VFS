@@ -1,3 +1,8 @@
+Overview of changes in Gnome2-VFS 1.00
+======================================
+
+* Depend on Glib 1.040.
+
 Overview of changes in Gnome2-VFS 0.99
 ======================================
 

@@ -1,3 +1,11 @@
+2004/03/24 17:04 (+0100) kaffeetisch
+
+	* Makefile.PL
+	* README: Depend on Glib 1.040.
+
+	* NEWS
+	* VFS.pm: Version 1.00.
+
 2004/03/19 00:12 (+0100) kaffeetisch
 
 	* NEWS
