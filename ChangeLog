@@ -1,3 +1,9 @@
+2004/03/11 15:49 (+0100) kaffeetisch
+
+	A NEWS
+	* MANIFEST
+	* VFS.pm: Version 0.98.
+
 2004/03/09 22:49 (+0100) kaffeetisch
 
 	* xs/GnomeVFSOps.xs (gnome_vfs_read): Croak if `bytes' is not
