@@ -56,7 +56,14 @@ my $callback_open = sub {
   isa_ok($handle, "Gnome2::VFS::Async::Handle");
   is($result, "ok");
 
-  $handle -> seek("start", 0, $callback_seek);
+  if (Gnome2::VFS -> CHECK_VERSION(2, 6, 0)) {
+    $handle -> seek("start", 0, $callback_seek);
+  }
+  else {
+    $handle -> read(2, $callback_read);
+    ok(1);
+    ok(1);
+  }
 };
 
 my $callback_write = sub {
