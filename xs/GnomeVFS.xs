@@ -213,7 +213,7 @@ gnome_vfs_result_to_string (class, result)
     C_ARGS:
 	result
 
-#if GNOME_VFS_CHECK_VERSION (2, 3, 1)
+#if VFS_CHECK_VERSION (2, 3, 1)
  
 ##  char *gnome_vfs_get_mime_type (const char *text_uri)
 char *
