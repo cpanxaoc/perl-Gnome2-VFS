@@ -1,5 +1,8 @@
 2003/12/22 23:55 (-0500) muppetman
 
+	* xs/GnomeVFS.xs: use braces to disambiguate the ifelse, and thereby
+	shut up the compiler about it.
+
 	* xs/GnomeVFSMime.xs: remove unused variable.
 
 	* xs/GnomeVFSUtils.xs: not sure why that "warn;" was there.

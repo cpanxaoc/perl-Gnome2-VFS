@@ -96,7 +96,7 @@ char **SvEnvArray (SV *ref)
 {
 	char **result = NULL;
 
-	if (SvOK (ref))
+	if (SvOK (ref)) {
 		if (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV) {
 			AV *array = (AV *) SvRV (ref);
 			SV **string;
@@ -112,6 +112,7 @@ char **SvEnvArray (SV *ref)
 		}
 		else
 			croak ("the environment parameter must be an array reference");
+	}
 
 	return result;
 }
