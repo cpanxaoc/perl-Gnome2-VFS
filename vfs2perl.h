@@ -46,6 +46,9 @@ SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);
 GnomeVFSHandle * SvGnomeVFSHandle (SV *object);
 SV * newSVGnomeVFSHandle (GnomeVFSHandle *handle);
 
+GnomeVFSAsyncHandle * SvGnomeVFSAsyncHandle (SV *object);
+SV * newSVGnomeVFSAsyncHandle (GnomeVFSAsyncHandle *handle);
+
 GnomeVFSMonitorHandle * SvGnomeVFSMonitorHandle (SV *object);
 SV * newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle);
 
@@ -56,5 +59,9 @@ SV * newSVGnomeVFSXferProgressInfo (GnomeVFSXferProgressInfo *info);
 
 GList * SvGList (SV *ref);
 GList * SvURIGList (SV *ref);
+
+SV * newSVFileInfoGList (GList *list);
+
+SV * newSVFileInfoResultGList (GList *list);
 
 #endif /* _VFS2PERL_H_ */

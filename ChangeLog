@@ -1,3 +1,23 @@
+2003/11/12 22:16 (+0100) kaffeetisch
+
+	* xs/GnomeIconSelection.xs: Look at the two main members of the
+	info struct when checking whether its valid.
+
+	* t/GnomeVFSDirectory.t
+	* t/GnomeVFSFileInfo.t
+	* t/GnomeVFSOps.t
+	* t/GnomeVFSUtils.t
+	* t/GnomeVFSXfer.t: Use a temporary scratch pad inside of the
+	package directory instead of /tmp.
+
+	* t/GnomeVFSFileInfo.t: Skip the Gnome2::VFS::FileInfo ->
+	matches() test on versions older than 2.4.1.
+
+	A xs/GnomeVFSAsync.xs
+	A t/GnomeVFSAsync
+	* vfs2perl.h: Initial, partial and leaky implementation of
+	GnomeVFSAsync.
+
 2003/11/09 03:02 (+0100) kaffeetisch
 
 	* Makefile.PL: Remove const_cccmd hack, MakeHelper does it for us.

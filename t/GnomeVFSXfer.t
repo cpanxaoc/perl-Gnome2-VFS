@@ -8,6 +8,15 @@ use Test::More tests => 68;
 
 ###############################################################################
 
+use Cwd qw(cwd);
+use constant TMP => cwd() . "/tmp";
+
+unless (-e TMP) {
+  mkdir(TMP) or die ("Urgh, couldn't create the scratch directory: $!");
+}
+
+###############################################################################
+
 Gnome2::VFS -> init();
 
 ###############################################################################
@@ -33,15 +42,15 @@ my $progress = sub {
 ###############################################################################
 
 foreach (qw(a e i o)) {
-  my $handle = Gnome2::VFS -> create("/tmp/bl" . $_, "write", 1, 0644);
+  my $handle = Gnome2::VFS -> create(TMP . "/bl" . $_, "write", 1, 0644);
   $handle -> write("blaaa!", 6);
   $handle -> close();
 }
 
 ###############################################################################
 
-my $source = Gnome2::VFS::URI -> new("file:///tmp/bla");
-my $destination = Gnome2::VFS::URI -> new("file:///tmp/blaa");
+my $source = Gnome2::VFS::URI -> new("file://" . TMP . "/bla");
+my $destination = Gnome2::VFS::URI -> new("file://" . TMP . "/blaa");
 
 is(Gnome2::VFS::Xfer -> uri($source,
                             $destination,
@@ -57,13 +66,13 @@ is($destination -> unlink(), "ok");
 
 ###############################################################################
 
-my @source = (Gnome2::VFS::URI -> new("file:///tmp/ble"),
-              Gnome2::VFS::URI -> new("file:///tmp/bli"),
-              Gnome2::VFS::URI -> new("file:///tmp/blo"));
+my @source = (Gnome2::VFS::URI -> new("file://" . TMP . "/ble"),
+              Gnome2::VFS::URI -> new("file://" . TMP . "/bli"),
+              Gnome2::VFS::URI -> new("file://" . TMP . "/blo"));
 
-my @destination = (Gnome2::VFS::URI -> new("file:///tmp/blee"),
-                   Gnome2::VFS::URI -> new("file:///tmp/blii"),
-                   Gnome2::VFS::URI -> new("file:///tmp/bloo"));
+my @destination = (Gnome2::VFS::URI -> new("file://" . TMP . "/blee"),
+                   Gnome2::VFS::URI -> new("file://" . TMP . "/blii"),
+                   Gnome2::VFS::URI -> new("file://" . TMP . "/bloo"));
 
 is(Gnome2::VFS::Xfer -> uri_list(\@source,
                                  \@destination,
@@ -89,3 +98,7 @@ is(Gnome2::VFS::Xfer -> delete_list(\@destination,
 ###############################################################################
 
 Gnome2::VFS -> shutdown();
+
+###############################################################################
+
+rmdir(TMP) or die("Urgh, couldn't delete the scratch directory: $!\n");

@@ -27,7 +27,7 @@ newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 {
 	HV *object = newHV ();
 
-	if (info) {
+	if (info && info->name && info->valid_fields) {
 		hv_store (object, "name", 4, newSVpv (info->name, PL_na), 0);
 		hv_store (object, "valid_fields", 12, newSVGnomeVFSFileInfoFields (info->valid_fields), 0);
 		

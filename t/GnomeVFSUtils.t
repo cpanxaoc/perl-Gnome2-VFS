@@ -2,6 +2,8 @@
 use strict;
 use Gnome2::VFS;
 
+use Cwd qw(cwd);
+
 use Test::More tests => 24;
 
 # $Header$
@@ -53,7 +55,7 @@ is(Gnome2::VFS -> get_local_path_from_uri("file:///bla"), "/bla");
 is(Gnome2::VFS -> get_uri_from_local_path("/bla"), "file:///bla");
 ok(Gnome2::VFS -> is_executable_command_string("perl -wle 'print bla'"));
 
-my ($result, $size) = Gnome2::VFS -> get_volume_free_space(Gnome2::VFS::URI -> new("file:///usr"));
+my ($result, $size) = Gnome2::VFS -> get_volume_free_space(Gnome2::VFS::URI -> new("file://" . cwd()));
 is($result, "ok");
 like($size, qr/^\d+$/);
 
