@@ -2,7 +2,7 @@
 
 	* Makefile.PL: Use custom prefixes for all GEnums and GFlags so
 	that there are no conflicts if/when gnome-vfs starts creating its
-	own ones.
+	own ones. (muppet)
 
 	* examples/downloader.pl: Use mnemonics and provide better status
 	messages.
