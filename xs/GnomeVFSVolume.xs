@@ -44,6 +44,7 @@ vfs2perl_volume_op_callback (gboolean succeeded,
 {
 	gperl_callback_invoke (callback, NULL, succeeded, error,
 	                                       detailed_error);
+	gperl_callback_destroy (callback);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -151,8 +152,6 @@ gnome_vfs_volume_unmount (volume, func, data=NULL)
 
 		default: g_assert_not_reached ();
 	}
-
-	/* FIXME: how to free the callback? */
 
 #if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
 

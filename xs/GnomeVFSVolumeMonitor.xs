@@ -37,8 +37,6 @@ GnomeVFSVolumeMonitor *
 gnome_vfs_get_volume_monitor (class)
     C_ARGS:
 	/* void */
-    CLEANUP:
-	gnome_vfs_volume_monitor_ref (RETVAL);
 
 # --------------------------------------------------------------------------- #
 
@@ -46,9 +44,9 @@ MODULE = Gnome2::VFS::VolumeMonitor	PACKAGE = Gnome2::VFS::VolumeMonitor	PREFIX 
 
 void
 DESTROY (monitor)
-	SV *monitor
     CODE:
-	gnome_vfs_volume_monitor_unref (SvGnomeVFSVolumeMonitor (monitor));
+	/* do nada to avoid strange warnings.  this means we're leaking the
+	   monitor, but I can live with that for now. */
 
 ##  GList * gnome_vfs_volume_monitor_get_mounted_volumes (GnomeVFSVolumeMonitor *volume_monitor)
 void

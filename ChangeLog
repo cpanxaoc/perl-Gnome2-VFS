@@ -1,3 +1,15 @@
+2004/08/15 03:01 (+0200) kaffeetisch
+
+	* t/GnomeVFSAsync: Completely rewrite this to actually work and
+	make sense.
+
+	* xs/GnomeVFSDrive.xs, xs/GnomeVFSVolume.xs: Free callback
+	directly after it was invoked.
+
+	* xs/GnomeVFSVolumeMonitor.xs: Keep a ref on the monitor and never
+	release it to avoid segfaults that occur when a monitor is freed
+	after gnome-vfs has already been shut down.
+
 2004/08/08 15:38 (+0200) kaffeetisch
 
 	* NEWS, README, VFS.pm: Version 1.010.

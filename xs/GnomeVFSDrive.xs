@@ -127,8 +127,6 @@ gnome_vfs_drive_mount (drive, func, data=NULL)
 		default: g_assert_not_reached ();
 	}
 
-	/* FIXME: how to free the callback? */
-
 #if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
 
 ##  GList * gnome_vfs_drive_get_mounted_volumes (GnomeVFSDrive *drive)
