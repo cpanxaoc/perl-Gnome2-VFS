@@ -78,65 +78,6 @@ newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle)
 
 /* ------------------------------------------------------------------------- */
 
-SV *
-newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
-{
-	HV * hv = newHV ();
-
-	if (info) {
-		hv_store (hv, "name", 4, newSVpv (info->name, PL_na), 0);
-		hv_store (hv, "valid_fields", 12, newSVGnomeVFSFileInfoFields (info->valid_fields), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE)
-			hv_store (hv, "type", 4, newSVGnomeVFSFileType (info->type), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS)
-			hv_store (hv, "permissions", 11, newSVGnomeVFSFilePermissions (info->permissions), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_FLAGS)
-			hv_store (hv, "flags", 5, newSVGnomeVFSFileFlags (info->flags), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_DEVICE)
-			hv_store (hv, "device", 6, newSViv (info->device), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_INODE)
-			hv_store (hv, "inode", 5, newSVuv (info->inode), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_LINK_COUNT)
-			hv_store (hv, "link_count", 10, newSVuv (info->link_count), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
-			hv_store (hv, "size", 4, newSVuv (info->size), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_BLOCK_COUNT)
-			hv_store (hv, "block_count", 11, newSVuv (info->block_count), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_IO_BLOCK_SIZE)
-			hv_store (hv, "io_block_size", 13, newSVuv (info->io_block_size), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ATIME)
-			hv_store (hv, "atime", 5, newSViv (info->atime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-			hv_store (hv, "mtime", 5, newSViv (info->mtime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_CTIME)
-			hv_store (hv, "ctime", 5, newSViv (info->ctime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME)
-			hv_store (hv, "symlink_name", 12, newSVpv (info->symlink_name, PL_na), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)
-			hv_store (hv, "mime_type", 9, newSVpv (info->mime_type, PL_na), 0);
-		
-		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
-	}
-
-	return newRV_inc ((SV*) hv);
-}
-
-/* ------------------------------------------------------------------------- */
-
 gboolean
 vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
                            const gchar *monitor_uri,
@@ -313,7 +254,6 @@ GnomeVFSResult
 gnome_vfs_close (handle)
 	GnomeVFSHandle *handle
 
-# FIXME: why doesn't bytes_read get filled?
 ##  GnomeVFSResult gnome_vfs_read (GnomeVFSHandle *handle, gpointer buffer, GnomeVFSFileSize bytes, GnomeVFSFileSize *bytes_read) 
 void
 gnome_vfs_read (handle, bytes)
@@ -332,7 +272,6 @@ gnome_vfs_read (handle, bytes)
 	PUSHs (sv_2mortal (newSVGChar (buffer)));
 	g_free (buffer);
 
-# FIXME: why doesn't bytes_written get filled?
 ##  GnomeVFSResult gnome_vfs_write (GnomeVFSHandle *handle, gconstpointer buffer, GnomeVFSFileSize bytes, GnomeVFSFileSize *bytes_written) 
 GnomeVFSResult
 gnome_vfs_write (handle, buffer, bytes)

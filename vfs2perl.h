@@ -34,6 +34,7 @@
 GnomeVFSURI * SvGnomeVFSURI (SV *object);
 SV * newSVGnomeVFSURI (GnomeVFSURI *uri);
 
+GnomeVFSFileInfo * SvGnomeVFSFileInfo (SV *object);
 SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);
 
 GnomeVFSHandle * SvGnomeVFSHandle (SV *object);

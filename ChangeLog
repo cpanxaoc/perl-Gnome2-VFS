@@ -1,3 +1,21 @@
+2003/10/22 22:43 (+0200) kaffeetisch
+
+	A t/GnomeVFSFileInfo.t
+	A xs/GnomeVFSFileInfo.xs
+	* vfs2perl.h
+	* MANIFEST: Implement gnome_vfs_file_info_matches,
+	gnome_vfs_file_info_get_mime_type and SvGnomeVFSFileInfo.
+
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSFileInfo.xs: Move newSVGnomeVFSFileInfo to
+	GnomeVFSFileInfo.xs.  Turn GnomeVFSFileInfo into an object so you
+	can call methods on it.  Retain the hash nature of it, though.
+	Yeah, it's not very OO-ish to be able to directly access the data
+	of an object, but implementing and using accessors would be much
+	more copious.
+
+	* vfs2perl.typemap: Add typemaps for GnomeVFSFileInfo.
+
 2003/10/22 01:36 (+0200) kaffeetisch
 
 	* VFS.pm: Follow James Curbo's advice and use a non-local file in

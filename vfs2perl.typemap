@@ -3,39 +3,48 @@ TYPEMAP
 GnomeVFSURI *	T_GNOME_VFS_URI
 const GnomeVFSURI *	T_GNOME_VFS_URI
 
+GnomeVFSFileInfo *	T_GNOME_VFS_FILE_INFO
+const GnomeVFSFileInfo *	T_GNOME_VFS_FILE_INFO
+
 GnomeVFSHandle *	T_GNOME_VFS_HANDLE
 const GnomeVFSHandle *	T_GNOME_VFS_HANDLE
 
-GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
-const GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
-
 GnomeVFSMonitorHandle *	T_GNOME_VFS_MONITOR_HANDLE
 const GnomeVFSMonitorHandle *	T_GNOME_VFS_MONITOR_HANDLE
+
+GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
+const GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
 
 INPUT
 
 T_GNOME_VFS_URI
 	$var = SvGnomeVFSURI ($arg);
 
+T_GNOME_VFS_FILE_INFO
+	$var = SvGnomeVFSFileInfo ($arg);
+
 T_GNOME_VFS_HANDLE
 	$var = SvGnomeVFSHandle ($arg);
 
-T_GNOME_VFS_DIRECTORY_HANDLE
-	$var = SvGnomeVFSDirectoryHandle ($arg);
-
 T_GNOME_VFS_MONITOR_HANDLE
 	$var = SvGnomeVFSMonitorHandle ($arg);
+
+T_GNOME_VFS_DIRECTORY_HANDLE
+	$var = SvGnomeVFSDirectoryHandle ($arg);
 
 OUTPUT
 
 T_GNOME_VFS_URI
 	$arg = newSVGnomeVFSURI ($var);
 
+T_GNOME_VFS_FILE_INFO
+	$arg = newSVGnomeVFSFileInfo ($var);
+
 T_GNOME_VFS_HANDLE
 	$arg = newSVGnomeVFSHandle ($var);
 
-T_GNOME_VFS_DIRECTORY_HANDLE
-	$arg = newSVGnomeVFSDirectoryHandle ($var);
-
 T_GNOME_VFS_MONITOR_HANDLE
 	$arg = newSVGnomeVFSMonitorHandle ($var);
+
+T_GNOME_VFS_DIRECTORY_HANDLE
+	$arg = newSVGnomeVFSDirectoryHandle ($var);
