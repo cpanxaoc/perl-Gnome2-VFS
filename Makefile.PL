@@ -11,13 +11,14 @@ our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.200',
   'perl-ExtUtils-PkgConfig' => '0.103',
   'perl-Glib'               => '1.034',
-  'perl-Gtk2'               => '1.03',
+  'perl-Gtk2'               => '1.02',
   'GnomeVFS'                => '2.0.0',
 );
 
 unless (eval "use ExtUtils::Depends;"
            . "use ExtUtils::PkgConfig;"
            . "use Glib '$build_reqs{'perl-Glib'}';"
+           . "use Gtk2 '$build_reqs{'perl-Gtk2'}';"
            . "use Glib::MakeHelper;"
 	   . "use Gtk2::CodeGen;"
            . "1") {
@@ -96,8 +97,8 @@ Gtk2::CodeGen->parse_maps ('vfs2perl');
 Gtk2::CodeGen->write_boot (ignore => qr/^Gnome2::VFS$/);
 
 ExtUtils::PkgConfig->write_version_macros (
-	"build/vfs2perl-version.h",
-	"gnome-vfs-2.0" => 'VFS',
+  "build/vfs2perl-version.h",
+  "gnome-vfs-2.0" => "VFS",
 );
 
 ###############################################################################
@@ -147,4 +148,3 @@ sub MY::postamble {
 		'PERL_GTK' => $build_reqs{'perl-Gtk2'},
 	);
 }
-

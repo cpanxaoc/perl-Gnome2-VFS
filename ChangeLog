@@ -1,3 +1,9 @@
+2004/02/11 20:43 (+0100) kaffeetisch
+
+	* Makefile.PL
+	* README
+	* VFS.pm: Version 0.92.
+
 2004/02/10 17:06 (+0100) kaffeetisch
 
 	Applying a patch from muppet.
@@ -7,8 +13,7 @@
 	* MANIFEST
 	* Makefile.PL
 	* gnome2perl.h: Use the new features of ExtUtils::Depends and
-	ExtUtils::PkgConfig.  Depend on Gnome2::Canvas.  Use
-	'gnome2perl-versions.h' for the version macros.
+	ExtUtils::PkgConfig.
 
 	* VFS.pm: Add the whole license statement to the documentation.
 

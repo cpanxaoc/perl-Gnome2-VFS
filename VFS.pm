@@ -12,7 +12,7 @@ require DynaLoader;
 
 our @ISA = qw(DynaLoader);
 
-our $VERSION = '0.90';
+our $VERSION = '0.92';
 
 sub import {
   my $self = shift();
@@ -138,8 +138,8 @@ There are some memory leaks especially with respect to callbacks.  This mainly
 affects GnomeVFSAsync as well as some parts of GnomeVFSXfer and GnomeVFSOps.
 GnomeVFSMime leaks some list data.
 
-GnomeVFSAsync is also known to crash occasionally when there are many
-concurrent transfers.
+GnomeVFSAsync is also known to crash under certain conditions when there are
+many concurrent transfers.
 
 =head1 SEE ALSO
 

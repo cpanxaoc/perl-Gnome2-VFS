@@ -16,7 +16,7 @@ access its index, use:
 				 Installation
 				--------------
 
-To install Gnome2::Vte, run the following commands:
+To install Gnome2::VFS, run the following commands:
 
   perl Makefile.PL
   make
@@ -26,9 +26,10 @@ To install Gnome2::Vte, run the following commands:
 				 Dependencies
 				--------------
 
-Gnome2::Vte depends on:
+Gnome2::VFS depends on:
 
-  ExtUtils::Depends
-  ExtUtils::PkgConfig
-  Glib >= 1.02
+  ExtUtils::Depends >= 0.200
+  ExtUtils::PkgConfig >= 0.103
+  Glib >= 1.034
+  Gtk2 >= 1.02
   libgnomevfs >= 2.0.0
