@@ -1,5 +1,7 @@
 TYPEMAP
 
+GnomeVFSFileSize	T_GNOME_VFS_FILE_SIZE
+
 GnomeVFSURI *	T_GNOME_VFS_URI
 const GnomeVFSURI *	T_GNOME_VFS_URI
 
@@ -15,7 +17,12 @@ const GnomeVFSMonitorHandle *	T_GNOME_VFS_MONITOR_HANDLE
 GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
 const GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
 
+GnomeVFSApplication *	T_GNOME_VFS_APPLICATION
+
 INPUT
+
+T_GNOME_VFS_FILE_SIZE
+	$var = SvUV ($arg);
 
 T_GNOME_VFS_URI
 	$var = SvGnomeVFSURI ($arg);
@@ -32,7 +39,13 @@ T_GNOME_VFS_MONITOR_HANDLE
 T_GNOME_VFS_DIRECTORY_HANDLE
 	$var = SvGnomeVFSDirectoryHandle ($arg);
 
+T_GNOME_VFS_APPLICATION
+	$var = SvGnomeVFSApplication ($arg);
+
 OUTPUT
+
+T_GNOME_VFS_FILE_SIZE
+	$arg = newSVuv ($var);
 
 T_GNOME_VFS_URI
 	$arg = newSVGnomeVFSURI ($var);
@@ -48,3 +61,6 @@ T_GNOME_VFS_MONITOR_HANDLE
 
 T_GNOME_VFS_DIRECTORY_HANDLE
 	$arg = newSVGnomeVFSDirectoryHandle ($var);
+
+T_GNOME_VFS_APPLICATION
+	$arg = newSVGnomeVFSApplication ($var);

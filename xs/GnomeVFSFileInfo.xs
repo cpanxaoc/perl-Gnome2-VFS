@@ -196,4 +196,5 @@ gnome_vfs_file_info_matches (a, b)
 
 ##  const char * gnome_vfs_file_info_get_mime_type (GnomeVFSFileInfo *info)
 const char *
-gnome_vfs_file_info_get_mime_type (GnomeVFSFileInfo *info)
+gnome_vfs_file_info_get_mime_type (info)
+	GnomeVFSFileInfo *info

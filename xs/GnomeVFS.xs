@@ -51,3 +51,10 @@ gnome_vfs_find_directory (class, near_uri, kind, create_if_needed, find_if_neede
 	EXTEND (sp, 2);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSURI (result_uri)));
+
+##  const char *gnome_vfs_result_to_string (GnomeVFSResult result)
+const char *
+gnome_vfs_result_to_string (class, result)
+	GnomeVFSResult result
+    C_ARGS:
+	result

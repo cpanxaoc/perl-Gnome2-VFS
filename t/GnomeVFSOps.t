@@ -2,7 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 59;
+use Test::More tests => 40;
 
 # $Header$
 
@@ -92,19 +92,20 @@ is(Gnome2::VFS -> unlink("/tmp/blu"), "ok");
 
 ###############################################################################
 
-my $monitor;
+# XXX: any way to reliably test this?  (currently needs FAM and some luck.)
+# my $monitor;
 
-($result, $monitor) = Gnome2::VFS::Monitor -> add("/tmp", qw(directory), sub {
-  my ($handle, $monitor_uri, $info_uri, $event_type) = @_;
+# ($result, $monitor) = Gnome2::VFS::Monitor -> add("/tmp", qw(directory), sub {
+#   my ($handle, $monitor_uri, $info_uri, $event_type) = @_;
 
-  isa_ok($handle, "Gnome2::VFS::Monitor::Handle");
-  is($monitor_uri, "file:///tmp");
-  is($info_uri, "file:///tmp/ulb");
-  ok($event_type eq "created" or $event_type eq "deleted");
-});
+#   isa_ok($handle, "Gnome2::VFS::Monitor::Handle");
+#   is($monitor_uri, "file:///tmp");
+#   is($info_uri, "file:///tmp/ulb");
+#   ok($event_type eq "created" or $event_type eq "deleted");
+# });
 
-is($result, "ok");
-isa_ok($monitor, "Gnome2::VFS::Monitor::Handle");
+# is($result, "ok");
+# isa_ok($monitor, "Gnome2::VFS::Monitor::Handle");
 
 ###############################################################################
 
@@ -119,14 +120,14 @@ is($uri -> remove_directory(), "ok");
 ###############################################################################
 
 # shortly enter the main loop so that the monitor receives the events.
-Glib::Idle -> add(sub {
-  Gtk2 -> main_quit();
-  return 0;
-});
+# Glib::Idle -> add(sub {
+#   Gtk2 -> main_quit();
+#   return 0;
+# });
 
-Gtk2 -> main();
+# Gtk2 -> main();
 
-is($monitor -> cancel(), "ok");
+# is($monitor -> cancel(), "ok");
 
 ###############################################################################
 

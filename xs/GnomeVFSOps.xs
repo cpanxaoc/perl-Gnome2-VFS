@@ -215,7 +215,7 @@ gnome_vfs_get_file_info (class, text_uri, options)
 GnomeVFSResult
 gnome_vfs_truncate (class, text_uri, length)
 	const gchar *text_uri
-	unsigned long length
+	GnomeVFSFileSize length
     C_ARGS:
 	text_uri, length
 
@@ -258,7 +258,7 @@ gnome_vfs_close (handle)
 void
 gnome_vfs_read (handle, bytes)
 	GnomeVFSHandle *handle
-	unsigned long bytes
+	GnomeVFSFileSize bytes
     PREINIT:
 	gchar *buffer;
 	GnomeVFSResult result;
@@ -277,7 +277,7 @@ GnomeVFSResult
 gnome_vfs_write (handle, buffer, bytes)
 	GnomeVFSHandle *handle
 	gchar *buffer;
-	unsigned long bytes
+	GnomeVFSFileSize bytes
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSFileSize bytes_written = bytes;
@@ -329,7 +329,7 @@ gnome_vfs_get_file_info_from_handle (handle, options)
 GnomeVFSResult
 gnome_vfs_truncate_handle (handle, length)
 	GnomeVFSHandle *handle
-	unsigned long length
+	GnomeVFSFileSize length
     ALIAS:
 	Gnome2::VFS::Handle::truncate = 1
 
@@ -430,7 +430,7 @@ gnome_vfs_get_file_info_uri (uri, options)
 GnomeVFSResult
 gnome_vfs_truncate_uri (uri, length)
 	GnomeVFSURI *uri
-	unsigned long length
+	GnomeVFSFileSize length
     ALIAS:
 	Gnome2::VFS::URI::truncate = 1
 
@@ -487,9 +487,16 @@ DESTROY (rv)
 	SV *rv
     CODE:
 	MAGIC *mg;
+	GnomeVFSMonitorHandle *handle;
 
 	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
 		return;
+
+	/* FIXME, FIXME, FIXME: why do I get «dereferencing pointer to incomplete type» here?
+	handle = mg->mg_ptr;
+
+	if (handle->user_data)
+		gperl_callback_destroy ((GPerlCallback *) handle->user_data); */
 
 	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
 

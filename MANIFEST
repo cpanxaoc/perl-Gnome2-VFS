@@ -6,6 +6,7 @@ MANIFEST			This list of files
 maps
 META.yml			Module meta-data (added by MakeMaker)
 t/GnomeVFS.t
+t/GnomeVFSApplicationRegistry.t
 t/GnomeVFSDirectory.t
 t/GnomeVFSFileInfo.t
 t/GnomeVFSOps.t
