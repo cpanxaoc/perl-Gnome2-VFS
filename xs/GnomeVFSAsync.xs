@@ -20,6 +20,7 @@
 
 #include "vfs2perl.h"
 #include <gperl_marshal.h>
+#include <libgnomevfs/gnome-vfs-job-limit.h>
 
 /* ------------------------------------------------------------------------- */
 
