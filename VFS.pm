@@ -12,7 +12,7 @@ require DynaLoader;
 
 our @ISA = qw(DynaLoader);
 
-our $VERSION = '0.10';
+our $VERSION = '0.90';
 
 sub import {
   my $self = shift();
@@ -111,8 +111,9 @@ Gnome2::VFS - Perl interface to the 2.x series of the GNOME VFS library
 
 =head1 ABSTRACT
 
-Perl bindings to the 2.x series of the GNOME VFS library.  This module allows
-you to interface with the gnome-vfs libraries.
+This module allows you to interface with the GNOME Virtual File System library.
+It provides the means to transparently access files on all kinds of
+filesystems.
 
 =head1 DESCRIPTION
 

@@ -30,5 +30,5 @@ Gnome2::Vte depends on:
 
   ExtUtils::Depends
   ExtUtils::PkgConfig
-  Glib >= 1.01
+  Glib >= 1.02
   libgnomevfs >= 2.0.0
