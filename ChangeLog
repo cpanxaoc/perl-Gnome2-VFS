@@ -1,3 +1,8 @@
+2003/12/22 01:19 (+0100) kaffeetisch
+
+	* META.yml
+	* VFS.pm: Version 0.10.
+
 2003/12/21 15:17 (+0100) kaffeetisch
 
 	* VFS.pm: Add a KNOWN BUGS section.
