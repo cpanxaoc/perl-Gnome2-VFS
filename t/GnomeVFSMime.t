@@ -20,7 +20,7 @@ my $type = Gnome2::VFS::Mime::Type -> new("text/html");
 my $application = $type -> get_default_application();
 
 SKIP: {
-  skip("you don't seem to have a default application associated with text/html", 3)
+  skip("you don't seem to have a default application associated with text/html", 5)
     unless (defined($application));
 
   isa_ok($application, "Gnome2::VFS::Mime::Application");
@@ -32,12 +32,12 @@ SKIP: {
   # FIXME: is(Gnome2::VFS::Mime -> id_list_from_application_list($application), "galeon");
 
   # is($application -> launch("http://gtk2-perl.sf.net"), "ok");
+
+  isa_ok(($type -> get_short_list_applications())[0], "Gnome2::VFS::Mime::Application");
+  isa_ok(($type -> get_all_applications())[0], "Gnome2::VFS::Mime::Application");
 }
 
 # isa_ok(Gnome2::VFS::Mime::Application -> new_from_id("xmms"), "Gnome2::VFS::Mime::Application");
-
-isa_ok(($type -> get_short_list_applications())[0], "Gnome2::VFS::Mime::Application");
-isa_ok(($type -> get_all_applications())[0], "Gnome2::VFS::Mime::Application");
 
 # $type -> get_icon();
 # $type -> set_icon(...);
