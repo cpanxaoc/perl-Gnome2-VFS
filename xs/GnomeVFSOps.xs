@@ -252,23 +252,23 @@ gnome_vfs_read (handle, bytes)
 	GnomeVFSHandle *handle
 	GnomeVFSFileSize bytes
     PREINIT:
-	gchar *buffer;
+	char *buffer;
 	GnomeVFSResult result;
 	GnomeVFSFileSize bytes_read = bytes;
     PPCODE:
-	buffer = g_new0 (gchar, bytes);
+	buffer = g_new0 (char, bytes);
 	result = gnome_vfs_read (handle, buffer, bytes, &bytes_read);
 	EXTEND (sp, 3);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVuv (bytes_read)));
-	PUSHs (sv_2mortal (newSVGChar (buffer)));
+	PUSHs (sv_2mortal (newSVpv (buffer, bytes_read)));
 	g_free (buffer);
 
 ##  GnomeVFSResult gnome_vfs_write (GnomeVFSHandle *handle, gconstpointer buffer, GnomeVFSFileSize bytes, GnomeVFSFileSize *bytes_written) 
 GnomeVFSResult
 gnome_vfs_write (handle, buffer, bytes)
 	GnomeVFSHandle *handle
-	gchar *buffer;
+	char *buffer;
 	GnomeVFSFileSize bytes
     PREINIT:
 	GnomeVFSResult result;

@@ -83,7 +83,7 @@ is($info -> { mime_type }, "text/plain");
 
 ($result, $info) = $handle -> get_file_info(qw(default));
 is($result, "ok");
-isa_ok($info -> { permissions }, "ARRAY");
+isa_ok($info -> { permissions }, "Gnome2::VFS::FilePermissions");
 
 is($handle -> close(), "ok");
 

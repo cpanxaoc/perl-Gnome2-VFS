@@ -128,13 +128,6 @@ WriteMakefile(
 );
 
 package MY;
-use Cwd;
-
-sub const_cccmd {
-	my $inherited = shift->SUPER::const_cccmd (@_);
-	$inherited .= ' -o $@';
-	$inherited;
-}
 
 sub postamble
 {

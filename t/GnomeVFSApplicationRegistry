@@ -13,6 +13,8 @@ Gnome2::VFS::ApplicationRegistry -> reload();
 
 ###############################################################################
 
+ok(Gnome2::VFS::ApplicationRegistry -> get_applications());
+
 my $application = Gnome2::VFS::ApplicationRegistry -> new("gnome-terminal");
 isa_ok($application, "Gnome2::VFS::Application");
 
@@ -38,7 +40,6 @@ is_deeply([$application -> get_bool_value("can_open_multiple_files")], [0, 1]);
 # Gnome2::VFS::ApplicationRegistry -> shutdown();
 # Gnome2::VFS::ApplicationRegistry -> reload();
 
-ok($application -> get_applications("text/html"));
 ok($application -> get_mime_types());
 ok($application -> supports_mime_type(($application -> get_mime_types())[0]));
 

@@ -87,12 +87,12 @@ Gnome2::VFS - Perl interface to the 2.x series of the GNOME VFS library
   my $bytes_written;
 
   ($result, $bytes_written) = $handle -> write($buffer, $bytes);
-  die_already("writing $bytes bytes to '/tmp/$file_name'")
+  die_already("writing $bytes bytes to '$target'")
     unless ($result eq "ok" && $bytes_written == $bytes);
 
   # Close the target.
   $result = $handle -> close();
-  die_already("closing '/tmp/$file_name'") unless ($result eq "ok");
+  die_already("closing '$target'") unless ($result eq "ok");
 
   Gnome2::VFS -> shutdown();
 

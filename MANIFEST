@@ -7,7 +7,7 @@ VFS.pm
 genmaps.pl
 maps
 t/GnomeVFS.t
-t/GnomeVFSApplicationRegistry.t
+t/GnomeVFSApplicationRegistry
 t/GnomeVFSAsync
 t/GnomeVFSDirectory.t
 t/GnomeVFSFileInfo.t

@@ -78,6 +78,17 @@ gnome_vfs_application_registry_reload (class)
     C_ARGS:
 	/* void */
 
+##  GList *gnome_vfs_application_registry_get_applications(const char *mime_type) 
+void
+gnome_vfs_application_registry_get_applications (class, mime_type=NULL)
+	const char *mime_type
+    PREINIT:
+	GList *result;
+    PPCODE:
+	result = gnome_vfs_application_registry_get_applications (mime_type);
+	for (; result != NULL; result = result->next)
+		XPUSHs (sv_2mortal (newSVpv (result->data, PL_na)));
+
 MODULE = Gnome2::VFS::ApplicationRegistry	PACKAGE = Gnome2::VFS::Application	PREFIX = gnome_vfs_application_registry_
 
 ##  gboolean gnome_vfs_application_registry_exists (const char *app_id) 
@@ -140,17 +151,6 @@ void
 gnome_vfs_application_registry_unset_key (app_id, key)
 	GnomeVFSApplication *app_id
 	const char *key
-
-##  GList *gnome_vfs_application_registry_get_applications(const char *mime_type) 
-void
-gnome_vfs_application_registry_get_applications (class, mime_type=NULL)
-	const char *mime_type
-    PREINIT:
-	GList *result;
-    PPCODE:
-	result = gnome_vfs_application_registry_get_applications (mime_type);
-	for (; result != NULL; result = result->next)
-		XPUSHs (sv_2mortal (newSVpv (result->data, PL_na)));
 
 ##  GList *gnome_vfs_application_registry_get_mime_types (const char *app_id) 
 void
