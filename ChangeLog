@@ -1,3 +1,9 @@
+2003/12/22 23:55 (-0500) muppetman
+
+	* xs/GnomeVFSMime.xs: remove unused variable.
+
+	* xs/GnomeVFSUtils.xs: not sure why that "warn;" was there.
+
 2003/12/23 01:30 (+0100) kaffeetisch
 
 	* Makefile.PL: Don't call do_pod_files twice.
