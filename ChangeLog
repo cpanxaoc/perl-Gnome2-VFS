@@ -1,3 +1,22 @@
+2004/06/28 19:55 (+0200) kaffeetisch
+
+	Merge from the stable-1-00 branch.
+
+	* Makefile.PL: Add guards around our custom GType definitions to
+	avoid compiler warnings that occur when Gnome2::VFS is not
+	recompiled after libgnomevfs was updated.
+
+	* t/GnomeVFSDirectory.t: Fix a test bug found by david d zuhn.
+
+	* t/GnomeVFSUtils.t
+	* xs/GnomeVFSUtils.xs: Patch by muppet fixes a crash found by
+	Gavin.
+
+	* vfs2perl.h
+	* Makefile.PL: Don't depend on Gtk2, since we actually don't need
+	to.  Instead, just include Glib's header, and add "-I build" to
+	the cflags.
+
 2004/03/29 17:15 (+0100) kaffeetisch
 
 	Merge from the stable-1-00 branch.

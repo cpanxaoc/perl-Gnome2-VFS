@@ -43,7 +43,7 @@ $handle = Gnome2::VFS::Directory -> open(TMP, qw(default));
 
 ($result, $info) = $handle -> read_next();
 is($result, "ok");
-is($info -> { name }, ".");
+ok($info -> { name } eq "." || $info -> { name } eq "..");
 is($info -> { type }, "directory");
 
 $handle -> close();
