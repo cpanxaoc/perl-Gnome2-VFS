@@ -1,3 +1,9 @@
+2004/01/02 15:09 (-0500) rwmcfa1
+
+	* Makefile.PL: rpm stuff added
+
+	* perl-Gnome2-VFS.spec.in: initial import
+
 2003/12/31 02:21 (-0500) muppetman
 
 	* GnomeVFSAsync.xs: include gnome-vfs-job-limit.h to quell
