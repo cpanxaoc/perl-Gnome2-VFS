@@ -11,13 +11,11 @@ our %build_reqs = (
 	'perl-ExtUtils-Depends'   => '0.1',
 	'perl-ExtUtils-PkgConfig' => '0.1',
 	'perl-Glib'               => '1.01',
-	'perl-Gtk2'               => '1.00',
 	'GnomeVFS'                => '2.0.0',
 );
 
 unless (eval "use ExtUtils::Depends;"
            . "use ExtUtils::PkgConfig;"
-           . "use Gtk2 '$build_reqs{'perl-Gtk2'}';"
            . "use Glib '$build_reqs{'perl-Glib'}';"
            . "use Glib::MakeHelper;"
 	   . "use Gtk2::CodeGen;"

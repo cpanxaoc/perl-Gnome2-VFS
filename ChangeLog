@@ -1,3 +1,17 @@
+2003/11/15 11:18 (+0100) kaffeetisch
+
+	* Makefile.PL: Remove dependency checking for Gtk2.
+
+	* VFS.pm: Don't 'use Gtk2;', 'use Glib;'.  We don't depend on
+	Gtk2.  Add an import method that takes an '-init' parameter, in
+	the style of Gtk2.
+
+	* t/GnomeVFSAsync: Do 'use Gtk2 -init;' here since VFS.pm isn't
+	doing it anymore.
+
+	A examples/downloader.pl: Add an example that makes use of
+	GnomeVFSAsync.  Also has a cool progress bar cell renderer.
+
 2003/11/14 19:09 (+0100) kaffeetisch
 
 	* xs/GnomeVFSApplicationRegistry.xs

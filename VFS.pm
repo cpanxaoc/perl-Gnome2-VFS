@@ -6,13 +6,26 @@ use 5.008;
 use strict;
 use warnings;
 
-use Gtk2;
+use Glib;
 
 require DynaLoader;
 
 our @ISA = qw(DynaLoader);
 
 our $VERSION = '0.01';
+
+sub import {
+  my $self = shift();
+
+  foreach (@_) {
+    if (/^-?init$/) {
+      $self -> init();
+    }
+    else {
+      $self -> VERSION($_);
+    }
+  }
+}
 
 sub dl_load_flags { 0x01 }
 
