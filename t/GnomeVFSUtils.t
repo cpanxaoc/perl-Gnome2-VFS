@@ -34,8 +34,8 @@ SKIP: {
 }
 
 SKIP: {
-  skip("make_uri_from_input_with_dirs is new in 2.2.5", 1)
-    unless (Gnome2::VFS -> check_version(2, 2, 5));
+  skip("make_uri_from_input_with_dirs is new in 2.3.1", 1)
+    unless (Gnome2::VFS -> check_version(2, 3, 1));
 
   is(Gnome2::VFS -> make_uri_from_input_with_dirs("~/tmp", qw(homedir)), "file://$ENV{ HOME }/tmp");
 }

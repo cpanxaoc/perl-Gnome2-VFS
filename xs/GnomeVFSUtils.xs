@@ -232,7 +232,7 @@ gnome_vfs_make_uri_from_input (class, uri)
 
 #endif
 
-#if VFS_CHECK_VERSION (2, 2, 5)
+#if VFS_CHECK_VERSION (2, 3, 1)
 
 ##  char * gnome_vfs_make_uri_from_input_with_dirs (const char *uri, GnomeVFSMakeURIDirs dirs) 
 char *

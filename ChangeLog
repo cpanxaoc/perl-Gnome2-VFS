@@ -1,3 +1,9 @@
+2003/11/29 18:03 (+0100) kaffeetisch
+
+	* t/GnomeVFSUtils.t
+	* xs/GnomeVFSUtils.xs: Alter the version checks:
+	gnome_vfs_make_uri_from_input_with_dirs was introduced in 2.3.1.
+
 2003/11/29 17:03 (+0100) kaffeetisch
 
 	* vfs2perl.h: Include
