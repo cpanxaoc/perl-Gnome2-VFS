@@ -169,6 +169,7 @@ Returns the major, minor and micro version numbers of GnomeVFS.
 void
 gnome_vfs_get_version_info (class)
     PPCODE:
+	PERL_UNUSED_VAR (ax);
 	EXTEND (SP, 3);
 	PUSHs (sv_2mortal (newSViv (VFS_MAJOR_VERSION)));
 	PUSHs (sv_2mortal (newSViv (VFS_MINOR_VERSION)));
