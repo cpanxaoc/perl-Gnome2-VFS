@@ -35,7 +35,7 @@ SKIP: {
 
   skip("resolve_relative was broken on 64bit platforms", 1)
     if ($Config{ archname } =~ m/^(ia64|x86_64|alpha)/ &&
-        not Gnome2::VFS -> CHECK_VERSION(2, 7, 4)); # FIXME: 2.8
+        not Gnome2::VFS -> CHECK_VERSION(2, 8, 0));
 
   is($uri -> resolve_relative("bla.html") -> to_string(), "http://www.freenet.de/bla.html");
 }

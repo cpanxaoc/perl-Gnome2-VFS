@@ -46,7 +46,7 @@ is($volume -> compare($volume), 0);
 
 SKIP: {
   skip("get_hal_udi is new in 2.8", 1)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 7, 4)); # FIXME: 2.8
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 8, 0));
 
   ok(defined $volume -> get_hal_udi());
 }

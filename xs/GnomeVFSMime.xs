@@ -528,7 +528,7 @@ gnome_vfs_mime_remove_from_all_applications (mime_type, ...)
     OUTPUT:
 	RETVAL
 
-#if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
+#if VFS_CHECK_VERSION (2, 8, 0)
 
 ##  GList *gnome_vfs_mime_get_all_desktop_entries (const char *mime_type)
 void

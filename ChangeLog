@@ -1,3 +1,13 @@
+2005/03/07	kaffeetisch
+
+	* vfs2perl.c, vfs2per.h, t/GnomeVFSAddress.t, t/GnomeVFSDNSSD,
+	t/GnomeVFSDrive, t/GnomeVFSMime, t/GnomeVFSResolve.t,
+	t/GnomeVFSURI.t, t/GnomeVFSVolume, xs/GnomeVFSDrive.xs,
+	xs/GnomeVFSMime.xs, xs/GnomeVFSVolume.xs: Use stable releases in
+	all version checks.
+
+	* t/GnomeVFSFileInfo.t: Mark failing test as TODO.
+
 2005/02/10 22:18 (+0100) kaffeetisch
 
 	* VFS.pm: Do it like all the other cool kids and alter

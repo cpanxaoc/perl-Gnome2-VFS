@@ -50,7 +50,7 @@ GType vfs2perl_gnome_vfs_async_handle_get_type (void) G_GNUC_CONST;
 
 /* ------------------------------------------------------------------------- */
 
-#if VFS_CHECK_VERSION (2, 7, 2) /* FIXME: 2.8 */
+#if VFS_CHECK_VERSION (2, 8, 0)
 
 #include <libgnomevfs/gnome-vfs-dns-sd.h>
 
@@ -59,10 +59,6 @@ GType vfs2perl_gnome_vfs_dns_sd_browse_handle_get_type (void) G_GNUC_CONST;
 
 #define GNOME_VFS_TYPE_VFS_DNS_SD_RESOLVE_HANDLE (vfs2perl_gnome_vfs_dns_sd_resolve_handle_get_type ())
 GType vfs2perl_gnome_vfs_dns_sd_resolve_handle_get_type (void) G_GNUC_CONST;
-
-#endif /* 2.8 */
-
-#if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
 
 #include <libgnomevfs/gnome-vfs-address.h>
 #include <libgnomevfs/gnome-vfs-resolve.h>

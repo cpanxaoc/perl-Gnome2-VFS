@@ -40,7 +40,7 @@ is($drive -> compare($drive), 0);
 
 SKIP: {
   skip("get_mounted_volumes and get_hal_udi are new in 2.8", 2)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 7, 4)); # FIXME: 2.8
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 8, 0));
 
   isa_ok(($drive -> get_mounted_volumes())[0], "Gnome2::VFS::Volume");
   ok(defined $drive -> get_hal_udi());

@@ -153,7 +153,7 @@ gnome_vfs_volume_unmount (volume, func, data=NULL)
 		default: g_assert_not_reached ();
 	}
 
-#if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
+#if VFS_CHECK_VERSION (2, 8, 0)
 
 ##  char * gnome_vfs_volume_get_hal_udi (GnomeVFSVolume *volume)
 char *

@@ -10,7 +10,7 @@ unless (-d "$ENV{ HOME }/.gnome") {
   plan(skip_all => "You have no ~/.gnome");
 }
 
-unless (Gnome2::VFS -> CHECK_VERSION(2, 7, 4)) { # FIXME: 2.8
+unless (Gnome2::VFS -> CHECK_VERSION(2, 8, 0)) {
   plan(skip_all => "This is new in 2.8");
 }
 
