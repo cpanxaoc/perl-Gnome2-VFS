@@ -1,3 +1,7 @@
+2004/08/08 15:38 (+0200) kaffeetisch
+
+	* NEWS, README, VFS.pm: Version 1.010.
+
 2004/08/08 15:15 (+0200) kaffeetisch
 
 	* Makefile.PL: Depend on Glib 1.053.

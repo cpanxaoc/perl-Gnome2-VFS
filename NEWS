@@ -1,7 +1,16 @@
+Overview of changes in Gnome2-VFS 1.010
+=======================================
+
+* Depend on Glib 1.053.
+* Wrapped GnomeVFSAddress, GnomeVFSDNSSD, GnomeVFSDrive, GnomeVFSResolve,
+  GnomeVFSVolume, and GnomeVFSVolumeMonitor.
+* Wrapped new stuff in GnomeVFSMime and GnomeVFSAsync.
+* Implemented a constructor for GnomeVFSFileInfo.
+
 Overview of changes in Gnome2-VFS 1.002
 =======================================
 
-* Hush compiler warnings that might occur under certain circumstances.
+* Hushed compiler warnings that might occur under certain circumstances.
 
 Overview of changes in Gnome2-VFS 1.001
 =======================================
@@ -23,5 +32,5 @@ Overview of changes in Gnome2-VFS 0.98
 ======================================
 
 * Fixed version information implementation to stick to the new policy.
-* Fixed bug in Gnome2::VFS::read that would result in a segfault when
+* Fixed a bug in Gnome2::VFS::read that would result in a segfault when
   called with a bytes argument that is not greater than 0.
