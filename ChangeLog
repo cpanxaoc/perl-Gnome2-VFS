@@ -1,3 +1,12 @@
+2003/11/27 22:55 (+0100) kaffeetisch
+
+	A t/GnomeVFSMimeHandlers.t
+	A xs/GnomeVFSMimeHandlers.xs
+	* vfs.typemap
+	* vfs2perl.h: Initial implementation of GnomeVFSMimeHandlers.  It
+	still has a few unbound functions, most of which need Bonobo
+	typemaps.
+
 2003/11/26 12:33 (-0500) muppetman
 
 	* vfs2perl.h

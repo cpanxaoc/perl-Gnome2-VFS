@@ -26,6 +26,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-handle.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -76,6 +77,15 @@ typedef const char GnomeVFSApplication;
 
 const char * SvGnomeVFSApplication (SV *object);
 SV * newSVGnomeVFSApplication (const char *app_id);
+
+typedef const char GnomeVFSMimeType;
+
+const char * SvGnomeVFSMimeType (SV *object);
+SV * newSVGnomeVFSMimeType (const char *mime_type);
+
+/* ------------------------------------------------------------------------- */
+
+SV * newSVGnomeVFSMimeApplication (GnomeVFSMimeApplication *application);
 
 GnomeVFSFileInfo * SvGnomeVFSFileInfo (SV *object);
 SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);
