@@ -1,3 +1,7 @@
+2003/11/28 21:59 (-0500) muppetman
+
+	* xs/GnomeVFSOps.xs: a couple of callback marshaller bugfixes
+
 2003/11/28 22:31 (+0100) kaffeetisch
 
 	* MANIFEST
