@@ -12,7 +12,7 @@ t/GnomeVFSApplicationRegistry
 t/GnomeVFSAsync
 t/GnomeVFSDirectory.t
 t/GnomeVFSFileInfo.t
-t/GnomeVFSMime.t
+t/GnomeVFSMime
 t/GnomeVFSOps.t
 t/GnomeVFSURI.t
 t/GnomeVFSUtils.t

@@ -1,3 +1,14 @@
+2003/11/29 14:15 (+0100) kaffeetisch
+
+	R t/GnomeVFSMime.t
+	A t/GnomeVFSMime
+	* MANIFEST: Don't include the GnomeVFSMime test in the 'make test'
+	run.  I didn't know that the altered information actually gets
+	stored.  Sigh.
+
+	* META.yml
+	* VFS.pm: Bump version yet again, to 0.05 this time.
+
 2003/11/29 04:29 (+0100) kaffeetisch
 
 	* t/GnomeVFSMime.t: Skip certain tests if the MIME database
