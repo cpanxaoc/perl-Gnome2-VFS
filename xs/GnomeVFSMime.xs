@@ -177,7 +177,7 @@ gnome_vfs_mime_id_in_application_list (class, id, ...)
 	const char *id
     PREINIT:
 	int i;
-	GList *applications = NULL, *j;
+	GList *applications = NULL;
     CODE:
 	for (i = 2; i < items; i++)
 		applications = g_list_append (applications, SvGnomeVFSMimeApplication (ST (i)));
