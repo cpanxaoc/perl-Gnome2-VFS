@@ -23,63 +23,13 @@
 
 /* ------------------------------------------------------------------------- */
 
-GnomeVFSHandle *
-SvGnomeVFSHandle (SV *object)
+static GPerlCallback *
+vfs2perl_monitor_callback_create (SV *func, SV *data)
 {
-	MAGIC *mg;
-
-	if (!object || !SvOK (object) || !SvROK (object) || !(mg = mg_find (SvRV (object), PERL_MAGIC_ext)))
-		return NULL;
-
-	return (GnomeVFSHandle *) mg->mg_ptr;
+	gperl_callback_new (func, data, 0, NULL, 0);
 }
 
-SV *
-newSVGnomeVFSHandle (GnomeVFSHandle *handle)
-{
-	SV *rv;
-	HV *stash;
-	SV *object = (SV *) newHV ();
-
-	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
-
-	rv = newRV_noinc (object);
-	stash = gv_stashpv ("Gnome2::VFS::Handle", 1);
-
-	return sv_bless (rv, stash);
-}
-
-/* ------------------------------------------------------------------------- */
-
-GnomeVFSMonitorHandle *
-SvGnomeVFSMonitorHandle (SV *object)
-{
-	MAGIC *mg;
-
-	if (!object || !SvOK (object) || !SvROK (object) || !(mg = mg_find (SvRV (object), PERL_MAGIC_ext)))
-		return NULL;
-
-	return (GnomeVFSMonitorHandle *) mg->mg_ptr;
-}
-
-SV *
-newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle)
-{
-	SV *rv;
-	HV *stash;
-	SV *object = (SV *) newHV ();
-
-	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
-
-	rv = newRV_noinc (object);
-	stash = gv_stashpv ("Gnome2::VFS::Monitor::Handle", 1);
-
-	return sv_bless (rv, stash);
-}
-
-/* ------------------------------------------------------------------------- */
-
-gboolean
+static gboolean
 vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
                            const gchar *monitor_uri,
                            const gchar *info_uri,
@@ -255,17 +205,6 @@ gnome_vfs_remove_directory (class, text_uri)
 # --------------------------------------------------------------------------- #
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Handle	PREFIX = gnome_vfs_
-
-void
-DESTROY (rv)
-	SV *rv
-    CODE:
-	MAGIC *mg;
-
-	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
-		return;
-
-	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
 
 ##  GnomeVFSResult gnome_vfs_close (GnomeVFSHandle *handle) 
 GnomeVFSResult
@@ -513,7 +452,7 @@ gnome_vfs_monitor_add (class, text_uri, monitor_type, func, data=NULL)
 	GnomeVFSResult result;
 	GnomeVFSMonitorHandle *handle;
     PPCODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, 0);
+	GPerlCallback *callback = vfs2perl_monitor_callback_create (func, data);
 
 	result = gnome_vfs_monitor_add (&handle,
 	                                text_uri,
@@ -530,32 +469,13 @@ gnome_vfs_monitor_add (class, text_uri, monitor_type, func, data=NULL)
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Monitor::Handle	PREFIX = gnome_vfs_monitor_
 
-# FIXME: also cancel the monitor here?
-void
-DESTROY (rv)
-	SV *rv
-    CODE:
-	MAGIC *mg;
-	GnomeVFSMonitorHandle *handle;
-
-	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
-		return;
-
-	/* FIXME, FIXME, FIXME: why do I get «dereferencing pointer to incomplete type» here?
-	handle = mg->mg_ptr;
-
-	if (handle->user_data)
-		gperl_callback_destroy ((GPerlCallback *) handle->user_data); */
-
-	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
-
 ##  GnomeVFSResult gnome_vfs_monitor_cancel (GnomeVFSMonitorHandle *handle) 
 GnomeVFSResult
 gnome_vfs_monitor_cancel (handle)
 	GnomeVFSMonitorHandle *handle
     CODE:
 	/* FIXME, FIXME, FIXME: why do I get «dereferencing pointer to incomplete type» here?
-	if (handle->user_data)
+	if (handle && handle->user_data)
 		gperl_callback_destroy ((GPerlCallback *) handle->user_data); */
 
 	RETVAL = gnome_vfs_monitor_cancel (handle);

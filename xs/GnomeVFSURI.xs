@@ -20,60 +20,17 @@
 
 #include "vfs2perl.h"
 
-GnomeVFSURI *
-SvGnomeVFSURI (SV * object)
-{
-	MAGIC *mg;
-
-	if (!object || !SvOK (object) || !SvROK (object) || !(mg = mg_find (SvRV (object), PERL_MAGIC_ext)))
-		return NULL;
-
-	return (GnomeVFSURI *) mg->mg_ptr;
-}
-
-SV *
-newSVGnomeVFSURI (GnomeVFSURI *uri)
-{
-	SV *rv;
-	HV *stash;
-	SV *object = (SV *) newHV ();
-
-	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) uri, 0);
-
-	rv = newRV_noinc (object);
-	stash = gv_stashpv ("Gnome2::VFS::URI", 1);
-
-	return sv_bless (rv, stash);
-}
-
 MODULE = Gnome2::VFS::URI	PACKAGE = Gnome2::VFS::URI	PREFIX = gnome_vfs_uri_
 
-void
-DESTROY (rv)
-	SV *rv
-    CODE:
-	GnomeVFSURI *uri;
-	MAGIC *mg;
-
-	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
-		return;
-
-	uri = (GnomeVFSURI *) mg->mg_ptr;
-
-	if (uri && uri->ref_count > 0)
-		gnome_vfs_uri_unref ((GnomeVFSURI *) mg->mg_ptr);
-
-	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
-
 ##  GnomeVFSURI *gnome_vfs_uri_new (const gchar *text_uri) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_new (class, text_uri)
 	const gchar *text_uri
     C_ARGS:
 	text_uri
 
 ##  GnomeVFSURI *gnome_vfs_uri_resolve_relative (const GnomeVFSURI *base, const gchar *relative_reference) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_resolve_relative (base, relative_reference)
 	const GnomeVFSURI *base
 	const gchar *relative_reference
@@ -93,19 +50,19 @@ gnome_vfs_uri_resolve_relative (base, relative_reference)
 #	GnomeVFSURI *uri
 
 ##  GnomeVFSURI *gnome_vfs_uri_append_string (const GnomeVFSURI *uri, const char *uri_fragment) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_append_string (base, uri_fragment)
 	const GnomeVFSURI *base
 	const char *uri_fragment
 
 ##  GnomeVFSURI *gnome_vfs_uri_append_path (const GnomeVFSURI *uri, const char *path) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_append_path (base, path)
 	const GnomeVFSURI *base
 	const char *path
 
 ##  GnomeVFSURI *gnome_vfs_uri_append_file_name (const GnomeVFSURI *uri, const gchar *filename) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_append_file_name (base, filename)
 	const GnomeVFSURI *base
 	const gchar *filename
@@ -132,7 +89,7 @@ gnome_vfs_uri_has_parent (uri)
 	const GnomeVFSURI *uri
 
 ##  GnomeVFSURI *gnome_vfs_uri_get_parent (const GnomeVFSURI *uri) 
-GnomeVFSURI *
+GnomeVFSURI_own *
 gnome_vfs_uri_get_parent (uri)
 	const GnomeVFSURI *uri
 

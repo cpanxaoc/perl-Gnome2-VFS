@@ -71,13 +71,19 @@ sv_to_int (GType type, SV *sv)
 	return n;
 }
 
+GPerlCallback *
+vfs2perl_xfer_progress_callback_create (SV *func, SV *data)
+{
+	return gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
+}
+
 gint
 vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
                                  GPerlCallback *callback)
 {
 	gint retval;
-	dGPERL_CALLBACK_MARSHAL_SP;
 
+	dGPERL_CALLBACK_MARSHAL_SP;
 	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
@@ -97,9 +103,9 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 	SPAGAIN;
 
 	if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR)
-		retval = sv_to_int (GNOME_TYPE_VFS_XFER_ERROR_ACTION, POPs);
+		retval = sv_to_int (VFS2PERL_GNOME_TYPE_VFS_XFER_ERROR_ACTION, POPs);
 	else if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OVERWRITE)
-		retval = sv_to_int (GNOME_TYPE_VFS_XFER_OVERWRITE_ACTION, POPs);
+		retval = sv_to_int (VFS2PERL_GNOME_TYPE_VFS_XFER_OVERWRITE_ACTION, POPs);
 	else
 		retval = POPi;
 
@@ -128,7 +134,7 @@ gnome_vfs_xfer_uri (class, source_uri, target_uri, xfer_options, error_mode, ove
     ALIAS:
 	Gnome2::VFS::URI::xfer = 0
     CODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
+	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_uri (source_uri,
 	                             target_uri,
@@ -157,7 +163,7 @@ gnome_vfs_xfer_uri_list (class, source_ref, target_ref, xfer_options, error_mode
 	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
 	GList *target_uri_list = SvGnomeVFSURIGList (target_ref);
 
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
+	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_uri_list ((const GList *) source_uri_list,
 	                                  (const GList *) target_uri_list,
@@ -186,7 +192,7 @@ gnome_vfs_xfer_delete_list (class, source_ref, error_mode, xfer_options, func, d
     CODE:
 	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
 
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
+	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_delete_list ((const GList *) source_uri_list,
 	                                     error_mode,

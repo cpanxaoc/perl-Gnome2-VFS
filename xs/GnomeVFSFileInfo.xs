@@ -22,6 +22,10 @@
 
 /* ------------------------------------------------------------------------- */
 
+#define VFS2PERL_CHECK_AND_STORE(_type, _key, _sv) \
+		if (info->valid_fields & _type) \
+			hv_store (object, _key, strlen (_key), _sv, 0);
+
 SV *
 newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 {
@@ -30,48 +34,21 @@ newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 	if (info && info->name && info->valid_fields) {
 		hv_store (object, "name", 4, newSVpv (info->name, PL_na), 0);
 		hv_store (object, "valid_fields", 12, newSVGnomeVFSFileInfoFields (info->valid_fields), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE)
-			hv_store (object, "type", 4, newSVGnomeVFSFileType (info->type), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS)
-			hv_store (object, "permissions", 11, newSVGnomeVFSFilePermissions (info->permissions), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_FLAGS)
-			hv_store (object, "flags", 5, newSVGnomeVFSFileFlags (info->flags), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_DEVICE)
-			hv_store (object, "device", 6, newSViv (info->device), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_INODE)
-			hv_store (object, "inode", 5, newSVuv (info->inode), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_LINK_COUNT)
-			hv_store (object, "link_count", 10, newSVuv (info->link_count), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
-			hv_store (object, "size", 4, newSVuv (info->size), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_BLOCK_COUNT)
-			hv_store (object, "block_count", 11, newSVuv (info->block_count), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_IO_BLOCK_SIZE)
-			hv_store (object, "io_block_size", 13, newSVuv (info->io_block_size), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ATIME)
-			hv_store (object, "atime", 5, newSViv (info->atime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-			hv_store (object, "mtime", 5, newSViv (info->mtime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_CTIME)
-			hv_store (object, "ctime", 5, newSViv (info->ctime), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME)
-			hv_store (object, "symlink_name", 12, newSVpv (info->symlink_name, PL_na), 0);
-		
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE)
-			hv_store (object, "mime_type", 9, newSVpv (info->mime_type, PL_na), 0);
+
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_TYPE, "type", newSVGnomeVFSFileType (info->type));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS, "permissions", newSVGnomeVFSFilePermissions (info->permissions));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_FLAGS, "flags", newSVGnomeVFSFileFlags (info->flags));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_DEVICE, "device", newSViv (info->device));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_INODE, "inode", newSVuv (info->inode));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_LINK_COUNT, "link_count", newSVuv (info->link_count));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_SIZE, "size", newSVGnomeVFSFileSize (info->size));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_BLOCK_COUNT, "block_count", newSVGnomeVFSFileSize (info->block_count));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_IO_BLOCK_SIZE, "io_block_size", newSVuv (info->io_block_size));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_ATIME, "atime", newSViv (info->atime));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_MTIME, "mtime", newSViv (info->mtime));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_CTIME, "ctime", newSViv (info->ctime));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME, "symlink_name", newSVpv (info->symlink_name, PL_na));
+		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE, "mime_type", newSVpv (info->mime_type, PL_na));
 		
 		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
 	}
@@ -79,6 +56,13 @@ newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 	return sv_bless (newRV_noinc ((SV *) object),
 	                 gv_stashpv ("Gnome2::VFS::FileInfo", 1));
 }
+
+#define VFS2PERL_FETCH_AND_CHECK(_type, _key, _member, _sv) \
+		if (hv_exists (hv, _key, strlen (_key))) { \
+			value = hv_fetch (hv, _key, strlen (_key), FALSE); \
+			if (value) _member = _sv; \
+			info->valid_fields |= _type; \
+		}
 
 GnomeVFSFileInfo *
 SvGnomeVFSFileInfo (SV *object)
@@ -94,89 +78,20 @@ SvGnomeVFSFileInfo (SV *object)
 
 		info->valid_fields = GNOME_VFS_FILE_INFO_FIELDS_NONE;
 
-		if (hv_exists (hv, "type", 4)) {
-			value = hv_fetch (hv, "type", 4, FALSE);
-			if (value) info->type = SvGnomeVFSFileType (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_TYPE;
-		}
-
-		if (hv_exists (hv, "permissions", 11)) {
-			value = hv_fetch (hv, "permissions", 11, FALSE);
-			if (value) info->permissions = SvGnomeVFSFilePermissions (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS;
-		}
-
-		if (hv_exists (hv, "flags", 5)) {
-			value = hv_fetch (hv, "flags", 5, FALSE);
-			if (value) info->flags = SvGnomeVFSFileFlags (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_FLAGS;
-		}
-
-		if (hv_exists (hv, "device", 6)) {
-			value = hv_fetch (hv, "device", 6, FALSE);
-			if (value) info->device = SvIV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_DEVICE;
-		}
-
-		if (hv_exists (hv, "inode", 5)) {
-			value = hv_fetch (hv, "inode", 5, FALSE);
-			if (value) info->inode = SvUV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_INODE;
-		}
-
-		if (hv_exists (hv, "link_count", 10)) {
-			value = hv_fetch (hv, "link_count", 10, FALSE);
-			if (value) info->link_count = SvUV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_LINK_COUNT;
-		}
-
-		if (hv_exists (hv, "size", 4)) {
-			value = hv_fetch (hv, "size", 4, FALSE);
-			if (value) info->size = SvUV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_SIZE;
-		}
-
-		if (hv_exists (hv, "block_count", 11)) {
-			value = hv_fetch (hv, "block_count", 11, FALSE);
-			if (value) info->block_count = SvUV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_BLOCK_COUNT;
-		}
-
-		if (hv_exists (hv, "io_block_size", 13)) {
-			value = hv_fetch (hv, "io_block_size", 13, FALSE);
-			if (value) info->io_block_size = SvUV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_IO_BLOCK_SIZE;
-		}
-
-		if (hv_exists (hv, "atime", 5)) {
-			value = hv_fetch (hv, "atime", 5, FALSE);
-			if (value) info->atime = SvIV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_ATIME;
-		}
-
-		if (hv_exists (hv, "mtime", 5)) {
-			value = hv_fetch (hv, "mtime", 5, FALSE);
-			if (value) info->mtime = SvIV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MTIME;
-		}
-
-		if (hv_exists (hv, "ctime", 5)) {
-			value = hv_fetch (hv, "ctime", 5, FALSE);
-			if (value) info->ctime = SvIV (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_CTIME;
-		}
-
-		if (hv_exists (hv, "symlink_name", 12)) {
-			value = hv_fetch (hv, "symlink_name", 12, FALSE);
-			if (value) info->symlink_name = SvPV_nolen (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME;
-		}
-
-		if (hv_exists (hv, "mime_type", 9)) {
-			value = hv_fetch (hv, "mime_type", 9, FALSE);
-			if (value) info->mime_type = SvPV_nolen (*value);
-			info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
-		}
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_TYPE, "type", info->type, SvGnomeVFSFileType (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS, "permissions", info->permissions, SvGnomeVFSFilePermissions (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_FLAGS, "flags", info->flags, SvGnomeVFSFileFlags (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_DEVICE, "device", info->device, SvIV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_INODE, "inode", info->inode, SvUV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_LINK_COUNT, "link_count", info->link_count, SvUV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_SIZE, "size", info->size, SvGnomeVFSFileSize (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_BLOCK_COUNT, "block_count", info->block_count, SvGnomeVFSFileSize (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_IO_BLOCK_SIZE, "io_block_size", info->io_block_size, SvUV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_ATIME, "atime", info->atime, SvIV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_MTIME, "mtime", info->mtime, SvIV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_CTIME, "ctime", info->ctime, SvIV (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME, "symlink_name", info->symlink_name, SvPV_nolen (*value));
+		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE, "mime_type", info->mime_type, SvPV_nolen (*value));
 		
 		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
 	}

@@ -27,6 +27,25 @@
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-handle.h>
 
+/* ------------------------------------------------------------------------- */
+
+#define VFS2PERL_GNOME_TYPE_VFS_URI (vfs2perl_gnome_vfs_uri_get_type ())
+GType vfs2perl_gnome_vfs_uri_get_type (void) G_GNUC_CONST;
+
+#define VFS2PERL_GNOME_TYPE_VFS_HANDLE (vfs2perl_gnome_vfs_handle_get_type ())
+GType vfs2perl_gnome_vfs_handle_get_type (void) G_GNUC_CONST;
+
+#define VFS2PERL_GNOME_TYPE_VFS_MONITOR_HANDLE (vfs2perl_gnome_vfs_monitor_handle_get_type ())
+GType vfs2perl_gnome_vfs_monitor_handle_get_type (void) G_GNUC_CONST;
+
+#define VFS2PERL_GNOME_TYPE_VFS_DIRECTORY_HANDLE (vfs2perl_gnome_vfs_directory_handle_get_type ())
+GType vfs2perl_gnome_vfs_directory_handle_get_type (void) G_GNUC_CONST;
+
+#define VFS2PERL_GNOME_TYPE_VFS_ASYNC_HANDLE (vfs2perl_gnome_vfs_async_handle_get_type ())
+GType vfs2perl_gnome_vfs_async_handle_get_type (void) G_GNUC_CONST;
+
+/* ------------------------------------------------------------------------- */
+
 #include "vfs2perl-gtypes.h"
 #include "vfs2perl-version.h"
 #include "vfs2perl-autogen.h"
@@ -46,27 +65,10 @@ typedef const char GnomeVFSApplication;
 const char * SvGnomeVFSApplication (SV *object);
 SV * newSVGnomeVFSApplication (const char *app_id);
 
-GnomeVFSURI * SvGnomeVFSURI (SV *object);
-SV * newSVGnomeVFSURI (GnomeVFSURI *uri);
-
 GnomeVFSFileInfo * SvGnomeVFSFileInfo (SV *object);
 SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);
 
 SV * newSVGnomeVFSXferProgressInfo (GnomeVFSXferProgressInfo *info);
-
-/* ------------------------------------------------------------------------- */
-
-GnomeVFSHandle * SvGnomeVFSHandle (SV *object);
-SV * newSVGnomeVFSHandle (GnomeVFSHandle *handle);
-
-GnomeVFSDirectoryHandle * SvGnomeVFSDirectoryHandle (SV *object);
-SV * newSVGnomeVFSDirectoryHandle (GnomeVFSDirectoryHandle *handle);
-
-GnomeVFSAsyncHandle * SvGnomeVFSAsyncHandle (SV *object);
-SV * newSVGnomeVFSAsyncHandle (GnomeVFSAsyncHandle *handle);
-
-GnomeVFSMonitorHandle * SvGnomeVFSMonitorHandle (SV *object);
-SV * newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle);
 
 /* ------------------------------------------------------------------------- */
 

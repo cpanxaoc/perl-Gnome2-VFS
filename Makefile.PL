@@ -39,6 +39,8 @@ my %cfgs = (
 	vfs => \%vfs_pkgcfg,
 );
 
+###############################################################################
+
 mkdir 'build', 0777;
 
 chomp(my $vfs_includes = `pkg-config --variable includedir gnome-vfs-2.0`);
@@ -48,8 +50,8 @@ system(q(glib-mkenums --fhead "#ifndef __VFS2PERL_GTYPES_H__\n" ) .
                     q(--fhead "#define __VFS2PERL_GTYPES_H__ 1\n\n" ) .
                     q(--fhead "#include <glib-object.h>\n\n" ) .
                     q(--fhead "G_BEGIN_DECLS\n\n" ) .
-                    q(--eprod "#define GNOME_TYPE_@ENUMSHORT@ @enum_name@_get_type()\n" ) .
-                    q(--eprod "GType @enum_name@_get_type (void);\n" ) .
+                    q(--eprod "#define VFS2PERL_GNOME_TYPE_@ENUMSHORT@ vfs2perl_@enum_name@_get_type()\n" ) .
+                    q(--eprod "GType vfs2perl_@enum_name@_get_type (void);\n" ) .
                     q(--ftail "G_END_DECLS\n\n" ) .
                     q(--ftail "#endif /* __VFS2PERL_GTYPES_H__ */\n" ) .
                     "@vfs_headers > build/vfs2perl-gtypes.h");
@@ -59,19 +61,21 @@ system(q(glib-mkenums --fhead "#include <libgnomevfs/gnome-vfs-types.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-monitor.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-mime-handlers.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-directory.h>\n" ) .
-                    q(--vhead "static const G@Type@Value _@enum_name@_values[] = {" ) .
+                    q(--vhead "static const G@Type@Value _vfs2perl_@enum_name@_values[] = {" ) .
                     q(--vprod "  { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," ) .
                     q(--vtail "  { 0, NULL, NULL }\n};\n\n" ) .
-                    q(--vtail "GType\n@enum_name@_get_type (void)\n{\n" ) .
+                    q(--vtail "GType\nvfs2perl_@enum_name@_get_type (void)\n{\n" ) .
                     q(--vtail "  static GType type = 0;\n\n" ) .
                     q(--vtail "  if (!type)\n" ) .
-                    q(--vtail "    type = g_@type@_register_static (\"@EnumName@\", _@enum_name@_values);\n\n" ) .
+                    q(--vtail "    type = g_@type@_register_static (\"@EnumName@\", _vfs2perl_@enum_name@_values);\n\n" ) .
                     q(--vtail "  return type;\n}\n\n" ) .
                     "@vfs_headers > build/vfs2perl-gtypes.c");
 
 # UGLY, UGLY, UGLY!
-system("perl -pi -e 's/GNOME_TYPE_VFSURI_HIDE_OPTIONS/GNOME_TYPE_VFS_URI_HIDE_OPTIONS/g;
-                     s/gnome_vfsuri_hide_options/gnome_vfs_uri_hide_options/g' build/vfs2perl-gtypes.h build/vfs2perl-gtypes.c");
+system("perl -pi -e 's/VFS2PERL_GNOME_TYPE_VFSURI_HIDE_OPTIONS/VFS2PERL_GNOME_TYPE_VFS_URI_HIDE_OPTIONS/g;
+                     s/vfs2perl_gnome_vfsuri_hide_options/vfs2perl_gnome_vfs_uri_hide_options/g' build/vfs2perl-gtypes.h build/vfs2perl-gtypes.c");
+
+###############################################################################
 
 our @xs_files = <xs/*.xs>;
 our %pod_files = (
@@ -84,7 +88,7 @@ Glib::MakeHelper->do_pod_files (@xs_files);
 Gtk2::CodeGen->parse_maps ('vfs2perl');
 Gtk2::CodeGen->write_boot (ignore => qr/^Gnome2::VFS$/);
 
-open VERSION, ">build/vfs2perl-version.h";
+open VERSION, ">build/vfs2perl-version.h" or die("Opening '>build/vfs2perl-version.h': $!");
 foreach my $pkg (keys %cfgs) {
 	my $stem = uc $pkg;
 	my @modversion = split /\./, $cfgs{$pkg}{modversion};
@@ -100,11 +104,13 @@ foreach my $pkg (keys %cfgs) {
 }
 close VERSION;
 
+###############################################################################
+
 my $vfs = ExtUtils::Depends->new ('Gnome2::VFS', 'Gtk2', 'Glib');
 $vfs->set_inc ($vfs_pkgcfg{cflags});
 $vfs->set_libs ($vfs_pkgcfg{libs});
 $vfs->add_xs (@xs_files);
-$vfs->add_c ("build/vfs2perl-gtypes.c");
+$vfs->add_c ("vfs2perl.c", "build/vfs2perl-gtypes.c");
 $vfs->add_pm ('VFS.pm' => '$(INST_LIBDIR)/VFS.pm');
 $vfs->add_typemaps (map {File::Spec->catfile(cwd(), $_)} 'build/vfs2perl.typemap', 'vfs2perl.typemap');
 $vfs->add_headers ('vfs2perl.h');
@@ -123,6 +129,8 @@ WriteMakefile(
     MAN3PODS        => \%pod_files,
     $vfs->get_makefile_vars,
 );
+
+###############################################################################
 
 package MY;
 

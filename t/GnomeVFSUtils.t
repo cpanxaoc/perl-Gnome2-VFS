@@ -47,7 +47,14 @@ foreach (Gnome2::VFS -> escape_path_string('%$§'),
 }
 
 is(Gnome2::VFS -> escape_slashes("/%/"), "%2F%25%2F");
-is(Gnome2::VFS -> make_uri_canonical("bla/bla.txt"), "file:///bla/bla.txt");
+
+SKIP: {
+  skip ("make_uri_canonical is borken in versions prior to 2.1.0", 1)
+    unless (Gnome2::VFS -> check_version (2, 1, 0));
+
+  is(Gnome2::VFS -> make_uri_canonical("bla/bla.txt"), "file:///bla/bla.txt");
+}
+
 is(Gnome2::VFS -> make_path_name_canonical("/bla"), "/bla");
 is(Gnome2::VFS -> expand_initial_tilde("~/bla"), "$ENV{ HOME }/bla");
 is(Gnome2::VFS -> unescape_string_for_display("%2F%25%2F"), "/%/");

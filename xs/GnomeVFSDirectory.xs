@@ -23,35 +23,13 @@
 
 /* ------------------------------------------------------------------------- */
 
-GnomeVFSDirectoryHandle *
-SvGnomeVFSDirectoryHandle (SV *object)
+static GPerlCallback *
+vfs2perl_directory_visit_func_create (SV *func, SV *data)
 {
-	MAGIC *mg;
-
-	if (!object || !SvOK (object) || !SvROK (object) || !(mg = mg_find (SvRV (object), PERL_MAGIC_ext)))
-		return NULL;
-
-	return (GnomeVFSDirectoryHandle *) mg->mg_ptr;
+	return gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
 }
 
-SV *
-newSVGnomeVFSDirectoryHandle (GnomeVFSDirectoryHandle *handle)
-{
-	SV *rv;
-	HV *stash;
-	SV *object = (SV *) newHV ();
-
-	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
-
-	rv = newRV_noinc (object);
-	stash = gv_stashpv ("Gnome2::VFS::Directory::Handle", 1);
-
-	return sv_bless (rv, stash);
-}
-
-/* ------------------------------------------------------------------------- */
-
-gboolean
+static gboolean
 vfs2perl_directory_visit_func (const gchar *rel_path,
                                GnomeVFSFileInfo *info,
                                gboolean recursing_will_loop,
@@ -142,7 +120,7 @@ gnome_vfs_directory_visit (class, uri, info_options, visit_options, func, data=N
 	SV *func
 	SV *data
     CODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
+	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
 
 	RETVAL = gnome_vfs_directory_visit (uri,
 	                                    info_options,
@@ -164,7 +142,7 @@ gnome_vfs_directory_visit_uri (class, uri, info_options, visit_options, func, da
 	SV *func
 	SV *data
     CODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
+	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
 
 	RETVAL = gnome_vfs_directory_visit_uri (uri,
 	                                        info_options,
@@ -187,7 +165,7 @@ gnome_vfs_directory_visit_files (class, text_uri, file_ref, info_options, visit_
 	SV *func
 	SV *data
     CODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
+	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
 	GList *file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files (text_uri,
@@ -213,7 +191,7 @@ gnome_vfs_directory_visit_files_at_uri (class, uri, file_ref, info_options, visi
 	SV *func
 	SV *data
     CODE:
-	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
+	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
 	GList *file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files_at_uri (uri,
@@ -257,17 +235,6 @@ gnome_vfs_directory_list_load (class, text_uri, options)
 # --------------------------------------------------------------------------- #
 
 MODULE = Gnome2::VFS::Directory	PACKAGE = Gnome2::VFS::Directory::Handle	PREFIX = gnome_vfs_directory_
-
-void
-DESTROY (rv)
-	SV *rv
-    CODE:
-	MAGIC *mg;
-
-	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
-		return;
-
-	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
 
 =for apidoc
 

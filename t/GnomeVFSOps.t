@@ -133,6 +133,7 @@ is($uri -> remove_directory(), "ok");
 #   return 0;
 # });
 
+# use Gtk2 -init;
 # Gtk2 -> main();
 
 # is($monitor -> cancel(), "ok");

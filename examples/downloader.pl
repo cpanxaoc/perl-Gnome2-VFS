@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 
+use Switch;
 use Gtk2 -init;
 use Gnome2::VFS -init;
 
@@ -47,13 +48,13 @@ sub on_render {
   my ($cell, $window, $widget, $background_area, $cell_area, $expose_area, $flags) = @_;
   my ($x_offset, $y_offset, $width, $height) = $cell -> on_get_size($widget, $cell_area);
 
-  unless ($cell -> { progress } == 0.0) {
+  if ($cell -> { progress } > 0) {
     $widget -> get_style -> paint_box($window,
                                       $flags & "selected" ? "normal" : "prelight",
                                       "out",
                                       $cell_area,
                                       $widget,
-                                      "bar",
+                                      undef,
                                       $cell_area -> x() + $x_offset,
                                       $cell_area -> y() + $y_offset,
                                       $width * $cell -> { progress },
@@ -86,7 +87,7 @@ my $vbox = Gtk2::VBox -> new(0, 5);
 my $hbox = Gtk2::HBox -> new(0, 5);
 
 my $entry = Gtk2::Entry -> new();
-my $button = Gtk2::Button -> new("Download");
+my $button = Gtk2::Button -> new("_Download");
 
 $button -> signal_connect(clicked => sub {
   start_new_download($entry -> get_text());
@@ -172,9 +173,21 @@ sub start_new_download {
 
 sub progress_update {
   my ($handle, $info, $source_string) = @_;
+  my $status;
+
+  switch ($info -> { phase }) {
+    case "phase-completed"      { $status = "Completed"; }
+    case "phase-initial"        { $status = "Initializing"; }
+    case "checking-destination" { $status = "Checking destination"; }
+    case "phase-collecting"     { $status = "Collecting"; }
+    case "phase-readytogo"      { $status = "Ready to go"; }
+    case "phase-opentarget"     { $status = "Opening target"; }
+    case "phase-copying"        { $status = "Copying"; }
+    else                        { warn $info -> { phase }; $status = ""; }
+  }
 
   $model -> set($iters{ $source_string },
-                COLUMN_STATUS, $info -> { phase });
+                COLUMN_STATUS, $status);
 
   if (defined($info -> { file_size }) &&
       defined($info -> { bytes_copied }) &&
@@ -192,6 +205,7 @@ sub progress_sync {
     return 1;
   }
   elsif ($info -> { status } eq "vfserror") {
+    warn $info -> { vfs_status };
     return "abort";
   }
   elsif ($info -> { status } eq "overwrite") {

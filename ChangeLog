@@ -1,3 +1,45 @@
+2003/11/23 21:52 (+0100) kaffeetisch
+
+	* Makefile.PL: Use custom prefixes for all GEnums and GFlags so
+	that there are no conflicts if/when gnome-vfs starts creating its
+	own ones.
+
+	* examples/downloader.pl: Use mnemonics and provide better status
+	messages.
+
+	* t/GnomeVFSFileInfo.t: Don't test matches by fetching the info
+	from the same file twice but by comparing one info to itself.  The
+	reason it was only working on my machine but not on others was
+	that I had access time storage disabled. (Ross McFarland)
+
+	* t/GnomeVFSUtils.t: Skip the make_uri_canonical test on versions
+	older than 2.1.0. (muppet)
+
+	* xs/GnomeVFS.xs: Remove FIXME comments.
+
+	* xs/GnomeVFSFileInfo.xs: Use macros to avoid code duplication.
+
+	* Makefile.PL
+	* maps
+	A vfs2perl.c
+	* vfs2perl.h
+	* vfs2perl.typemap
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSURI.xs: Use standard GBoxed wrappers instead of the
+	homebrew HV + magic thingies.  There's less code duplication and
+	better documentation now.  A potentially negative side effect is
+	that you can't store additional data inside the Perl objects
+	anymore.  The change necessitated the creation and registration of
+	GTypes for those structs, too. (muppet, for suggesting this step)
+
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSXfer.xs: Stick to the standard GPerlCallback
+	marshalling wherever possible.
+
 2003/11/18 23:36 (+0100) kaffeetisch
 
 	* examples/downloader.pl: Handle a click on Download with nothing

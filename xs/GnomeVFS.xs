@@ -92,7 +92,6 @@ SvGnomeVFSURIGList (SV *ref)
 	return list;
 }
 
-/* FIXME: does that AV leak? */
 SV *
 newSVGnomeVFSFileInfoGList (GList *list)
 {
@@ -104,7 +103,6 @@ newSVGnomeVFSFileInfoGList (GList *list)
 	return newRV_noinc ((SV *) array);
 }
 
-/* FIXME: leak? */
 SV *
 newSVGnomeVFSGetFileInfoResultGList (GList *list)
 {
@@ -126,7 +124,6 @@ newSVGnomeVFSGetFileInfoResultGList (GList *list)
 	return newRV_noinc ((SV *) array);
 }
 
-/* FIXME: leak? */
 SV *
 newSVGnomeVFSFindDirectoryResultGList (GList *list)
 {

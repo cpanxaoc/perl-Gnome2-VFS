@@ -19,11 +19,9 @@ unless (-e TMP) {
 
 Gnome2::VFS -> init();
 
-my $result;
-
 ###############################################################################
 
-my $handle;
+my ($result, $handle);
 
 foreach ([Gnome2::VFS::Directory -> open(TMP, qw(default))],
          [Gnome2::VFS::Directory -> open_from_uri(Gnome2::VFS::URI -> new(TMP), qw(default))]) {
