@@ -115,6 +115,10 @@ vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::main
+
+=cut
+
 ##  GnomeVFSResult gnome_vfs_open (GnomeVFSHandle **handle, const gchar *text_uri, GnomeVFSOpenMode open_mode)
 void
 gnome_vfs_open (class, text_uri, open_mode)
@@ -301,7 +305,7 @@ gnome_vfs_get_file_info_from_handle (handle, options)
 	GnomeVFSHandle *handle
 	GnomeVFSFileInfoOptions options
     ALIAS:
-	Gnome2::VFS::Handle::get_file_info = 1
+	Gnome2::VFS::Handle::get_file_info = 0
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSFileInfo *info;
@@ -319,7 +323,7 @@ gnome_vfs_truncate_handle (handle, length)
 	GnomeVFSHandle *handle
 	GnomeVFSFileSize length
     ALIAS:
-	Gnome2::VFS::Handle::truncate = 1
+	Gnome2::VFS::Handle::truncate = 0
 
 # --------------------------------------------------------------------------- #
 
@@ -331,7 +335,7 @@ gnome_vfs_open_uri (uri, open_mode)
 	GnomeVFSURI *uri
 	GnomeVFSOpenMode open_mode
     ALIAS:
-	Gnome2::VFS::URI::open = 1
+	Gnome2::VFS::URI::open = 0
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSHandle *handle;
@@ -349,7 +353,7 @@ gnome_vfs_create_uri (uri, open_mode, exclusive, perm)
 	gboolean exclusive
 	guint perm
     ALIAS:
-	Gnome2::VFS::URI::create = 1
+	Gnome2::VFS::URI::create = 0
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSHandle *handle;
@@ -366,7 +370,7 @@ gnome_vfs_move_uri (old_uri, new_uri, force_replace)
 	GnomeVFSURI *new_uri
 	gboolean force_replace
     ALIAS:
-	Gnome2::VFS::URI::move = 1
+	Gnome2::VFS::URI::move = 0
 
 ##  GnomeVFSResult gnome_vfs_check_same_fs_uris (GnomeVFSURI *source_uri, GnomeVFSURI *target_uri, gboolean *same_fs_return) 
 void
@@ -374,7 +378,7 @@ gnome_vfs_check_same_fs_uris (source_uri, target_uri)
 	GnomeVFSURI *source_uri
 	GnomeVFSURI *target_uri
     ALIAS:
-	Gnome2::VFS::URI::check_same_fs = 1
+	Gnome2::VFS::URI::check_same_fs = 0
     PREINIT:
 	GnomeVFSResult result;
 	gboolean same_fs_return;
@@ -394,7 +398,7 @@ GnomeVFSResult
 gnome_vfs_unlink_from_uri (uri)
 	GnomeVFSURI *uri
     ALIAS:
-	Gnome2::VFS::URI::unlink = 1
+	Gnome2::VFS::URI::unlink = 0
 
 ##  GnomeVFSResult gnome_vfs_get_file_info_uri (GnomeVFSURI *uri, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
 void
@@ -402,7 +406,7 @@ gnome_vfs_get_file_info_uri (uri, options)
 	GnomeVFSURI *uri
 	GnomeVFSFileInfoOptions options
     ALIAS:
-	Gnome2::VFS::URI::get_file_info = 1
+	Gnome2::VFS::URI::get_file_info = 0
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSFileInfo *info;
@@ -420,7 +424,7 @@ gnome_vfs_truncate_uri (uri, length)
 	GnomeVFSURI *uri
 	GnomeVFSFileSize length
     ALIAS:
-	Gnome2::VFS::URI::truncate = 1
+	Gnome2::VFS::URI::truncate = 0
 
 ##  GnomeVFSResult gnome_vfs_make_directory_for_uri (GnomeVFSURI *uri, guint perm) 
 GnomeVFSResult
@@ -428,14 +432,14 @@ gnome_vfs_make_directory_for_uri (uri, perm)
 	GnomeVFSURI *uri
 	guint perm
     ALIAS:
-	Gnome2::VFS::URI::make_directory = 1
+	Gnome2::VFS::URI::make_directory = 0
 
 ##  GnomeVFSResult gnome_vfs_remove_directory_from_uri (GnomeVFSURI *uri) 
 GnomeVFSResult
 gnome_vfs_remove_directory_from_uri (uri)
 	GnomeVFSURI *uri
     ALIAS:
-	Gnome2::VFS::URI::remove_directory = 1
+	Gnome2::VFS::URI::remove_directory = 0
 
 # --------------------------------------------------------------------------- #
 

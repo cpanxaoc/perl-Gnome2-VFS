@@ -22,6 +22,10 @@
 
 MODULE = Gnome2::VFS::Init	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::main
+
+=cut
+
 ##  gboolean gnome_vfs_init (void) 
 gboolean
 gnome_vfs_init (class)

@@ -61,7 +61,7 @@ is_deeply([$handle -> read(4)], ["ok", 4, "aaa!"]);
 
 is($handle -> close(), "ok");
 
-# XXX: warn $handle -> truncate(3);
+# FIXME: warn $handle -> truncate(3);
 
 ###############################################################################
 
@@ -91,7 +91,7 @@ is(Gnome2::VFS -> unlink("/tmp/blu"), "ok");
 
 ###############################################################################
 
-# XXX: any way to reliably test this?  (currently needs FAM and some luck.)
+# FIXME: any way to reliably test this?  (currently needs FAM and some luck.)
 # my $monitor;
 
 # ($result, $monitor) = Gnome2::VFS::Monitor -> add("/tmp", qw(directory), sub {

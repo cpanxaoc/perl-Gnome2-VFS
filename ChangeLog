@@ -1,3 +1,22 @@
+2003/11/07 20:48 (+0100) kaffeetisch
+
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSXfer.xs: Reorder ALIAS sections to indicate that the
+	original function name shouldn't appear in the documentation.
+
+	* xs/GnomeVFS.xs
+	* xs/GnomeVFSInit.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSUtils.xs: Add a =for directive to keep
+	Gnome2::VFS.pm3 from being overwritten.
+
+	* t/GnomeVFS.t
+	* t/GnomeVFSApplicationRegistry.t
+	* t/GnomeVFSOps.t
+	* t/GnomeVFSURI.t: XXX -> FIXME.
+
+	* Makefile.PL: Use Glib::MakeHelper and create POD documentation.
+
 2003/11/04 09:34 (-0500) muppetman
 
 	A .cvsignore, xs/.cvsignore: added

@@ -17,9 +17,10 @@ our %build_reqs = (
 
 unless (eval "use ExtUtils::Depends;"
            . "use ExtUtils::PkgConfig;"
-	   . "use Gtk2::CodeGen;"
            . "use Gtk2 '$build_reqs{'perl-Gtk2'}';"
            . "use Glib '$build_reqs{'perl-Glib'}';"
+           . "use Glib::MakeHelper;"
+	   . "use Gtk2::CodeGen;"
            . "1") {
    warn "$@\n";
    WriteMakefile(
@@ -75,6 +76,14 @@ system(q(glib-mkenums --fhead "#include <libgnomevfs/gnome-vfs-types.h>\n" ) .
 system("perl -pi -e 's/GNOME_TYPE_VFSURI_HIDE_OPTIONS/GNOME_TYPE_VFS_URI_HIDE_OPTIONS/g;
                      s/gnome_vfsuri_hide_options/gnome_vfs_uri_hide_options/g' build/vfs2perl-gtypes.h build/vfs2perl-gtypes.c");
 
+our @xs_files = <xs/*.xs>;
+our %pod_files = (
+	'VFS.pm' => '$(INST_MAN3DIR)/VFS.$(MAN3EXT)',
+	Glib::MakeHelper->do_pod_files (@xs_files),
+);
+
+Glib::MakeHelper->do_pod_files (@xs_files);
+
 Gtk2::CodeGen->parse_maps ('vfs2perl');
 Gtk2::CodeGen->write_boot (ignore => qr/^Gnome2::VFS$/);
 
@@ -97,7 +106,7 @@ close VERSION;
 my $vfs = ExtUtils::Depends->new ('Gnome2::VFS', 'Gtk2', 'Glib');
 $vfs->set_inc ($vfs_pkgcfg{cflags});
 $vfs->set_libs ($vfs_pkgcfg{libs});
-$vfs->add_xs (<xs/*.xs>);
+$vfs->add_xs (@xs_files);
 $vfs->add_c ("build/vfs2perl-gtypes.c");
 $vfs->add_pm ('VFS.pm' => '$(INST_LIBDIR)/VFS.pm');
 $vfs->add_typemaps (map {File::Spec->catfile(cwd(), $_)} 'build/vfs2perl.typemap', 'vfs2perl.typemap');
@@ -114,14 +123,10 @@ WriteMakefile(
     VERSION_FROM    => 'VFS.pm', # finds $VERSION
     ABSTRACT_FROM   => 'VFS.pm', # retrieve abstract from module
     XSPROTOARG      => '-noprototypes',
+    MAN3PODS        => \%pod_files,
     $vfs->get_makefile_vars,
 );
 
-#
-# there's a bug in the MakeMaker output which results in .xs files in a
-# subdirectory being turned into .o files in this dir.  the bug is a missing
-# -o on the compiler command line.  this is a hackish fix for it.
-#
 package MY;
 use Cwd;
 
@@ -133,10 +138,8 @@ sub const_cccmd {
 
 sub postamble
 {
-	"
-realclean ::
-	-\$(RM_RF) build build/gnome2perl-vfs-gtypes.c
-"
+	return Glib::MakeHelper->postamble_clean ()
+	     . Glib::MakeHelper->postamble_docs (@main::xs_files);
 }
 
 package MAIN;

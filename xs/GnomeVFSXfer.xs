@@ -146,7 +146,7 @@ gnome_vfs_xfer_uri (class, source_uri, target_uri, xfer_options, error_mode, ove
 	SV *func
 	SV *data
     ALIAS:
-	Gnome2::VFS::URI::xfer = 1
+	Gnome2::VFS::URI::xfer = 0
     CODE:
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
 

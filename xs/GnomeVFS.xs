@@ -46,6 +46,10 @@ SvGnomeVFSFileOffset (SV *offset)
 
 MODULE = Gnome2::VFS	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::main
+
+=cut
+
 BOOT:
 #include "register.xsh"
 #include "boot.xsh"

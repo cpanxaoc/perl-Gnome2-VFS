@@ -8,6 +8,7 @@ genmaps.pl
 maps
 t/GnomeVFS.t
 t/GnomeVFSApplicationRegistry.t
+t/GnomeVFSAsync
 t/GnomeVFSDirectory.t
 t/GnomeVFSFileInfo.t
 t/GnomeVFSOps.t
@@ -18,6 +19,7 @@ vfs2perl.h
 vfs2perl.typemap
 xs/GnomeVFS.xs
 xs/GnomeVFSApplicationRegistry.xs
+xs/GnomeVFSAsync.xs
 xs/GnomeVFSDirectory.xs
 xs/GnomeVFSFileInfo.xs
 xs/GnomeVFSInit.xs

@@ -69,7 +69,7 @@ is($uri -> get_password(), "blub");
 $uri = Gnome2::VFS::URI -> new("/usr/bin/perl");
 
 is($uri -> get_path(), "/usr/bin/perl");
-# XXX: $uri -> get_fragment_identifier();
+# FIXME: $uri -> get_fragment_identifier();
 
 is($uri -> extract_dirname(), "/usr/bin");
 is($uri -> extract_short_name(), "perl");

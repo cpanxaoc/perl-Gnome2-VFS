@@ -21,7 +21,7 @@ ok($application -> get_keys());
 is($application -> peek_value("name"), "Terminal");
 is_deeply([$application -> get_bool_value("can_open_multiple_files")], [0, 1]);
 
-# XXX: enable, but -> reload()?
+# FIXME: enable, but -> reload()?
 # $application -> remove_application();
 # $application -> set_value();
 # $application -> set_bool_value();

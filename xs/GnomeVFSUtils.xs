@@ -2,6 +2,10 @@
 
 MODULE = Gnome2::VFS::Utils	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::main
+
+=cut
+
 ##  char *gnome_vfs_format_file_size_for_display (GnomeVFSFileSize size) 
 char *
 gnome_vfs_format_file_size_for_display (class, size)
