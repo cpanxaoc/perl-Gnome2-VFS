@@ -1,3 +1,9 @@
+2003/10/22 01:36 (+0200) kaffeetisch
+
+	* VFS.pm: Follow James Curbo's advice and use a non-local file in
+	the SYNOPSIS to demonstrate that GNOME VFS can do those kind of
+	things, too.
+
 2003/10/20 17:15 (+0200) kaffeetisch
 
 	* t/GnomeVFSOps.t: Implemented Gnome2::VFS::Monitor tests.  They

@@ -31,61 +31,68 @@ Gnome2::VFS - Perl interface to the 2.x series of the GNOME VFS library
 =head1 SYNOPSIS
 
   use Gnome2::VFS;
-  Gnome2::VFS -> init();
 
-  sub die_a_bloody_death {
+  sub die_already {
     my ($action) = @_;
     die("An error occured while $action.\n");
   }
 
-  # Open /usr/bin/perl.
-  my ($result, $handle) = Gnome2::VFS -> open("/usr/bin/perl", "read");
+  die_already("initializing GNOME VFS") unless (Gnome2::VFS -> init());
 
-  unless ($result eq "ok") {
-    die_a_bloody_death("opening '/usr/bin/perl'");
-  }
+  my $source = "http://www.perldoc.com/about.html";
+  my ($result, $handle, $info);
 
-  # Read from /usr/bin/perl.
-  my $bytes = 1024;
-  my ($bytes_read, $buffer);
+  # Open a connection to Perldoc.
+  ($result, $handle) = Gnome2::VFS -> open($source, "read");
+  die_already("opening connection to '$source'")
+    unless ($result eq "ok");
 
-  ($result, $bytes_read, $buffer) = $handle -> read($bytes);
+  # Get the file information.
+  ($result, $info) = $handle -> get_file_info("default");
+  die_already("retrieving information about '$source'")
+    unless ($result eq "ok");
 
-  unless ($result eq "ok") {
-    die_a_bloody_death("reading $bytes bytes from '/usr/bin/perl'");
-  }
+  # Read the content.
+  my $bytes = $info -> { size };
 
-  # Close /usr/bin/perl.
+  my $bytes_read = 0;
+  my $buffer = "";
+
+  do {
+    my ($tmp_buffer, $tmp_bytes_read);
+
+    ($result, $tmp_bytes_read, $tmp_buffer) =
+      $handle -> read($bytes - $bytes_read);
+
+    $buffer .= $tmp_buffer;
+    $bytes_read += $tmp_bytes_read;
+  } while ($result eq "ok" and $bytes_read < $bytes);
+
+  die_already("reading $bytes bytes from '$source'")
+    unless ($result eq "ok" && $bytes_read == $bytes);
+
+  # Close the connection.
   $result = $handle -> close();
+  die_already("closing connection to '$source'")
+    unless ($result eq "ok");
 
-  unless ($result eq "ok") {
-    die_a_bloody_death("closing '/usr/bin/perl'");
-  }
-
-  # Create /tmp/perl-head.
-  my $uri = Gnome2::VFS::URI -> new("/tmp/perl-head");
+  # Create and open the target.
+  my $target = "/tmp/" . $info -> { name };
+  my $uri = Gnome2::VFS::URI -> new($target);
 
   ($result, $handle) = $uri -> create("write", 1, 0644);
+  die_already("creating '$target'") unless ($result eq "ok");
 
-  unless ($result eq "ok") {
-    die_a_bloody_death("creating '/tmp/perl-head'");
-  }
-
-  # Write to /tmp/perl-head.
+  # Write to it.
   my $bytes_written;
 
   ($result, $bytes_written) = $handle -> write($buffer, $bytes);
+  die_already("writing $bytes bytes to '/tmp/$file_name'")
+    unless ($result eq "ok" && $bytes_written == $bytes);
 
-  unless ($result eq "ok" && $bytes_written == $bytes) {
-    die_a_bloody_death("writing $bytes byte to '/tmp/perl-head'");
-  }
-
-  # Close /tmp/perl-head.
+  # Close the target.
   $result = $handle -> close();
-
-  unless ($result eq "ok") {
-    die_a_bloody_death("closing '/tmp/perl-head'");
-  }
+  die_already("closing '/tmp/$file_name'") unless ($result eq "ok");
 
   Gnome2::VFS -> shutdown();
 
