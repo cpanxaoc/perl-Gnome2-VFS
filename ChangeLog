@@ -1,3 +1,10 @@
+2004/10/24 11:55 (-0400) rwmcfa1
+
+	* MANIFEST.SKIP: updates
+
+	* perl-Gnome2-VFS.spec.in: new scheme that addresses x86_64 problems
+	found by Carl Nygard
+
 2004/09/25 21:14 (+0200) kaffeetisch
 
 	* doctypes: Add types for GnomeVFSApplication and
