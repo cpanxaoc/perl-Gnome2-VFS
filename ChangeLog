@@ -1,3 +1,30 @@
+2003/11/28 21:39 (+0100) kaffeetisch
+
+	* maps
+	* genmaps.pl: Map GnomeVFSURIHideOptions to
+	Gnome2::VFS::URI::HideOptions instead of
+	Gnome2::VFS::URIHideOptions.
+
+	R xs/GnomeVFSMimeHandlers.xs
+	A xs/GnomeVFSMime.xs
+	R t/GnomeVFSMimeHandlers.t
+	A t/GnomeVFSMime.t
+	* vfs2perl.h
+	* maps
+	* genmaps.pl: GnomeVFSMimeHandlers.(xs|t) => GnomeVFSMime.$1.
+	Implement and test support for GnomeVFSMIMEMonitor.
+
+	* xs/GnomeVFS.xs: Implement Gnome2::VFS::get_mime_type.
+
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSXfer.xs: Follow muppet's advise: Don't use ALIAS
+	sections to "rename" functions but do it the manly way instead.
+	We now don't have two xsubs for those functions anymore but we
+	also lose a bit of C API compatability.  Considering the very high
+	stinkage factor of that API, that's not necessarily a bad thing
+	though.
+
 2003/11/27 22:55 (+0100) kaffeetisch
 
 	A t/GnomeVFSMimeHandlers.t

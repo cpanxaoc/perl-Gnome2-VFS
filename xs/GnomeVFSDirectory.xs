@@ -97,6 +97,12 @@ gnome_vfs_directory_open (class, text_uri, options)
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSDirectoryHandle (handle)));
 
+
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSDirectoryHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_directory_open_from_uri (GnomeVFSDirectoryHandle **handle, GnomeVFSURI *uri, GnomeVFSFileInfoOptions options) 
 GnomeVFSResult
 gnome_vfs_directory_open_from_uri (class, uri, options)

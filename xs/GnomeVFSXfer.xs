@@ -121,6 +121,7 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 MODULE = Gnome2::VFS::Xfer	PACKAGE = Gnome2::VFS::Xfer	PREFIX = gnome_vfs_xfer_
 
 # FIXME: these function names are UGLY.
+
 ##  GnomeVFSResult gnome_vfs_xfer_uri (const GnomeVFSURI *source_uri, const GnomeVFSURI *target_uri, GnomeVFSXferOptions xfer_options, GnomeVFSXferErrorMode error_mode, GnomeVFSXferOverwriteMode overwrite_mode, GnomeVFSXferProgressCallback progress_callback, gpointer data) 
 GnomeVFSResult
 gnome_vfs_xfer_uri (class, source_uri, target_uri, xfer_options, error_mode, overwrite_mode, func, data=NULL)
@@ -131,8 +132,6 @@ gnome_vfs_xfer_uri (class, source_uri, target_uri, xfer_options, error_mode, ove
 	GnomeVFSXferOverwriteMode overwrite_mode
 	SV *func
 	SV *data
-    ALIAS:
-	Gnome2::VFS::URI::xfer = 0
     PREINIT:
 	GPerlCallback *callback;
     CODE:

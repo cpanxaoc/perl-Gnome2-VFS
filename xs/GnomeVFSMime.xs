@@ -163,12 +163,68 @@ newSVGnomeVFSMimeAction (GnomeVFSMimeAction *action)
 
 MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime	PREFIX = gnome_vfs_mime_
 
-# FIXME: Implement.
-###  gboolean gnome_vfs_mime_id_in_application_list (const char *id, GList *applications) 
-#gboolean
-#gnome_vfs_mime_id_in_application_list (id, applications)
-#	const char *id
-#	GList *applications
+# FIXME, FIXME, FIXME: why does it crash?
+##  gboolean gnome_vfs_mime_id_in_application_list (const char *id, GList *applications) 
+#############gboolean
+#############gnome_vfs_mime_id_in_application_list (class, id, first_application, ...)
+#############	const char *id
+#############    PREINIT:
+#############	int i;
+#############	GList *applications = NULL;
+#############    CODE:
+#############	for (i = 2; i < items; i++)
+#############		applications = g_list_append (applications, SvGnomeVFSMimeApplication (ST (i)));
+#############
+#############	RETVAL = gnome_vfs_mime_id_in_application_list (id, applications);
+#############
+#############	gnome_vfs_mime_application_list_free (applications);
+#############    OUTPUT:
+#############	RETVAL
+
+# FIXME, FIXME, FIXME: why does it crash?
+##  GList * gnome_vfs_mime_remove_application_from_list (GList *applications, const char *application_id, gboolean *did_remove) 
+#############void
+#############gnome_vfs_mime_remove_application_from_list (class, application_id, first_application, ...)
+#############	const char *application_id
+#############    PREINIT:
+#############	int i;
+#############	GList *applications = NULL, *result, *j;
+#############	gboolean did_remove;
+#############    PPCODE:
+#############	for (i = 2; i < items; i++)
+#############		applications = g_list_append (applications, SvGnomeVFSMimeApplication (ST (i)));
+#############
+#############	result = gnome_vfs_mime_remove_application_from_list (applications, application_id, &did_remove);
+#############
+#############	EXTEND (sp, 1);
+#############	PUSHs (sv_2mortal (newSVuv (did_remove)));
+#############
+#############	for (j = result; j != NULL; j = j->next)
+#############		XPUSHs (sv_2mortal (newSVGnomeVFSMimeApplication (j->data)));
+#############
+#############	gnome_vfs_mime_application_list_free (applications);
+#############	g_list_free (result);
+
+# FIXME, FIXME, FIXME: why does it crash?
+###############  GList * gnome_vfs_mime_id_list_from_application_list (GList *applications) 
+#############void
+#############gnome_vfs_mime_id_list_from_application_list (class, fist_application, ...)
+#############    PREINIT:
+#############	int i;
+#############	GList *applications = NULL, *ids, *j;
+#############    PPCODE:
+#############	for (i = 1; i < items; i++)
+#############		applications = g_list_append (applications, SvGnomeVFSMimeApplication (ST (i)));
+#############
+#############	ids = gnome_vfs_mime_id_list_from_application_list (applications);
+#############
+#############	for (j = ids; j != NULL; j = j->next) {
+#############		XPUSHs (sv_2mortal (newSVpv (j->data, PL_na)));
+#############		g_free (j->data);
+#############	}
+#############
+#############	gnome_vfs_mime_application_list_free (applications);
+#############	g_list_free (ids);
 
 # FIXME: Needs bonobo typemaps.
 ###  gboolean gnome_vfs_mime_id_in_component_list (const char *iid, GList *components) 
@@ -177,14 +233,6 @@ MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime	PREFIX = gnome_vfs_mime_
 #	const char *iid
 #	GList *components
 
-# FIXME: Implement.
-###  GList * gnome_vfs_mime_remove_application_from_list (GList *applications, const char *application_id, gboolean *did_remove) 
-#GList *
-#gnome_vfs_mime_remove_application_from_list (applications, application_id, did_remove)
-#	GList *applications
-#	const char *application_id
-#	gboolean *did_remove
-
 # FIXME: Needs bonobo typemaps.
 ###  GList * gnome_vfs_mime_remove_component_from_list (GList *components, const char *iid, gboolean *did_remove) 
 #GList *
@@ -192,12 +240,6 @@ MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime	PREFIX = gnome_vfs_mime_
 #	GList *components
 #	const char *iid
 #	gboolean *did_remove
-
-# FIXME: Implement.
-###  GList * gnome_vfs_mime_id_list_from_application_list (GList *applications) 
-#GList *
-#gnome_vfs_mime_id_list_from_application_list (applications)
-#	GList *applications
 
 # FIXME: Needs bonobo typemaps.
 ###  GList * gnome_vfs_mime_id_list_from_component_list (GList *components) 
@@ -490,3 +532,13 @@ MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime::Action	PREFIX = gnome_vf
 #	GnomeVFSMimeAction *action
 #	GList *uris
 #	char **envp
+
+# --------------------------------------------------------------------------- #
+
+MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime::Monitor	PREFIX = gnome_vfs_mime_monitor_
+ 
+##  GnomeVFSMIMEMonitor *gnome_vfs_mime_monitor_get (void)
+GnomeVFSMIMEMonitor *
+gnome_vfs_mime_monitor_get (class)
+    C_ARGS:
+	/* void */

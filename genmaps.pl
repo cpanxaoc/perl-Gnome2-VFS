@@ -5,14 +5,15 @@ use strict;
 
 my @types = ();
 my @dirs = (
+  '/usr/include/gnome-vfs-2.0/libgnomevfs',
   'build',
 );
 
 foreach my $dir (@dirs) {
-	my @lines = `grep _TYPE_ $dir/*.h | grep get_type`;
+	my @lines = `grep _TYPE $dir/*.h | grep get_type`;
 	foreach (@lines) {
 		chomp;
-		s/^.*\s([A-Z][A-Z0-9_]*_TYPE_[A-Z0-9_]*)\s.*$/$1/;
+		s/^.*\s([A-Z][A-Z0-9_]*_TYPE[A-Z0-9_]*)\s.*$/$1/;
 		# print "$1\n";
 		push @types, $_;
 	}
@@ -29,6 +30,7 @@ print '#include <stdio.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include <libgnomevfs/gnome-vfs-monitor.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
+#include <libgnomevfs/gnome-vfs-mime-monitor.h>
 #include <libgnomevfs/gnome-vfs-directory.h>
 #include "build/vfs2perl-gtypes.h"
 
@@ -91,6 +93,8 @@ system 'gcc -DGTK_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED -Wall -o foo foo
 # these are matched in order; for example, GnomePrinter must test before
 # GnomePrint to avoid matching the wrong thing.
 my @packagemap = (
+  [ GnomeVFSMIME => 'Gnome2::VFS::Mime' ],
+  [ GnomeVFSURI  => 'Gnome2::VFS::URI' ],
   [ GnomeVFS     => 'Gnome2::VFS' ],
   [ Gnome        => 'Gnome2' ], # fallback
 );

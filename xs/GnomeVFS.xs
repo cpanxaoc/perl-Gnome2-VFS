@@ -212,3 +212,18 @@ gnome_vfs_result_to_string (class, result)
 	GnomeVFSResult result
     C_ARGS:
 	result
+ 
+##  char *gnome_vfs_get_mime_type (const char *text_uri)
+char *
+gnome_vfs_get_mime_type (class, text_uri)
+	const char *text_uri
+    C_ARGS:
+	text_uri
+    CLEANUP:
+	g_free (RETVAL);
+
+###  const char *gnome_vfs_get_mime_type_for_data (gconstpointer data, int data_size)
+#const char *
+#gnome_vfs_get_mime_type_for_data (data, data_size)
+#	gconstpointer data
+#	int data_size
