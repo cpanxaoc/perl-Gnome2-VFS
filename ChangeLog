@@ -1,3 +1,8 @@
+2003/11/16 02:44 (-0500) muppetman
+
+	* xs/GnomeVFSDirectory.xs, xs/GnomeVFSXfer.xs:
+	clean up the stack properly after call_sv to stop internal bleeding.
+
 2003/11/15 12:16 (+0100) kaffeetisch
 
 	* VFS.pm: Add a comma.
