@@ -225,12 +225,17 @@ gnome_vfs_read (handle, bytes)
 	GnomeVFSResult result;
 	GnomeVFSFileSize bytes_read = bytes;
     PPCODE:
+	if (! bytes > 0)
+		croak ("The number of bytes to read must be greater than 0");
+
 	buffer = g_new0 (char, bytes);
 	result = gnome_vfs_read (handle, buffer, bytes, &bytes_read);
+
 	EXTEND (sp, 3);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVuv (bytes_read)));
 	PUSHs (sv_2mortal (newSVpv (buffer, bytes_read)));
+
 	g_free (buffer);
 
 =for apidoc

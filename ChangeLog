@@ -1,3 +1,9 @@
+2004/03/09 22:49 (+0100) kaffeetisch
+
+	* xs/GnomeVFSOps.xs (gnome_vfs_read): Croak if `bytes' is not
+	greater than 0 in order to prevent segfaults.  (Reported by James
+	Curbo)
+
 2004/03/03 20:28 (+0100) kaffeetisch
 
 	* t/GnomeVFSURI.t
