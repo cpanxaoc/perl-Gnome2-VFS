@@ -1,3 +1,11 @@
+2004/06/25 16:09 (+0200) kaffeetisch
+
+	* t/GnomeVFSDirectory.t: Fix a test bug found by david d zuhn.
+
+	* t/GnomeVFSUtils.t
+	* xs/GnomeVFSUtils.xs: Patch by muppet fixes a crash found by
+	Gavin.
+
 2004/06/13 22:05 (+0200) kaffeetisch
 
 	* NEWS

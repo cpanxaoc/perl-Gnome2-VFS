@@ -250,7 +250,9 @@ gnome_vfs_read_entire_file (class, uri)
 	EXTEND (sp, 3);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSViv (file_size)));
-	PUSHs (sv_2mortal (newSVpv (file_contents, file_size)));
+	PUSHs (sv_2mortal (file_size
+			   ? newSVpv (file_contents, file_size)
+			   : newSVsv (&PL_sv_undef)));
 
 ##  char * gnome_vfs_format_uri_for_display (const char *uri) 
 char *

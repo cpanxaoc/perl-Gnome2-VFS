@@ -9,7 +9,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 27) :
+  (tests => 30) :
   (skip_all => "You have no ~/.gnome");
 
 Gnome2::VFS -> init();
@@ -24,7 +24,7 @@ Gnome2::VFS -> init();
 is(Gnome2::VFS -> format_file_size_for_display(1200000000), "1.1 GB");
 
 SKIP: {
-  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.2.0", 10)
+  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.2.0", 13)
     unless (Gnome2::VFS -> CHECK_VERSION(2, 2, 0));
 
   is(Gnome2::VFS -> escape_string('%$§'), '%25%24%A7');
@@ -39,6 +39,11 @@ SKIP: {
   is($result, "ok");
   like($size, qr/^\d+$/);
   like($content, qr(^#!/usr/bin/perl));
+
+  ($result, $size, $content) = Gnome2::VFS -> read_entire_file(cwd());
+  is($result, "error-is-directory");
+  is($size, 0);
+  is($content, undef);
 }
 
 SKIP: {
