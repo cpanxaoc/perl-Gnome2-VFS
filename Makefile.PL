@@ -105,8 +105,8 @@ ExtUtils::PkgConfig->write_version_macros (
 
 ###############################################################################
 
-my $vfs = ExtUtils::Depends->new ('Gnome2::VFS', 'Gtk2');
-$vfs->set_inc ($vfs_pkgcfg{cflags});
+my $vfs = ExtUtils::Depends->new ('Gnome2::VFS', 'Glib');
+$vfs->set_inc ($vfs_pkgcfg{cflags} . " -I build");
 $vfs->set_libs ($vfs_pkgcfg{libs});
 $vfs->add_xs (@xs_files);
 $vfs->add_c ("vfs2perl.c");

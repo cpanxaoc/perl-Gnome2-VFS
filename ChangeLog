@@ -1,3 +1,10 @@
+2004/06/25 16:47 (+0200) kaffeetisch
+
+	* vfs2perl.h
+	* Makefile.PL: Don't depend on Gtk2, since we actually don't need
+	to.  Instead, just include Glib's header, and add "-I build" to
+	the cflags.
+
 2004/06/25 16:09 (+0200) kaffeetisch
 
 	* t/GnomeVFSDirectory.t: Fix a test bug found by david d zuhn.

@@ -21,7 +21,7 @@
 #ifndef _VFS2PERL_H_
 #define _VFS2PERL_H_
 
-#include <gtk2perl.h>
+#include <gperl.h>
 
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
