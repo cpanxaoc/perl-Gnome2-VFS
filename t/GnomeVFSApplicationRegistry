@@ -2,7 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 9;
+use Test::More tests => 11;
 
 # $Header$
 
@@ -44,6 +44,11 @@ ok($application -> get_mime_types());
 ok($application -> supports_mime_type(($application -> get_mime_types())[0]));
 
 ok(not $application -> supports_uri_scheme("http"));
+
+my $mime_application = $application -> get_mime_application();
+isa_ok($mime_application, "Gnome2::VFS::Mime::Application");
+ok(not $mime_application -> is_user_owned());
+$mime_application -> save();
 
 ###############################################################################
 

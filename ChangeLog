@@ -1,3 +1,15 @@
+2003/11/30 16:41 (+0100) kaffeetisch
+
+	* xs/GnomeVFSMime.xs: In SvGnomeVFSMimeApplication, check if a
+	pointer is non-NULL before dereferencing it.
+
+	* vfs.typemap
+	* xs/GnomeVFSApplicationRegistry.xs
+	* t/GnomeVFSApplicationRegistry: Implement and test
+	Gnome2::VFS::Application::get_mime_application,
+	Gnome2::VFS::Mime::Application::is_user_owned and
+	Gnome2::VFS::Mime::Application::save.
+
 2003/11/30 15:22 (+0100) kaffeetisch
 
 	A MANIFEST.SKIP

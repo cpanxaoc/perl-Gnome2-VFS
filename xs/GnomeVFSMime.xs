@@ -109,7 +109,7 @@ SvGnomeVFSMimeApplication (SV *object)
 		if (value) application->requires_terminal = SvUV (*value);
 
 		value = hv_fetch (hv, "supported_uri_schemes", 21, FALSE);
-		if (*value && SvOK (*value) && SvROK (*value) && SvTYPE (SvRV (*value)) == SVt_PVAV) {
+		if (value && *value && SvOK (*value) && SvROK (*value) && SvTYPE (SvRV (*value)) == SVt_PVAV) {
 			AV *array = (AV *) SvRV (*value);
 			int i;
 

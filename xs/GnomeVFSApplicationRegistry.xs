@@ -182,12 +182,6 @@ gnome_vfs_application_registry_supports_uri_scheme (app_id, uri_scheme)
 	GnomeVFSApplication *app_id
 	const char *uri_scheme
 
-# FIXME: Implement GnomeVFSMimeApplication.
-###  gboolean gnome_vfs_application_is_user_owned_application (const GnomeVFSMimeApplication *application) 
-#gboolean
-#gnome_vfs_application_is_user_owned_application (application)
-#	const GnomeVFSMimeApplication *application
-
 ##  void gnome_vfs_application_registry_clear_mime_types (const char *app_id) 
 void
 gnome_vfs_application_registry_clear_mime_types (app_id)
@@ -205,14 +199,25 @@ gnome_vfs_application_registry_remove_mime_type (app_id, mime_type)
 	GnomeVFSApplication *app_id
 	const char *mime_type
 
-# FIXME: Implement GnomeVFSMimeApplication.
-###  GnomeVFSMimeApplication * gnome_vfs_application_registry_get_mime_application(const char *app_id) 
-#GnomeVFSMimeApplication *
-#gnome_vfs_application_registry_get_mime_application (app_id)
-#	const char *app_id
+##  GnomeVFSMimeApplication * gnome_vfs_application_registry_get_mime_application(const char *app_id) 
+GnomeVFSMimeApplication *
+gnome_vfs_application_registry_get_mime_application (app_id)
+	GnomeVFSApplication *app_id
 
-# FIXME: Implement GnomeVFSMimeApplication.
-###  void gnome_vfs_application_registry_save_mime_application(const GnomeVFSMimeApplication *application) 
-#void
-#gnome_vfs_application_registry_save_mime_application (application)
-#	const GnomeVFSMimeApplication *application
+MODULE = Gnome2::VFS::ApplicationRegistry	PACKAGE = Gnome2::VFS::Mime::Application	PREFIX = gnome_vfs_mime_application_
+
+##  gboolean gnome_vfs_application_is_user_owned_application (const GnomeVFSMimeApplication *application) 
+gboolean
+gnome_vfs_mime_application_is_user_owned (application)
+	const GnomeVFSMimeApplication *application
+    CODE:
+	RETVAL = gnome_vfs_application_is_user_owned_application (application);
+    OUTPUT:
+	RETVAL
+
+##  void gnome_vfs_application_registry_save_mime_application(const GnomeVFSMimeApplication *application) 
+void
+gnome_vfs_mime_application_save (application)
+	const GnomeVFSMimeApplication *application
+    CODE:
+	gnome_vfs_application_registry_save_mime_application (application);
