@@ -292,7 +292,7 @@ GnomeVFSResult
 gnome_vfs_seek (handle, whence, offset)
 	GnomeVFSHandle *handle
 	GnomeVFSSeekPosition whence
-	long offset
+	GnomeVFSFileOffset offset
 
 ##  GnomeVFSResult gnome_vfs_tell (GnomeVFSHandle *handle, GnomeVFSFileSize *offset_return) 
 void
@@ -515,7 +515,7 @@ gnome_vfs_monitor_cancel (handle)
 
 # --------------------------------------------------------------------------- #
 
-# FIXME: why would you want to use this?
+# FIXME: why would you want to use these?
 ###  GnomeVFSResult gnome_vfs_set_file_info_uri (GnomeVFSURI *uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
 #GnomeVFSResult
 #gnome_vfs_set_file_info_uri (uri, info, mask)
@@ -523,13 +523,14 @@ gnome_vfs_monitor_cancel (handle)
 #	GnomeVFSFileInfo *info
 #	GnomeVFSSetFileInfoMask mask
 
-# FIXME: why would you want to use this?
 ###  GnomeVFSResult gnome_vfs_set_file_info (const gchar *text_uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
 #GnomeVFSResult
 #gnome_vfs_set_file_info (text_uri, info, mask)
 #	const gchar *text_uri
 #	GnomeVFSFileInfo *info
 #	GnomeVFSSetFileInfoMask mask
+
+# --------------------------------------------------------------------------- #
 
 # according to the docs, not intended to be used directly.
 ###  GnomeVFSResult gnome_vfs_file_control (GnomeVFSHandle *handle, const char *operation, gpointer operation_data) 

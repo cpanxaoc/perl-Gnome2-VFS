@@ -20,6 +20,30 @@
 
 #include "vfs2perl.h"
 
+SV *
+newSVGnomeVFSFileSize (GnomeVFSFileSize size)
+{
+	return newSVuv (size);
+}
+
+GnomeVFSFileSize
+SvGnomeVFSFileSize (SV *size)
+{
+	return SvUV (size);
+}
+
+SV *
+newSVGnomeVFSFileOffset (GnomeVFSFileOffset offset)
+{
+	return newSVuv (offset);
+}
+
+GnomeVFSFileOffset
+SvGnomeVFSFileOffset (SV *offset)
+{
+	return SvUV (offset);
+}
+
 MODULE = Gnome2::VFS	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
 BOOT:
@@ -28,7 +52,6 @@ BOOT:
 
 void
 gnome_vfs_get_version_info (class)
-	SV * class
     PPCODE:
 	EXTEND (SP, 3);
 	PUSHs (sv_2mortal (newSViv (VFS_MAJOR_VERSION)));

@@ -1,6 +1,7 @@
 TYPEMAP
 
 GnomeVFSFileSize	T_GNOME_VFS_FILE_SIZE
+GnomeVFSFileOffset	T_GNOME_VFS_FILE_OFFSET
 
 GnomeVFSURI *	T_GNOME_VFS_URI
 const GnomeVFSURI *	T_GNOME_VFS_URI
@@ -22,7 +23,10 @@ GnomeVFSApplication *	T_GNOME_VFS_APPLICATION
 INPUT
 
 T_GNOME_VFS_FILE_SIZE
-	$var = SvUV ($arg);
+	$var = SvGnomeVFSFileSize ($arg);
+
+T_GNOME_VFS_FILE_OFFSET
+	$var = SvGnomeVFSFileOffset ($arg);
 
 T_GNOME_VFS_URI
 	$var = SvGnomeVFSURI ($arg);
@@ -45,7 +49,10 @@ T_GNOME_VFS_APPLICATION
 OUTPUT
 
 T_GNOME_VFS_FILE_SIZE
-	$arg = newSVuv ($var);
+	$arg = newSVGnomeVFSFileSize ($var);
+
+T_GNOME_VFS_FILE_OFFSET
+	$arg = newSVGnomeVFSFileOffset ($var);
 
 T_GNOME_VFS_URI
 	$arg = newSVGnomeVFSURI ($var);

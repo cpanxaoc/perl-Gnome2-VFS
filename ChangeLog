@@ -1,4 +1,19 @@
-2003/10/28 23:17 (+0200) kaffeetisch
+2003/10/30 16:25 (+0100) kaffeetisch
+
+	* vfs2perl.h
+	* vfs2perl.typemap
+	* xs/GnomeVFSOps.xs: Implement and use GnomeVFSFileOffset typemap.
+
+	* xs/GnomeVFS.xs: Implement GnomeVFSFileSize and
+	GnomeVFSFileOffset typemaps here.
+
+	* t/GnomeVFSOps.t: Implement seek and truncate tests.
+
+	A xs/GnomeVFSUtils.xs
+	A t/GnomeVFSUtils.t
+	* MANIFEST: Initial implementation of GnomeVFSUtils.
+
+2003/10/28 23:17 (+0100) kaffeetisch
 
 	* vfs2perl.h
 	* xs/GnomeVFSOps.xs: Implement and use GnomeVFSFileSize typemap.

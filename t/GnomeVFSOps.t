@@ -2,7 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 40;
+use Test::More tests => 44;
 
 # $Header$
 
@@ -56,18 +56,17 @@ is_deeply([$handle -> read(6)], ["ok", 6, "blaaa!"]);
 
 is_deeply([$handle -> tell()], ["ok", 6]);
 
-# XXX: why doesn't that work?
-# is($handle -> seek("start", 2), "ok");
-# is_deeply([$handle -> read(4)], ["ok", 4, "aaa!"]);
+is($handle -> seek("start", 2), "ok");
+is_deeply([$handle -> read(4)], ["ok", 4, "aaa!"]);
 
 is($handle -> close(), "ok");
 
-# XXX: truncating not working at all?
-# warn $handle -> truncate(3);
-# warn Gnome2::VFS::URI -> new("/tmp/blu") -> truncate(4);
-# warn Gnome2::VFS -> truncate("/tmp/blu", 5);
+# XXX: warn $handle -> truncate(3);
 
 ###############################################################################
+
+is(Gnome2::VFS -> truncate("/tmp/blu", 5), "ok");
+is(Gnome2::VFS::URI -> new("/tmp/blu") -> truncate(4), "ok");
 
 ($result, $handle) = Gnome2::VFS -> open("/tmp/blu", [qw(read write random)]);
 is($result, "ok");
@@ -76,7 +75,7 @@ my $info;
 
 ($result, $info) = Gnome2::VFS -> get_file_info("/tmp/blu", qw(default));
 is($result, "ok");
-is($info -> { size }, 6);
+is($info -> { size }, 4);
 
 ($result, $info) = Gnome2::VFS::URI -> new("/tmp/blu") -> get_file_info(qw(get-mime-type));
 is($result, "ok");
@@ -84,7 +83,7 @@ is($info -> { mime_type }, "text/plain");
 
 ($result, $info) = $handle -> get_file_info(qw(default));
 is($result, "ok");
-is_deeply($info -> { permissions }, [qw(user-read user-write user-all group-read group-all other-read other-all)]);
+isa_ok($info -> { permissions }, "ARRAY");
 
 is($handle -> close(), "ok");
 

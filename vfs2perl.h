@@ -31,6 +31,12 @@
 #include "vfs2perl-version.h"
 #include "vfs2perl-autogen.h"
 
+SV * newSVGnomeVFSFileSize (GnomeVFSFileSize size);
+GnomeVFSFileSize SvGnomeVFSFileSize (SV *size);
+
+SV * newSVGnomeVFSFileOffset (GnomeVFSFileOffset offset);
+GnomeVFSFileOffset SvGnomeVFSFileOffset (SV *offset);
+
 GnomeVFSURI * SvGnomeVFSURI (SV *object);
 SV * newSVGnomeVFSURI (GnomeVFSURI *uri);
 
