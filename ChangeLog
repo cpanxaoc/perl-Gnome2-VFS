@@ -1,3 +1,21 @@
+2004/03/27 17:24 (+0100) kaffeetisch
+
+	Merge from the stable-1-00 branch.
+
+	* t/GnomeVFSAsync
+	* t/GnomeVFSDirectory.t
+	* t/GnomeVFSFileInfo.t 
+	* t/GnomeVFSMime
+	* t/GnomeVFSOps.t
+	* t/GnomeVFSURI.t 
+	* t/GnomeVFSUtils.t
+	* t/GnomeVFSXfer.t Skip all tests if there is no ~/.gnome
+	directory.  (Reported by Marc Brockschmidt)
+
+	* xs/GnomeVFSMime.xs
+	* xs/GnomeVFSUtils.xs: Make all version checks refer to stable
+	versions.
+
 2004/03/24 17:04 (+0100) kaffeetisch
 
 	* Makefile.PL

@@ -64,7 +64,7 @@ gnome_vfs_format_file_size_for_display (class, size)
     CLEANUP:
 	g_free (RETVAL);
 
-#if VFS_CHECK_VERSION (2, 1, 3)
+#if VFS_CHECK_VERSION (2, 2, 0)
 
 ##  char *gnome_vfs_escape_string (const char *string) 
 char *
@@ -230,7 +230,7 @@ gnome_vfs_is_primary_thread (class)
     C_ARGS:
 	/* void */
 
-#if VFS_CHECK_VERSION (2, 1, 3)
+#if VFS_CHECK_VERSION (2, 2, 0)
 
 =for apidoc
 
@@ -272,7 +272,7 @@ gnome_vfs_make_uri_from_input (class, uri)
 
 #endif
 
-#if VFS_CHECK_VERSION (2, 3, 1)
+#if VFS_CHECK_VERSION (2, 4, 0)
 
 ##  char * gnome_vfs_make_uri_from_input_with_dirs (const char *uri, GnomeVFSMakeURIDirs dirs) 
 char *
@@ -286,7 +286,7 @@ gnome_vfs_make_uri_from_input_with_dirs (class, uri, dirs)
 
 #endif
 
-#if VFS_CHECK_VERSION (2, 1, 3)
+#if VFS_CHECK_VERSION (2, 2, 0)
 
 ##  char * gnome_vfs_make_uri_canonical_strip_fragment (const char *uri) 
 char *
@@ -336,7 +336,7 @@ gnome_vfs_make_uri_from_shell_arg (class, uri)
 
 #endif
 
-#if VFS_CHECK_VERSION (2, 3, 1)
+#if VFS_CHECK_VERSION (2, 4, 0)
 
 ##  GnomeVFSResult gnome_vfs_url_show (const char *url) 
 GnomeVFSResult

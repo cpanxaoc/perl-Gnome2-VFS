@@ -546,7 +546,7 @@ gnome_vfs_mime_application_new_from_id (class, id)
 
 ##  void gnome_vfs_mime_application_free (GnomeVFSMimeApplication *application) 
 
-#if VFS_CHECK_VERSION (2, 3, 1)
+#if VFS_CHECK_VERSION (2, 4, 0)
 
 =for apidoc
 
