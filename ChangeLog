@@ -1,3 +1,30 @@
+2003/11/01 13:24 (+0100) kaffeetisch
+
+	* xs/GnomeVFSUtils.xs: Apply muppet's patch to make it compile on
+	older versions of gnome-vfs.
+
+	* xs/GnomeVFSOps.xs: Remove Gnome2::VFS::DESTROY.  It wasn't
+	necessary, there are no objects with that package name.
+
+	* xs/GnomeVFSApplicationRegistry.xs: Move
+	gnome_vfs_application_registry_sync,
+	gnome_vfs_application_registry_shutdown and
+	gnome_vfs_application_registry_reload to the correct package.
+
+	* xs/GnomeVFS.xs: Implement Gnome2::VFS::check_version.
+
+	* t/GnomeVFSUtils.t: Add tests for undocumented functions.  Skip
+	tests if the correspoinding function isn't available.
+
+	* t/GnomeVFSApplicationRegistry: Add -> reload() at the beginning
+	and -> shutdown() at the end.
+
+	* Makefile.PL: Require version 1.01 of Glib for the new
+	T_GPERL_GENERIC_WRAPPER typemap.
+
+	* vfs2perl.typemap: Switch to T_GPERL_GENERIC_WRAPPER for all
+	types.
+
 2003/10/31 20:12 (+0100) kaffeetisch
 
 	Memory leak hunting.

@@ -9,6 +9,7 @@ use Test::More tests => 9;
 ###############################################################################
 
 Gnome2::VFS -> init();
+Gnome2::VFS::ApplicationRegistry -> reload();
 
 ###############################################################################
 
@@ -45,4 +46,5 @@ ok(not $application -> supports_uri_scheme("http"));
 
 ###############################################################################
 
+Gnome2::VFS::ApplicationRegistry -> shutdown();
 Gnome2::VFS -> shutdown();

@@ -115,17 +115,6 @@ vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
-void
-DESTROY (rv)
-	SV *rv
-    CODE:
-	MAGIC *mg;
-
-	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
-		return;
-
-	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
-
 ##  GnomeVFSResult gnome_vfs_open (GnomeVFSHandle **handle, const gchar *text_uri, GnomeVFSOpenMode open_mode)
 void
 gnome_vfs_open (class, text_uri, open_mode)

@@ -174,12 +174,13 @@ gnome_vfs_is_primary_thread (class)
 # FIXME: implement.
 ###  GnomeVFSResult gnome_vfs_read_entire_file (const char *uri, int *file_size, char **file_contents) 
 #GnomeVFSResult
-#gnome_vfs_read_entire_file (class, uri, file_size, file_contents)
+#gnome_vfs_read_entire_file (uri, file_size, file_contents)
 #	const char *uri
 #	int *file_size
 #	char **file_contents
-#    C_ARGS:
 #	
+
+#if VFS_CHECK_VERSION (2, 1, 3)
 
 ##  char * gnome_vfs_format_uri_for_display (const char *uri) 
 char *
@@ -199,6 +200,10 @@ gnome_vfs_make_uri_from_input (class, uri)
     CLEANUP:
 	g_free (RETVAL);
 
+#endif
+
+#if VFS_CHECK_VERSION (2, 2, 5)
+
 ##  char * gnome_vfs_make_uri_from_input_with_dirs (const char *uri, GnomeVFSMakeURIDirs dirs) 
 char *
 gnome_vfs_make_uri_from_input_with_dirs (class, uri, dirs)
@@ -208,6 +213,10 @@ gnome_vfs_make_uri_from_input_with_dirs (class, uri, dirs)
 	uri, dirs
     CLEANUP:
 	g_free (RETVAL);
+
+#endif
+
+#if VFS_CHECK_VERSION (2, 1, 3)
 
 ##  char * gnome_vfs_make_uri_canonical_strip_fragment (const char *uri) 
 char *
@@ -244,15 +253,20 @@ gnome_vfs_make_uri_from_shell_arg (class, uri)
     CLEANUP:
 	g_free (RETVAL);
 
-##  char * gnome_vfs_make_uri_full_from_relative (const char *base_uri, const char *relative_uri) 
-char *
-gnome_vfs_make_uri_full_from_relative (class, base_uri, relative_uri)
-	const char *base_uri
-	const char *relative_uri
-    C_ARGS:
-	base_uri, relative_uri
-    CLEANUP:
-	g_free (RETVAL);
+# deprecated.
+###  char * gnome_vfs_make_uri_full_from_relative (const char *base_uri, const char *relative_uri) 
+#char *
+#gnome_vfs_make_uri_full_from_relative (class, base_uri, relative_uri)
+#	const char *base_uri
+#	const char *relative_uri
+#    C_ARGS:
+#	base_uri, relative_uri
+#    CLEANUP:
+#	g_free (RETVAL);
+
+#endif
+
+#if VFS_CHECK_VERSION (2, 2, 5)
 
 ##  GnomeVFSResult gnome_vfs_url_show (const char *url) 
 GnomeVFSResult
@@ -261,11 +275,11 @@ gnome_vfs_url_show (class, url)
     C_ARGS:
 	url
 
+#endif
+
 # FIXME: implement?
 ###  GnomeVFSResult gnome_vfs_url_show_with_env (const char *url, char **envp) 
 #GnomeVFSResult
-#gnome_vfs_url_show_with_env (class, url, envp)
+#gnome_vfs_url_show_with_env (url, envp)
 #	const char *url
 #	char **envp
-#    C_ARGS:
-#	

@@ -2,7 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 20;
+use Test::More tests => 24;
 
 # $Header$
 
@@ -14,11 +14,31 @@ Gnome2::VFS -> init();
 
 # Gnome2::VFS -> escape_set(...);
 # Gnome2::VFS -> icon_path_from_filename(...);
+# Gnome2::VFS -> url_show(...);
 
 is(Gnome2::VFS -> format_file_size_for_display(1200000000), "1.1 GB");
 
-foreach (Gnome2::VFS -> escape_string('%$§'),
-         Gnome2::VFS -> escape_path_string('%$§'),
+SKIP: {
+  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.1.3", 7)
+    unless (Gnome2::VFS -> check_version(2, 1, 3));
+
+  is(Gnome2::VFS -> escape_string('%$§'), '%25%24%A7');
+  is(Gnome2::VFS -> format_uri_for_display("/usr/bin/perl"), "/usr/bin/perl");
+  is(Gnome2::VFS -> make_uri_from_input("gtk2-perl.sf.net"), "http://gtk2-perl.sf.net");
+  is(Gnome2::VFS -> make_uri_canonical_strip_fragment("http://gtk2-perl.sf.net#bla"), "http://gtk2-perl.sf.net");
+  ok(Gnome2::VFS -> uris_match("http://gtk2-perl.sf.net", "http://gtk2-perl.sf.net"));
+  is(Gnome2::VFS -> get_uri_scheme("http://gtk2-perl.sf.net"), "http");
+  is(Gnome2::VFS -> make_uri_from_shell_arg("/~/bla"), "file:///~/bla");
+}
+
+SKIP: {
+  skip("make_uri_from_input_with_dirs is new in 2.2.5", 1)
+    unless (Gnome2::VFS -> check_version(2, 2, 5));
+
+  is(Gnome2::VFS -> make_uri_from_input_with_dirs("~/tmp", qw(homedir)), "file://$ENV{ HOME }/tmp");
+}
+
+foreach (Gnome2::VFS -> escape_path_string('%$§'),
          Gnome2::VFS -> escape_host_and_path_string('%$§')) {
   is($_, '%25%24%A7');
   is(Gnome2::VFS -> unescape_string($_), '%$§');
@@ -38,8 +58,6 @@ is($result, "ok");
 like($size, qr/^\d+$/);
 
 ok(Gnome2::VFS -> is_primary_thread());
-is(Gnome2::VFS -> get_uri_scheme("http://gtk2-perl.sf.net"), "http");
-ok(Gnome2::VFS -> uris_match("http://gtk2-perl.sf.net", "http://gtk2-perl.sf.net"));
 
 ###############################################################################
 

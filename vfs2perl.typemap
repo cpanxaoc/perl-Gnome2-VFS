@@ -1,73 +1,23 @@
 TYPEMAP
 
-GnomeVFSFileSize	T_GNOME_VFS_FILE_SIZE
-GnomeVFSFileOffset	T_GNOME_VFS_FILE_OFFSET
+GnomeVFSFileSize	T_GPERL_GENERIC_WRAPPER
+GnomeVFSFileOffset	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSURI *	T_GNOME_VFS_URI
-const GnomeVFSURI *	T_GNOME_VFS_URI
+GnomeVFSURI *	T_GPERL_GENERIC_WRAPPER
+const GnomeVFSURI *	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSFileInfo *	T_GNOME_VFS_FILE_INFO
-const GnomeVFSFileInfo *	T_GNOME_VFS_FILE_INFO
+GnomeVFSFileInfo *	T_GPERL_GENERIC_WRAPPER
+const GnomeVFSFileInfo *	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSHandle *	T_GNOME_VFS_HANDLE
-const GnomeVFSHandle *	T_GNOME_VFS_HANDLE
+GnomeVFSHandle *	T_GPERL_GENERIC_WRAPPER
+const GnomeVFSHandle *	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSMonitorHandle *	T_GNOME_VFS_MONITOR_HANDLE
-const GnomeVFSMonitorHandle *	T_GNOME_VFS_MONITOR_HANDLE
+GnomeVFSAsyncHandle *	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
-const GnomeVFSDirectoryHandle *	T_GNOME_VFS_DIRECTORY_HANDLE
+GnomeVFSMonitorHandle *	T_GPERL_GENERIC_WRAPPER
+const GnomeVFSMonitorHandle *	T_GPERL_GENERIC_WRAPPER
 
-GnomeVFSApplication *	T_GNOME_VFS_APPLICATION
+GnomeVFSDirectoryHandle *	T_GPERL_GENERIC_WRAPPER
+const GnomeVFSDirectoryHandle *	T_GPERL_GENERIC_WRAPPER
 
-INPUT
-
-T_GNOME_VFS_FILE_SIZE
-	$var = SvGnomeVFSFileSize ($arg);
-
-T_GNOME_VFS_FILE_OFFSET
-	$var = SvGnomeVFSFileOffset ($arg);
-
-T_GNOME_VFS_URI
-	$var = SvGnomeVFSURI ($arg);
-
-T_GNOME_VFS_FILE_INFO
-	$var = SvGnomeVFSFileInfo ($arg);
-
-T_GNOME_VFS_HANDLE
-	$var = SvGnomeVFSHandle ($arg);
-
-T_GNOME_VFS_MONITOR_HANDLE
-	$var = SvGnomeVFSMonitorHandle ($arg);
-
-T_GNOME_VFS_DIRECTORY_HANDLE
-	$var = SvGnomeVFSDirectoryHandle ($arg);
-
-T_GNOME_VFS_APPLICATION
-	$var = SvGnomeVFSApplication ($arg);
-
-OUTPUT
-
-T_GNOME_VFS_FILE_SIZE
-	$arg = newSVGnomeVFSFileSize ($var);
-
-T_GNOME_VFS_FILE_OFFSET
-	$arg = newSVGnomeVFSFileOffset ($var);
-
-T_GNOME_VFS_URI
-	$arg = newSVGnomeVFSURI ($var);
-
-T_GNOME_VFS_FILE_INFO
-	$arg = newSVGnomeVFSFileInfo ($var);
-
-T_GNOME_VFS_HANDLE
-	$arg = newSVGnomeVFSHandle ($var);
-
-T_GNOME_VFS_MONITOR_HANDLE
-	$arg = newSVGnomeVFSMonitorHandle ($var);
-
-T_GNOME_VFS_DIRECTORY_HANDLE
-	$arg = newSVGnomeVFSDirectoryHandle ($var);
-
-T_GNOME_VFS_APPLICATION
-	$arg = newSVGnomeVFSApplication ($var);
+GnomeVFSApplication *	T_GPERL_GENERIC_WRAPPER

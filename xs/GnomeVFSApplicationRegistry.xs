@@ -60,6 +60,24 @@ gnome_vfs_application_registry_new (class, app_id)
     OUTPUT:
 	RETVAL
 
+##  GnomeVFSResult gnome_vfs_application_registry_sync (void) 
+GnomeVFSResult
+gnome_vfs_application_registry_sync (class)
+    C_ARGS:
+	/* void */
+
+##  void gnome_vfs_application_registry_shutdown (void) 
+void
+gnome_vfs_application_registry_shutdown (class)
+    C_ARGS:
+	/* void */
+
+##  void gnome_vfs_application_registry_reload (void) 
+void
+gnome_vfs_application_registry_reload (class)
+    C_ARGS:
+	/* void */
+
 MODULE = Gnome2::VFS::ApplicationRegistry	PACKAGE = Gnome2::VFS::Application	PREFIX = gnome_vfs_application_registry_
 
 ##  gboolean gnome_vfs_application_registry_exists (const char *app_id) 
@@ -179,24 +197,6 @@ void
 gnome_vfs_application_registry_remove_mime_type (app_id, mime_type)
 	GnomeVFSApplication *app_id
 	const char *mime_type
-
-##  GnomeVFSResult gnome_vfs_application_registry_sync (void) 
-GnomeVFSResult
-gnome_vfs_application_registry_sync (class)
-    C_ARGS:
-	/* void */
-
-##  void gnome_vfs_application_registry_shutdown (void) 
-void
-gnome_vfs_application_registry_shutdown (class)
-    C_ARGS:
-	/* void */
-
-##  void gnome_vfs_application_registry_reload (void) 
-void
-gnome_vfs_application_registry_reload (class)
-    C_ARGS:
-	/* void */
 
 # FIXME: Implement GnomeVFSMimeApplication.
 ###  GnomeVFSMimeApplication * gnome_vfs_application_registry_get_mime_application(const char *app_id) 

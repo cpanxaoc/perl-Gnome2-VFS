@@ -58,6 +58,16 @@ gnome_vfs_get_version_info (class)
 	PUSHs (sv_2mortal (newSViv (VFS_MINOR_VERSION)));
 	PUSHs (sv_2mortal (newSViv (VFS_MICRO_VERSION)));
 
+bool
+gnome_vfs_check_version (class, major, minor, micro)
+	int major
+	int minor
+	int micro
+    CODE:
+	RETVAL = VFS_CHECK_VERSION (major, minor, micro);
+    OUTPUT:
+	RETVAL
+
 ##  GnomeVFSResult gnome_vfs_find_directory (GnomeVFSURI *near_uri, GnomeVFSFindDirectoryKind kind, GnomeVFSURI **result, gboolean create_if_needed, gboolean find_if_needed, guint permissions)
 void
 gnome_vfs_find_directory (class, near_uri, kind, create_if_needed, find_if_needed, permissions)
