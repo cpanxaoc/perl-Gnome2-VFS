@@ -112,7 +112,7 @@ $vfs->set_libs ($vfs_pkgcfg{libs});
 $vfs->add_xs (@xs_files);
 $vfs->add_c ("vfs2perl.c", "build/vfs2perl-gtypes.c");
 $vfs->add_pm ('VFS.pm' => '$(INST_LIBDIR)/VFS.pm');
-$vfs->add_typemaps (map {File::Spec->catfile(cwd(), $_)} 'build/vfs2perl.typemap', 'vfs2perl.typemap');
+$vfs->add_typemaps (map {File::Spec->catfile(cwd(), $_)} 'build/vfs2perl.typemap', 'vfs.typemap');
 $vfs->add_headers ('vfs2perl.h');
 
 $vfs->install (qw(vfs2perl.h

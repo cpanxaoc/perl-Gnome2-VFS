@@ -36,10 +36,10 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
                                GPerlCallback * callback,
                                gboolean *recurse)
 {
-	dGPERL_CALLBACK_MARSHAL_SP;
 	int n;
 	gboolean stop;
 
+	dGPERL_CALLBACK_MARSHAL_SP;
 	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
@@ -119,8 +119,10 @@ gnome_vfs_directory_visit (class, uri, info_options, visit_options, func, data=N
 	GnomeVFSDirectoryVisitOptions visit_options
 	SV *func
 	SV *data
+    PREINIT:
+	GPerlCallback *callback;
     CODE:
-	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
+	callback = vfs2perl_directory_visit_func_create (func, data);
 
 	RETVAL = gnome_vfs_directory_visit (uri,
 	                                    info_options,
@@ -141,8 +143,10 @@ gnome_vfs_directory_visit_uri (class, uri, info_options, visit_options, func, da
 	GnomeVFSDirectoryVisitOptions visit_options
 	SV *func
 	SV *data
+    PREINIT:
+	GPerlCallback *callback;
     CODE:
-	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
+	callback = vfs2perl_directory_visit_func_create (func, data);
 
 	RETVAL = gnome_vfs_directory_visit_uri (uri,
 	                                        info_options,
@@ -164,9 +168,12 @@ gnome_vfs_directory_visit_files (class, text_uri, file_ref, info_options, visit_
 	GnomeVFSDirectoryVisitOptions visit_options
 	SV *func
 	SV *data
+    PREINIT:
+	GPerlCallback *callback;
+	GList *file_list;
     CODE:
-	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
-	GList *file_list = SvPVGList (file_ref);
+	callback = vfs2perl_directory_visit_func_create (func, data);
+	file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files (text_uri,
 	                                          file_list,
@@ -190,9 +197,12 @@ gnome_vfs_directory_visit_files_at_uri (class, uri, file_ref, info_options, visi
 	GnomeVFSDirectoryVisitOptions visit_options
 	SV *func
 	SV *data
+    PREINIT:
+	GPerlCallback *callback;
+	GList *file_list;
     CODE:
-	GPerlCallback *callback = vfs2perl_directory_visit_func_create (func, data);
-	GList *file_list = SvPVGList (file_ref);
+	callback = vfs2perl_directory_visit_func_create (func, data);
+	file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files_at_uri (uri,
 	                                                 file_list,

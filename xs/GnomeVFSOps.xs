@@ -36,9 +36,9 @@ vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
                            GnomeVFSMonitorEventType event_type,
                            GPerlCallback *callback)
 {
-	dGPERL_CALLBACK_MARSHAL_SP;
 	int n;
 
+	dGPERL_CALLBACK_MARSHAL_SP;
 	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
@@ -451,8 +451,9 @@ gnome_vfs_monitor_add (class, text_uri, monitor_type, func, data=NULL)
     PREINIT:
 	GnomeVFSResult result;
 	GnomeVFSMonitorHandle *handle;
+	GPerlCallback *callback;
     PPCODE:
-	GPerlCallback *callback = vfs2perl_monitor_callback_create (func, data);
+	callback = vfs2perl_monitor_callback_create (func, data);
 
 	result = gnome_vfs_monitor_add (&handle,
 	                                text_uri,

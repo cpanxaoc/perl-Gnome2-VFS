@@ -133,8 +133,10 @@ gnome_vfs_xfer_uri (class, source_uri, target_uri, xfer_options, error_mode, ove
 	SV *data
     ALIAS:
 	Gnome2::VFS::URI::xfer = 0
+    PREINIT:
+	GPerlCallback *callback;
     CODE:
-	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
+	callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_uri (source_uri,
 	                             target_uri,
@@ -159,11 +161,15 @@ gnome_vfs_xfer_uri_list (class, source_ref, target_ref, xfer_options, error_mode
 	GnomeVFSXferOverwriteMode overwrite_mode
 	SV *func
 	SV *data
+    PREINIT:
+	GList *source_uri_list;
+	GList *target_uri_list;
+	GPerlCallback *callback;
     CODE:
-	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
-	GList *target_uri_list = SvGnomeVFSURIGList (target_ref);
+	source_uri_list = SvGnomeVFSURIGList (source_ref);
+	target_uri_list = SvGnomeVFSURIGList (target_ref);
 
-	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
+	callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_uri_list ((const GList *) source_uri_list,
 	                                  (const GList *) target_uri_list,
@@ -189,10 +195,13 @@ gnome_vfs_xfer_delete_list (class, source_ref, error_mode, xfer_options, func, d
 	GnomeVFSXferOptions xfer_options
 	SV *func
 	SV *data
+    PREINIT:
+	GList *source_uri_list;
+	GPerlCallback *callback;
     CODE:
-	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
+	source_uri_list = SvGnomeVFSURIGList (source_ref);
 
-	GPerlCallback *callback = vfs2perl_xfer_progress_callback_create (func, data);
+	callback = vfs2perl_xfer_progress_callback_create (func, data);
 
 	RETVAL = gnome_vfs_xfer_delete_list ((const GList *) source_uri_list,
 	                                     error_mode,

@@ -4,6 +4,7 @@ MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 Makefile.PL
 VFS.pm
+examples/downloader.pl
 genmaps.pl
 maps
 t/GnomeVFS.t
@@ -15,8 +16,9 @@ t/GnomeVFSOps.t
 t/GnomeVFSURI.t
 t/GnomeVFSUtils.t
 t/GnomeVFSXfer.t
+vfs.typemap
+vfs2perl.c
 vfs2perl.h
-vfs2perl.typemap
 xs/GnomeVFS.xs
 xs/GnomeVFSApplicationRegistry.xs
 xs/GnomeVFSAsync.xs
