@@ -123,6 +123,9 @@ found at
 
 is the canonical reference.
 
+In addition to that, there's also the automatically generated API
+documentation: L<Gnome2::VFS::index>(3pm).
+
 The mapping described in L<Gtk2::api>(3pm) also applies to this module.
 
 To discuss this module, ask questions and flame/praise the authors, join
@@ -130,7 +133,8 @@ gtk-perl-list@gnome.org at lists.gnome.org.
 
 =head1 SEE ALSO
 
-L<perl>(1), L<Glib>(3pm), L<Gtk2>(3pm), L<Gtk2::api>(3pm).
+L<perl>(1), L<Gnome2::VFS::index>(3pm), L<Glib>(3pm), L<Gtk2>(3pm),
+L<Gtk2::api>(3pm).
 
 =head1 AUTHOR
 

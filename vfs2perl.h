@@ -32,19 +32,19 @@
 
 /* ------------------------------------------------------------------------- */
 
-#define VFS2PERL_GNOME_TYPE_VFS_URI (vfs2perl_gnome_vfs_uri_get_type ())
+#define GNOME_VFS_TYPE_VFS_URI (vfs2perl_gnome_vfs_uri_get_type ())
 GType vfs2perl_gnome_vfs_uri_get_type (void) G_GNUC_CONST;
 
-#define VFS2PERL_GNOME_TYPE_VFS_HANDLE (vfs2perl_gnome_vfs_handle_get_type ())
+#define GNOME_VFS_TYPE_VFS_HANDLE (vfs2perl_gnome_vfs_handle_get_type ())
 GType vfs2perl_gnome_vfs_handle_get_type (void) G_GNUC_CONST;
 
-#define VFS2PERL_GNOME_TYPE_VFS_MONITOR_HANDLE (vfs2perl_gnome_vfs_monitor_handle_get_type ())
+#define GNOME_VFS_TYPE_VFS_MONITOR_HANDLE (vfs2perl_gnome_vfs_monitor_handle_get_type ())
 GType vfs2perl_gnome_vfs_monitor_handle_get_type (void) G_GNUC_CONST;
 
-#define VFS2PERL_GNOME_TYPE_VFS_DIRECTORY_HANDLE (vfs2perl_gnome_vfs_directory_handle_get_type ())
+#define GNOME_VFS_TYPE_VFS_DIRECTORY_HANDLE (vfs2perl_gnome_vfs_directory_handle_get_type ())
 GType vfs2perl_gnome_vfs_directory_handle_get_type (void) G_GNUC_CONST;
 
-#define VFS2PERL_GNOME_TYPE_VFS_ASYNC_HANDLE (vfs2perl_gnome_vfs_async_handle_get_type ())
+#define GNOME_VFS_TYPE_VFS_ASYNC_HANDLE (vfs2perl_gnome_vfs_async_handle_get_type ())
 GType vfs2perl_gnome_vfs_async_handle_get_type (void) G_GNUC_CONST;
 
 /* ------------------------------------------------------------------------- */
@@ -58,8 +58,8 @@ GType vfs2perl_gnome_vfs_async_handle_get_type (void) G_GNUC_CONST;
  */
 #if !VFS_CHECK_VERSION (2, 1, 0)
 # define VFS2PERL_BROKEN_FILE_PERMISSIONS
-# undef VFS2PERL_GNOME_TYPE_VFS_FILE_PERMISSIONS
-# define VFS2PERL_GNOME_TYPE_VFS_FILE_PERMISSIONS (_vfs2perl_gnome_vfs_file_permissions_get_type ())
+# undef GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS
+# define GNOME_VFS_TYPE_VFS_FILE_PERMISSIONS (_vfs2perl_gnome_vfs_file_permissions_get_type ())
   GType _vfs2perl_gnome_vfs_file_permissions_get_type (void) G_GNUC_CONST;
 #endif
 

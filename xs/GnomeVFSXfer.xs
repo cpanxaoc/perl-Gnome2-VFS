@@ -103,9 +103,9 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 	SPAGAIN;
 
 	if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR)
-		retval = sv_to_int (VFS2PERL_GNOME_TYPE_VFS_XFER_ERROR_ACTION, POPs);
+		retval = sv_to_int (GNOME_VFS_TYPE_VFS_XFER_ERROR_ACTION, POPs);
 	else if (info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OVERWRITE)
-		retval = sv_to_int (VFS2PERL_GNOME_TYPE_VFS_XFER_OVERWRITE_ACTION, POPs);
+		retval = sv_to_int (GNOME_VFS_TYPE_VFS_XFER_OVERWRITE_ACTION, POPs);
 	else
 		retval = POPi;
 
