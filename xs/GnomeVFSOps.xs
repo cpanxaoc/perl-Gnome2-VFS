@@ -119,6 +119,11 @@ MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
 =cut
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_open (GnomeVFSHandle **handle, const gchar *text_uri, GnomeVFSOpenMode open_mode)
 void
 gnome_vfs_open (class, text_uri, open_mode)
@@ -133,6 +138,12 @@ gnome_vfs_open (class, text_uri, open_mode)
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSHandle (handle)));
 
+
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_create (GnomeVFSHandle **handle, const gchar *text_uri, GnomeVFSOpenMode open_mode, gboolean exclusive, guint perm) 
 void
 gnome_vfs_create (class, text_uri, open_mode, exclusive, perm)
@@ -165,6 +176,12 @@ gnome_vfs_move (class, old_text_uri, new_text_uri, force_replace)
     C_ARGS:
 	old_text_uri, new_text_uri, force_replace
 
+
+=for apidoc
+
+Returns a GnomeVFSResult and a boolean.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_check_same_fs (const gchar *source, const gchar *target, gboolean *same_fs_return) 
 void
 gnome_vfs_check_same_fs (class, source, target)
@@ -187,6 +204,12 @@ gnome_vfs_create_symbolic_link (class, uri, target_reference)
     C_ARGS:
 	uri, target_reference
 
+
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSFileInfo.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_get_file_info (const gchar *text_uri, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
 void
 gnome_vfs_get_file_info (class, text_uri, options)
@@ -246,6 +269,12 @@ GnomeVFSResult
 gnome_vfs_close (handle)
 	GnomeVFSHandle *handle
 
+=for apidoc
+
+Returns a GnomeVFSResult, the number of bytes read and the buffer containing
+the read content.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_read (GnomeVFSHandle *handle, gpointer buffer, GnomeVFSFileSize bytes, GnomeVFSFileSize *bytes_read) 
 void
 gnome_vfs_read (handle, bytes)
@@ -286,6 +315,11 @@ gnome_vfs_seek (handle, whence, offset)
 	GnomeVFSSeekPosition whence
 	GnomeVFSFileOffset offset
 
+=for apidoc
+
+Returns a GnomeVFSResult and the offset.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_tell (GnomeVFSHandle *handle, GnomeVFSFileSize *offset_return) 
 void
 gnome_vfs_tell (handle)
@@ -329,6 +363,11 @@ gnome_vfs_truncate_handle (handle, length)
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::URI	PREFIX = gnome_vfs_uri_
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_open_uri (GnomeVFSHandle **handle, GnomeVFSURI *uri, GnomeVFSOpenMode open_mode) 
 void
 gnome_vfs_open_uri (uri, open_mode)
@@ -372,6 +411,11 @@ gnome_vfs_move_uri (old_uri, new_uri, force_replace)
     ALIAS:
 	Gnome2::VFS::URI::move = 0
 
+=for apidoc
+
+Returns a GnomeVFSResult and a boolean.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_check_same_fs_uris (GnomeVFSURI *source_uri, GnomeVFSURI *target_uri, gboolean *same_fs_return) 
 void
 gnome_vfs_check_same_fs_uris (source_uri, target_uri)
@@ -400,6 +444,11 @@ gnome_vfs_unlink_from_uri (uri)
     ALIAS:
 	Gnome2::VFS::URI::unlink = 0
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSFileInfo.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_get_file_info_uri (GnomeVFSURI *uri, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
 void
 gnome_vfs_get_file_info_uri (uri, options)
@@ -445,6 +494,11 @@ gnome_vfs_remove_directory_from_uri (uri)
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Monitor	PREFIX = gnome_vfs_monitor_
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSMonitorHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_monitor_add (GnomeVFSMonitorHandle **handle, const gchar *text_uri, GnomeVFSMonitorType monitor_type, GnomeVFSMonitorCallback callback, gpointer user_data) 
 void
 gnome_vfs_monitor_add (class, text_uri, monitor_type, func, data=NULL)

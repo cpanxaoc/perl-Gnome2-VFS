@@ -240,6 +240,11 @@ gnome_vfs_uri_extract_short_path_name (uri)
 #gnome_vfs_uri_hash (p)
 #	gconstpointer p
 
+=for apidoc
+
+Returns a list of GnomeVFSURI's.
+
+=cut
 ##  GList *gnome_vfs_uri_list_parse (const gchar* uri_list) 
 void
 gnome_vfs_uri_list_parse (class, uri_list)

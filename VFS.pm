@@ -116,7 +116,7 @@ you to interface with the gnome-vfs libraries.
 
 =head1 DESCRIPTION
 
-Since this module tries to stick very closely to the C API the documentation
+Since this module tries to stick very closely to the C API, the documentation
 found at
 
   http://developer.gnome.org/doc/API/2.0/gnome-vfs-2.0/

@@ -113,6 +113,12 @@ gnome_vfs_application_registry_peek_value (app_id, key)
 	GnomeVFSApplication *app_id
 	const char *key
 
+=for apidoc
+
+Returns the actual value and a boolean indicating whether the requested key was
+found.
+
+=cut
 ##  gboolean gnome_vfs_application_registry_get_bool_value (const char *app_id, const char *key, gboolean *got_key) 
 void
 gnome_vfs_application_registry_get_bool_value (app_id, key)

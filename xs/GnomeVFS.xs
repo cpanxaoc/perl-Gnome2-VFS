@@ -164,6 +164,11 @@ BOOT:
 	gperl_handle_logs_for ("libgnomevfs");
 }
 
+=for apidoc
+
+Returns the major, minor and micro version numbers of GnomeVFS.
+
+=cut
 void
 gnome_vfs_get_version_info (class)
     PPCODE:
@@ -182,6 +187,11 @@ gnome_vfs_check_version (class, major, minor, micro)
     OUTPUT:
 	RETVAL
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSURI.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_find_directory (GnomeVFSURI *near_uri, GnomeVFSFindDirectoryKind kind, GnomeVFSURI **result, gboolean create_if_needed, gboolean find_if_needed, guint permissions)
 void
 gnome_vfs_find_directory (class, near_uri, kind, create_if_needed, find_if_needed, permissions)

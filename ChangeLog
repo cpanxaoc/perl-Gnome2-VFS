@@ -1,3 +1,16 @@
+2003/11/15 12:16 (+0100) kaffeetisch
+
+	* VFS.pm: Add a comma.
+
+	* xs/GnomeVFS.xs
+	* xs/GnomeVFSApplicationRegistry.xs
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSURI.xs
+	* xs/GnomeVFSUtil.xs: Add API documentation mainly for things that
+	return lists.
+
 2003/11/15 11:18 (+0100) kaffeetisch
 
 	* Makefile.PL: Remove dependency checking for Gtk2.

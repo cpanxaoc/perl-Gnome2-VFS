@@ -161,6 +161,12 @@ gnome_vfs_is_executable_command_string (class, command_string)
 #gnome_vfs_list_deep_free (list)
 #	GList *list
 
+
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSFileSize.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_get_volume_free_space (const GnomeVFSURI *vfs_uri, GnomeVFSFileSize *size) 
 void
 gnome_vfs_get_volume_free_space (class, vfs_uri)

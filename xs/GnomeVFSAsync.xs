@@ -501,6 +501,11 @@ gnome_vfs_async_load_directory_uri (class, uri, options, items_per_notification,
     OUTPUT:
 	RETVAL
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSAsyncHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_async_xfer (GnomeVFSAsyncHandle **handle_return, GList *source_uri_list, GList *target_uri_list, GnomeVFSXferOptions xfer_options, GnomeVFSXferErrorMode error_mode, GnomeVFSXferOverwriteMode overwrite_mode, int priority, GnomeVFSAsyncXferProgressCallback progress_update_callback, gpointer update_callback_data, GnomeVFSXferProgressCallback progress_sync_callback, gpointer sync_callback_data) 
 void
 gnome_vfs_async_xfer (class, source_ref, target_ref, xfer_options, error_mode, overwrite_mode, priority, func_update, data_update, func_sync, data_sync=NULL)

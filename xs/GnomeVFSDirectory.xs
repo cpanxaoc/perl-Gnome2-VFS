@@ -96,6 +96,11 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
 
 MODULE = Gnome2::VFS::Directory	PACKAGE = Gnome2::VFS::Directory	PREFIX = gnome_vfs_directory_
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSDirectoryHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_directory_open (GnomeVFSDirectoryHandle **handle, const gchar *text_uri, GnomeVFSFileInfoOptions options) 
 void
 gnome_vfs_directory_open (class, text_uri, options)
@@ -220,6 +225,12 @@ gnome_vfs_directory_visit_files_at_uri (class, uri, file_ref, info_options, visi
     OUTPUT:
 	RETVAL
 
+=for apidoc
+
+Returns a GnomeVFSResult and the GnomeVFSFileInfo's corresponding to the
+directory's content.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_directory_list_load (GList **list, const gchar *text_uri, GnomeVFSFileInfoOptions options) 
 void
 gnome_vfs_directory_list_load (class, text_uri, options)
@@ -254,6 +265,11 @@ DESTROY (rv)
 
 	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSFileInfo.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_directory_read_next (GnomeVFSDirectoryHandle *handle, GnomeVFSFileInfo *file_info) 
 void
 gnome_vfs_directory_read_next (handle)
