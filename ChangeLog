@@ -1,3 +1,8 @@
+2004/09/15 12:31 (+0200) kaffeetisch
+
+	* xs/GnomeVFSVolumeMonitor.xs: Add a FIXME comment with a
+	reference to the relevant bug to the DESTROY workaround.
+
 2004/08/16 00:03 (+0200) kaffeetisch
 
 	* Makefile.PL, NEWS, README, VFS.pm: Version 1.011.
