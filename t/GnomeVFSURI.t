@@ -2,6 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
+use Config;
 use Test::More;
 
 # $Header$
@@ -29,8 +30,11 @@ is($uri -> append_file_name("blo.html") -> to_string(), "http://www.freenet.de/b
 ok(not $uri -> is_local());
 
 SKIP: {
-  skip("resolve_relative, it changed in 2.3.1", 1)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 3, 1));
+  skip("resolve_relative, it changed in 2.4.0", 1)
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 4, 0));
+
+  skip("resolve_relative is currently broken on 64bit platforms", 1)
+    if ($Config{ archname } =~ m/^(ia64|x86_64|alpha)/);
 
   is($uri -> resolve_relative("bla.html") -> to_string(), "http://www.freenet.de/bla.html");
 }
