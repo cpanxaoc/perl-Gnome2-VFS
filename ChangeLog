@@ -1,3 +1,7 @@
+2003/12/21 15:17 (+0100) kaffeetisch
+
+	* VFS.pm: Add a KNOWN BUGS section.
+
 2003/12/20 14:34 (+0100) kaffeetisch
 
 	* xs/GnomeVFSAsync.xs: Add a commented out attempt to handle

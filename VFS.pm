@@ -131,6 +131,15 @@ The mapping described in L<Gtk2::api>(3pm) also applies to this module.
 To discuss this module, ask questions and flame/praise the authors, join
 gtk-perl-list@gnome.org at lists.gnome.org.
 
+=head1 KNOWN BUGS
+
+There are some memory leaks especially with respect to callbacks.  This mainly
+affects GnomeVFSAsync as well as some parts of GnomeVFSXfer and GnomeVFSOps.
+GnomeVFSMime leaks some list data.
+
+GnomeVFSAsync is also known to crash occasionally when there are many
+concurrent transfers.
+
 =head1 SEE ALSO
 
 L<perl>(1), L<Gnome2::VFS::index>(3pm), L<Glib>(3pm), L<Gtk2>(3pm),
