@@ -1,3 +1,27 @@
+2005/03/21	kaffeetisch
+
+	* VFS.pm, t/GnomeVFS.t: Export the following constants on demand
+	(@EXPORT_OK): GNOME_VFS_PRIORITY_MIN, GNOME_VFS_PRIORITY_MAX,
+	GNOME_VFS_PRIORITY_DEFAULT, GNOME_VFS_SIZE_FORMAT_STR,
+	GNOME_VFS_OFFSET_FORMAT_STR, GNOME_VFS_MIME_TYPE_UNKNOWN,
+	GNOME_VFS_URI_MAGIC_STR, and GNOME_VFS_URI_PATH_STR.
+
+	* xs/GnomeVFSMime.xs, t/GnomeVFSMime: Bind
+	gnome_vfs_mime_get_default_application_for_uri,
+	gnome_vfs_mime_get_all_applications_for_uri,
+	gnome_vfs_mime_application_new_from_desktop_id,
+	gnome_vfs_mime_application_get_desktop_id,
+	gnome_vfs_mime_application_get_desktop_file_path,
+	gnome_vfs_mime_application_get_name,
+	gnome_vfs_mime_application_get_generic_name,
+	gnome_vfs_mime_application_get_icon,
+	gnome_vfs_mime_application_get_exec,
+	gnome_vfs_mime_application_get_binary_name,
+	gnome_vfs_mime_application_supports_uris,
+	gnome_vfs_mime_application_requires_terminal,
+	gnome_vfs_mime_application_supports_startup_notification, and
+	gnome_vfs_mime_application_get_startup_wm_class.
+
 2005/03/16	kaffeetisch
 
 	* xs/GnomeVFSResolve.xs: Add a DESTROY xsub that frees the handle.

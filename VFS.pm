@@ -8,34 +8,64 @@ use warnings;
 
 use Glib;
 
+require Exporter;
 require DynaLoader;
 
-our @ISA = qw(DynaLoader);
+our @ISA = qw(Exporter DynaLoader);
+
+our @EXPORT_OK = qw(
+  GNOME_VFS_PRIORITY_MIN
+  GNOME_VFS_PRIORITY_MAX
+  GNOME_VFS_PRIORITY_DEFAULT
+  GNOME_VFS_SIZE_FORMAT_STR
+  GNOME_VFS_OFFSET_FORMAT_STR
+  GNOME_VFS_MIME_TYPE_UNKNOWN
+  GNOME_VFS_URI_MAGIC_STR
+  GNOME_VFS_URI_PATH_STR
+);
+
+# --------------------------------------------------------------------------- #
 
 our $VERSION = '1.020';
 
 sub import {
-  my $self = shift();
+  my ($self) = @_;
+  my @symbols = ();
 
   foreach (@_) {
     if (/^-?init$/) {
       $self -> init();
-    }
-    else {
-      $self -> VERSION($_);
+    } else {
+      push @symbols, $_;
     }
   }
+
+  Gnome2::VFS -> export_to_level(1, @symbols);
 }
 
 sub dl_load_flags { $^O eq 'darwin' ? 0x00 : 0x01 }
 
 Gnome2::VFS -> bootstrap($VERSION);
 
-# Preloaded methods go here.
+# --------------------------------------------------------------------------- #
+
+use constant GNOME_VFS_PRIORITY_MIN => -10;
+use constant GNOME_VFS_PRIORITY_MAX => 10;
+use constant GNOME_VFS_PRIORITY_DEFAULT => 0;
+
+use constant GNOME_VFS_SIZE_FORMAT_STR => "Lu";
+use constant GNOME_VFS_OFFSET_FORMAT_STR => "Ld";
+
+use constant GNOME_VFS_MIME_TYPE_UNKNOWN => "application/octet-stream";
+
+use constant GNOME_VFS_URI_MAGIC_STR => "#";
+use constant GNOME_VFS_URI_PATH_STR => "/";
 
 1;
+
+# --------------------------------------------------------------------------- #
+
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -120,14 +150,14 @@ filesystems.
 Since this module tries to stick very closely to the C API, the documentation
 found at
 
-  http://developer.gnome.org/doc/API/2.0/gnome-vfs-2.0/
+  L<http://developer.gnome.org/doc/API/2.0/gnome-vfs-2.0/>
 
 is the canonical reference.
 
 In addition to that, there's also the automatically generated API
-documentation: L<Gnome2::VFS::index>(3pm).
+documentation: L<Gnome2::VFS::index>.
 
-The mapping described in L<Gtk2::api>(3pm) also applies to this module.
+The mapping described in L<Gtk2::api> also applies to this module.
 
 To discuss this module, ask questions and flame/praise the authors, join
 gtk-perl-list@gnome.org at lists.gnome.org.
@@ -143,8 +173,7 @@ many concurrent transfers.
 
 =head1 SEE ALSO
 
-L<perl>(1), L<Gnome2::VFS::index>(3pm), L<Glib>(3pm), L<Gtk2>(3pm),
-L<Gtk2::api>(3pm).
+L<Gnome2::VFS::index>, L<Glib>, L<Gtk2>, L<Gtk2::api>.
 
 =head1 AUTHOR
 
