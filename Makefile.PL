@@ -59,7 +59,6 @@ system(q(glib-mkenums --fhead "#include <libgnomevfs/gnome-vfs-types.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-monitor.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-mime-handlers.h>\n" ) .
                     q(--fhead "#include <libgnomevfs/gnome-vfs-directory.h>\n" ) .
-                    q(--eprod "#define GNOME_TYPE_@ENUMSHORT@ @enum_name@_get_type()\n" ) .
                     q(--vhead "static const G@Type@Value _@enum_name@_values[] = {" ) .
                     q(--vprod "  { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," ) .
                     q(--vtail "  { 0, NULL, NULL }\n};\n\n" ) .

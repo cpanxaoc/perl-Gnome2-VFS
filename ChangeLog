@@ -1,3 +1,11 @@
+2003/11/18 23:36 (+0100) kaffeetisch
+
+	* examples/downloader.pl: Handle a click on Download with nothing
+	in the text entry gracefully.
+
+	* Makefile.PL: Don't #define the GTypes in the .c, they're already
+	in the .h.
+
 2003/11/16 20:32 (-0500) muppetman
 
 	* xs/GnomeVFSAsync.xs, xs/GnomeVFSDirectory.xs, xs/GnomeVFSOps.xs,

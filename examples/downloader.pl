@@ -139,6 +139,8 @@ my %iters;
 sub start_new_download {
   my ($address) = @_;
 
+  return unless ($address ne "");
+
   my $source = Gnome2::VFS::URI -> new($address);
   my $target = Gnome2::VFS::URI -> new(cwd() . "/" . $source -> extract_short_path_name());
 
