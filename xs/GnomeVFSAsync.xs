@@ -27,8 +27,8 @@ static GPerlCallback *
 vfs2perl_async_open_callback_create (SV *func, SV *data)
 {
 	GType param_types [] = {
-		VFS2PERL_GNOME_TYPE_VFS_ASYNC_HANDLE,
-		VFS2PERL_GNOME_TYPE_VFS_RESULT
+		GNOME_VFS_TYPE_VFS_ASYNC_HANDLE,
+		GNOME_VFS_TYPE_VFS_RESULT
 	};
 	return gperl_callback_new (func, data, G_N_ELEMENTS (param_types),
 	                           param_types, 0);
