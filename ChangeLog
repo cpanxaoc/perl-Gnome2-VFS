@@ -1,3 +1,9 @@
+2004/03/14 21:25 (+0100) kaffeetisch
+
+	* t/GnomeVFSUtils.t: Don't be so strict with
+	make_uri_from_input_with_dirs and expand_initial_tilde: test only
+	if they return something defined.
+
 2004/03/11 15:49 (+0100) kaffeetisch
 
 	A NEWS

@@ -39,7 +39,7 @@ SKIP: {
   skip("make_uri_from_input_with_dirs is new in 2.3.1", 1)
     unless (Gnome2::VFS -> CHECK_VERSION(2, 3, 1));
 
-  is(Gnome2::VFS -> make_uri_from_input_with_dirs("~/tmp", qw(homedir)), "file://$ENV{ HOME }/tmp");
+  ok(defined(Gnome2::VFS -> make_uri_from_input_with_dirs("~/tmp", qw(homedir))));
 }
 
 foreach (Gnome2::VFS -> escape_path_string('%$§'),
@@ -58,11 +58,11 @@ SKIP: {
 }
 
 is(Gnome2::VFS -> make_path_name_canonical("/bla"), "/bla");
-is(Gnome2::VFS -> expand_initial_tilde("~/bla"), "$ENV{ HOME }/bla");
+ok(defined(Gnome2::VFS -> expand_initial_tilde("~/bla")));
 is(Gnome2::VFS -> unescape_string_for_display("%2F%25%2F"), "/%/");
 is(Gnome2::VFS -> get_local_path_from_uri("file:///bla"), "/bla");
 is(Gnome2::VFS -> get_uri_from_local_path("/bla"), "file:///bla");
-ok(Gnome2::VFS -> is_executable_command_string("perl -wle 'print bla'"));
+ok(Gnome2::VFS -> is_executable_command_string("perl -wle 'print 23'"));
 
 my ($result, $size) = Gnome2::VFS -> get_volume_free_space(Gnome2::VFS::URI -> new("file://" . cwd()));
 is($result, "ok");
