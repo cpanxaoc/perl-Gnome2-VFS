@@ -34,10 +34,6 @@ GnomeVFSURI_own *
 gnome_vfs_uri_resolve_relative (base, relative_reference)
 	const GnomeVFSURI *base
 	const gchar *relative_reference
-    CODE:
-	RETVAL = gnome_vfs_uri_resolve_relative (base, relative_reference);
-    OUTPUT:
-	RETVAL
 
 ###  GnomeVFSURI *gnome_vfs_uri_ref (GnomeVFSURI *uri) 
 #GnomeVFSURI *

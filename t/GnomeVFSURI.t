@@ -12,12 +12,6 @@ plan -d "$ENV{ HOME }/.gnome" ?
 
 Gnome2::VFS -> init();
 
-plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 29) :
-  (skip_all => "You have no ~/.gnome");
-
-Gnome2::VFS -> init();
-
 ###############################################################################
 
 my $uri = Gnome2::VFS::URI -> new("http://www.freenet.de");

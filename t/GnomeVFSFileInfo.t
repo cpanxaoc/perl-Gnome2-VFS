@@ -14,12 +14,6 @@ plan -d "$ENV{ HOME }/.gnome" ?
 
 Gnome2::VFS -> init();
 
-plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 3) :
-  (skip_all => "You have no ~/.gnome");
-
-Gnome2::VFS -> init();
-
 ###############################################################################
 
 my $info = Gnome2::VFS -> get_file_info(cwd() . "/" . $0, qw(get-mime-type));

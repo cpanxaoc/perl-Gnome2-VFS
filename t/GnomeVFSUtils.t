@@ -14,12 +14,6 @@ plan -d "$ENV{ HOME }/.gnome" ?
 
 Gnome2::VFS -> init();
 
-plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 27) :
-  (skip_all => "You have no ~/.gnome");
-
-Gnome2::VFS -> init();
-
 ###############################################################################
 
 # Gnome2::VFS -> escape_set(...);

@@ -12,12 +12,6 @@ plan -d "$ENV{ HOME }/.gnome" ?
 
 Gnome2::VFS -> init();
 
-plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 11) :
-  (skip_all => "You have no ~/.gnome");
-
-Gnome2::VFS -> init();
-
 ###############################################################################
 
 my $monitor = Gnome2::VFS::Mime::Monitor -> get();
