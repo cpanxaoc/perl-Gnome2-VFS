@@ -10,6 +10,19 @@
 	warnings.
 
 	* xs/GnomeVFSUtils.xs: disambiguating braces hush compiler warnings.
+	
+2003/12/18 22:23 (+0100) kaffeetisch
+
+	* VFS.pm: Mention Gnome2::VFS::index.
+
+	* Makefile.PL
+	* maps
+	* vfs2perl.h
+	* xs/GnomeVFSXfer.xs: Since gnome-vfs 2.5.3 now ships with own
+	GTypes, we use those instead of the home-grown ones if they are
+	available.  For that to work, GNOME_VFS_TYPE_VFS_ is now used as
+	the prefix for all GTypes so that we can easily switch between our
+	and gnome-vfs' implementation.
 
 2003/12/12 23:29 (+0100) kaffeetisch
 
