@@ -200,6 +200,15 @@ gnome_vfs_remove_directory (class, text_uri)
     C_ARGS:
 	text_uri
 
+##  GnomeVFSResult gnome_vfs_set_file_info (const gchar *text_uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
+GnomeVFSResult
+gnome_vfs_set_file_info (class, text_uri, info, mask)
+	const gchar *text_uri
+	GnomeVFSFileInfo *info
+	GnomeVFSSetFileInfoMask mask
+    C_ARGS:
+	text_uri, info, mask
+
 # --------------------------------------------------------------------------- #
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Handle	PREFIX = gnome_vfs_
@@ -452,6 +461,17 @@ gnome_vfs_uri_remove_directory (uri)
     OUTPUT:
 	RETVAL
 
+##  GnomeVFSResult gnome_vfs_set_file_info_uri (GnomeVFSURI *uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
+GnomeVFSResult
+gnome_vfs_uri_set_file_info (uri, info, mask)
+	GnomeVFSURI *uri
+	GnomeVFSFileInfo *info
+	GnomeVFSSetFileInfoMask mask
+    CODE:
+	RETVAL = gnome_vfs_set_file_info_uri (uri, info, mask);
+    OUTPUT:
+	RETVAL
+
 # --------------------------------------------------------------------------- #
 
 MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Monitor	PREFIX = gnome_vfs_monitor_
@@ -496,23 +516,6 @@ MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Monitor::Handle	PREFIX = gnome_
 GnomeVFSResult
 gnome_vfs_monitor_cancel (handle)
 	GnomeVFSMonitorHandle *handle
-
-# --------------------------------------------------------------------------- #
-
-# FIXME: why would you want to use these?
-###  GnomeVFSResult gnome_vfs_set_file_info_uri (GnomeVFSURI *uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
-#GnomeVFSResult
-#gnome_vfs_set_file_info_uri (uri, info, mask)
-#	GnomeVFSURI *uri
-#	GnomeVFSFileInfo *info
-#	GnomeVFSSetFileInfoMask mask
-
-###  GnomeVFSResult gnome_vfs_set_file_info (const gchar *text_uri, GnomeVFSFileInfo *info, GnomeVFSSetFileInfoMask mask) 
-#GnomeVFSResult
-#gnome_vfs_set_file_info (text_uri, info, mask)
-#	const gchar *text_uri
-#	GnomeVFSFileInfo *info
-#	GnomeVFSSetFileInfoMask mask
 
 # --------------------------------------------------------------------------- #
 

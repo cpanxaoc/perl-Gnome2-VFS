@@ -15,8 +15,8 @@ Gnome2::VFS -> init();
 
 ###############################################################################
 
-Gnome2::VFS::Async -> set_job_limit(3);
-is(Gnome2::VFS::Async -> get_job_limit(), 3);
+Gnome2::VFS::Async -> set_job_limit(2);
+is(Gnome2::VFS::Async -> get_job_limit(), 2);
 
 ###############################################################################
 
@@ -27,6 +27,18 @@ my $callback_close = sub {
   is($result, "ok");
 
   $handle -> cancel();
+};
+
+my $callback_write = sub {
+  my ($handle, $result, $buffer, $bytes_requested, $bytes_written) = @_;
+
+  isa_ok($handle, "Gnome2::VFS::Async::Handle");
+  is($result, "ok");
+  is($buffer, "urgs\n");
+  is($bytes_requested, 5);
+  is($bytes_written, 5);
+
+  $handle -> close($callback_close);
 };
 
 my $callback_read = sub {
@@ -41,13 +53,22 @@ my $callback_read = sub {
   $handle -> close($callback_close);
 };
 
-my $callback_open = sub {
+my $callback_seek = sub {
   my ($handle, $result) = @_;
 
   isa_ok($handle, "Gnome2::VFS::Async::Handle");
   is($result, "ok");
 
   $handle -> read(10, $callback_read);
+};
+
+my $callback_open = sub {
+  my ($handle, $result) = @_;
+
+  isa_ok($handle, "Gnome2::VFS::Async::Handle");
+  is($result, "ok");
+
+  $handle -> seek("start", 0, $callback_seek);
 };
 
 ###############################################################################
@@ -58,7 +79,7 @@ my $callback_create = sub {
   isa_ok($handle, "Gnome2::VFS::Async::Handle");
   is($result, "ok");
 
-  $handle -> close($callback_close);
+  $handle -> write("urgs\n", 5, $callback_write);
 };
 
 ###############################################################################
@@ -83,7 +104,7 @@ my $callback_directory_open = sub {
 
 ###############################################################################
 
-my $callback_file_info = sub {
+my $callback_get_file_info = sub {
   my ($handle, $infos) = @_;
 
   foreach (@{$infos}) {
@@ -91,6 +112,18 @@ my $callback_file_info = sub {
     isa_ok($_ -> { file_info }, "Gnome2::VFS::FileInfo");
     isa_ok($_ -> { uri }, "Gnome2::VFS::URI");
   }
+
+  $handle -> cancel();
+};
+
+my $callback_set_file_info = sub {
+  my ($handle, $result, $info) = @_;
+
+  isa_ok($handle, "Gnome2::VFS::Async::Handle");
+  is($result, "ok");
+
+  is($info -> { name }, "bla");
+  is_deeply($info -> { permissions }, [qw/user-read user-write/]);
 
   $handle -> cancel();
 };
@@ -157,8 +190,13 @@ my $files = [Gnome2::VFS::URI -> new("/tmp/bla"),
              Gnome2::VFS::URI -> new("/tmp/ble"),
              Gnome2::VFS::URI -> new("/tmp/bli")];
 
-Gnome2::VFS::Async -> get_file_info($files, qw(default), 0, $callback_file_info);
+Gnome2::VFS::Async -> get_file_info($files, qw(default), 0, $callback_get_file_info);
 Gnome2::VFS::Async -> find_directory($files, "desktop", 0, 1, 0777, 0, $callback_find_directory);
+
+Gnome2::VFS::Async -> set_file_info(Gnome2::VFS::URI -> new("/tmp/bla"),
+                                    { permissions => [qw/user-read user-write/] },
+                                    [qw/permissions/],
+                                    qw/default/, 0, $callback_set_file_info);
 
 ###############################################################################
 
@@ -187,8 +225,6 @@ isa_ok($handle, "Gnome2::VFS::Async::Handle");
 ###############################################################################
 
 Glib::Timeout -> add(2000, sub {
-  Gtk2 -> main_quit();
-
   Gnome2::VFS -> unlink("/tmp/bla");
   Gnome2::VFS -> unlink("/tmp/ble");
   Gnome2::VFS -> unlink("/tmp/bli");
@@ -196,6 +232,8 @@ Glib::Timeout -> add(2000, sub {
   Gnome2::VFS -> unlink("/tmp/blaa");
   Gnome2::VFS -> unlink("/tmp/blee");
   Gnome2::VFS -> unlink("/tmp/blii");
+
+  Gtk2 -> main_quit();
 
   0;
 });

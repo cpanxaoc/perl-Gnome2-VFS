@@ -74,3 +74,44 @@ vfs2perl_gnome_vfs_async_handle_get_type (void)
 		      (GBoxedFreeFunc) g_boxed_free);
 	return t;
 }
+
+#if VFS_CHECK_VERSION (2, 7, 2) /* FIXME: 2.8 */
+
+GType
+vfs2perl_gnome_vfs_dns_sd_browse_handle_get_type (void)
+{
+	static GType t = 0;
+	if (!t)
+		t = g_boxed_type_register_static ("GnomeVFSDNSSDBrowseHandle",
+		      (GBoxedCopyFunc) g_boxed_copy,
+		      (GBoxedFreeFunc) g_boxed_free);
+	return t;
+}
+
+GType
+vfs2perl_gnome_vfs_dns_sd_resolve_handle_get_type (void)
+{
+	static GType t = 0;
+	if (!t)
+		t = g_boxed_type_register_static ("GnomeVFSDNSSDResolveHandle",
+		      (GBoxedCopyFunc) g_boxed_copy,
+		      (GBoxedFreeFunc) g_boxed_free);
+	return t;
+}
+
+#endif /* 2.8 */
+
+#if VFS_CHECK_VERSION (2, 7, 4) /* FIXME: 2.8 */
+
+GType
+vfs2perl_gnome_vfs_resolve_handle_get_type (void)
+{
+	static GType t = 0;
+	if (!t)
+		t = g_boxed_type_register_static ("GnomeVFSResolveHandle",
+		      (GBoxedCopyFunc) g_boxed_copy,
+		      (GBoxedFreeFunc) gnome_vfs_resolve_free);
+	return t;
+}
+
+#endif /* 2.8 */

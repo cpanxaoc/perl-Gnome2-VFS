@@ -37,13 +37,13 @@ SvGnomeVFSFileSize (SV *size)
 SV *
 newSVGnomeVFSFileOffset (GnomeVFSFileOffset offset)
 {
-	return newSVuv (offset);
+	return newSViv (offset);
 }
 
 GnomeVFSFileOffset
 SvGnomeVFSFileOffset (SV *offset)
 {
-	return SvUV (offset);
+	return SvIV (offset);
 }
 
 /* ------------------------------------------------------------------------- */

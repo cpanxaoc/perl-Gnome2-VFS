@@ -7,7 +7,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 1) :
+  (tests => 2) :
   (skip_all => "You have no ~/.gnome");
 
 ###############################################################################
@@ -21,6 +21,8 @@ ok(Gnome2::VFS -> initialized());
 # my ($result, $uri) = Gnome2::VFS -> find_directory("/home", "desktop", 0, 1, 0755);
 # is($result, "ok");
 # isa_ok($uri, "Gnome2::VFS::URI");
+
+ok(defined Gnome2::VFS -> result_to_string("ok"));
 
 ###############################################################################
 

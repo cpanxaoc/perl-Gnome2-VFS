@@ -10,7 +10,7 @@ use File::Spec;
 our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.20',
   'perl-ExtUtils-PkgConfig' => '1.03',
-  'perl-Glib'               => '1.04',
+  'perl-Glib'               => '1.052', # FIXME: 1.053
   'perl-Gtk2'               => '1.02',
   'GnomeVFS'                => '2.0.0',
 );
@@ -89,14 +89,20 @@ else {
 
 ###############################################################################
 
-our @xs_files = <xs/*.xs>;
-our %pod_files = (
+my @xs_files = ();
+
+foreach (Glib::MakeHelper->select_files_by_version ("xs_files", split /\./, $vfs_pkgcfg{modversion})) {
+	push @xs_files, Glib::MakeHelper->read_source_list_file ($_);
+}
+
+my %pod_files = (
   'VFS.pm' => '$(INST_MAN3DIR)/Gnome2::VFS.$(MAN3EXT)',
   Glib::MakeHelper->do_pod_files (@xs_files),
 );
 
-Gtk2::CodeGen->parse_maps ('vfs2perl');
-Gtk2::CodeGen->write_boot (ignore => qr/^Gnome2::VFS$/);
+Gtk2::CodeGen->parse_maps ('vfs2perl', input => [<maps-*\.*>]);
+Gtk2::CodeGen->write_boot (xs_files => \@xs_files,
+                           ignore => qr/^Gnome2::VFS$/);
 
 ExtUtils::PkgConfig->write_version_macros (
   "build/vfs2perl-version.h",

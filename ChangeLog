@@ -1,3 +1,47 @@
+2004/07/29 19:12 (+0200) kaffeetisch
+
+	* MANIFEST, vfs2perl.c, vfs2perl.h, t/GnomeVFSAddress.t,
+	t/GnomeVFSDNSSD, t/GnomeVFSDrive, t/GnomeVFSResolve.t,
+	t/GnomeVFSVolume, t/GnomeVFSVolumeMonitor, xs/GnomeVFSAddress.xs,
+	xs/GnomeVFSDNSSD.xs, xs/GnomeVFSDrive.xs, xs/GnomeVFSResolve.xs,
+	xs/GnomeVFSVolume.xs, xs/GnomeVFSVolumeMonitor.xs: Bind and test
+	GnomeVFSAddress, GnomeVFSDNSSD, GnomeVFSDrive, GnomeVFSResolve,
+	GnomeVFSVolume, and GnomeVFSVolumeMonitor.  Nifty stuff!
+
+	* maps, maps-2.0, maps-2.6, maps-2.8, xs_files-2.0, xs_files-2.6,
+	xs_files-2.8, Makefile.PL: Implement loading of xs_files and maps
+	files based on the version of gnome-vfs.  Require Glib 1.052.
+	(1.053 actually, but it has not been released yet.)
+
+	* NEWS, VFS.pm: Merge changes from the stable-1-00 branch.
+
+	* t/GnomeVFS.t: Test Gnome2::VFS::result_to_string.
+
+	* t/GnomeVFSApplicationRegistry: Test a bit more stuff, and then
+	just reload the database to avoid permanent changes.
+
+	* t/GnomeVFSURI.t: Enable the resolve_relative test on 64 bit
+	platforms if gnome-vfs is recent enough.
+
+	* vfs.typemap, xs/GnomeVFS.xs: Use IVs to represent
+	GnomeVFSFileOffset instead of UVs -- offsets are signed.  Also
+	switch to T_UV and T_IV instead of the generic typemap for
+	GnomeVFSFileSize and GnomeVFSFileOffset respectively for
+	performance reasons.
+
+	* t/GnomeVFSAsync.t, xs/GnomeVFSAsync.xs: Use the same helpers for
+	the open and for set_file_info callback.  Bind and test
+	gnome_vfs_async_set_file_info and gnome_vfs_async_seek.
+
+	* t/GnomeVFSFileInfo.t, xs/GnomeVFSFileInfo.xs: Provide and test a
+	constructor for GnomeVFSFileInfo structures.
+
+	* t/GnomeVFSOps.t, xs/GnomeVFSOps.xs: Bind and test
+	gnome_vfs_set_file_info and gnome_vfs_set_file_info_uri.
+
+	* xs/GnomeVFSUtils.xs: Use the new char_own typemap to get rid of
+	all those CLEANUP sections.
+
 2004/06/28 19:55 (+0200) kaffeetisch
 
 	Merge from the stable-1-00 branch.

@@ -155,6 +155,24 @@ SvGnomeVFSFileInfo (SV *object)
 
 MODULE = Gnome2::VFS::FileInfo	PACKAGE = Gnome2::VFS::FileInfo	PREFIX = gnome_vfs_file_info_
 
+=for apidocs
+
+Creates a new GnomeVFSFileInfo object from I<hash_ref> for use with
+Gnome2::VFS::FileInfo::matches, for example.  Normally, you can always directly
+use a hash reference if you're asked for a GnomeVFSFileInfo.
+
+=cut
+GnomeVFSFileInfo *
+gnome_vfs_file_info_new (class, hash_ref)
+	SV *hash_ref
+    CODE:
+	/* All this really doesn't do much more than just bless the reference,
+	   because on the way out, the struct will be converted to a hash
+	   reference again.  Not really efficient, but future-safe. */
+	RETVAL = SvGnomeVFSFileInfo (hash_ref);
+    OUTPUT:
+	RETVAL
+
 ##  gboolean gnome_vfs_file_info_matches (const GnomeVFSFileInfo *a, const GnomeVFSFileInfo *b) 
 gboolean
 gnome_vfs_file_info_matches (a, b)
