@@ -20,34 +20,6 @@
 
 #include "vfs2perl.h"
 
-const char *
-SvGnomeVFSApplication (SV *object)
-{
-	MAGIC *mg;
-
-	if (!object || !SvOK (object) || !SvROK (object) || !(mg = mg_find (SvRV (object), PERL_MAGIC_ext)))
-		return NULL;
-
-	return (const char *) mg->mg_ptr;
-}
-
-SV *
-newSVGnomeVFSApplication (const char *app_id)
-{
-	SV *rv;
-	HV *stash;
-	SV *object = (SV *) newHV ();
-
-	sv_magic (object, 0, PERL_MAGIC_ext, app_id, 0);
-
-	rv = newRV_noinc (object);
-	stash = gv_stashpv ("Gnome2::VFS::Application", 1);
-
-	return sv_bless (rv, stash);
-}
-
-/* -------------------------------------------------------------------------  */
-
 MODULE = Gnome2::VFS::ApplicationRegistry	PACKAGE = Gnome2::VFS::ApplicationRegistry	PREFIX = gnome_vfs_application_registry_
 
 SV *

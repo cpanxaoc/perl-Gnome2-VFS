@@ -1,3 +1,16 @@
+2005/03/08	kaffeetisch
+
+	* doctypes, maps-2.0, maps-2.6, maps-2.8, vfs.typemap, vfs2perl.c,
+	vfs2perl.h, xs/GnomeVFSAsync.xs: Get rid of the custom boxed types
+	for the various handles and use simple opaque scalars instead.
+
+	* vfs2perl.c, xs/GnomeVFS.xs, xs/GnomeVFSApplicationRegistry.xs,
+	xs/GnomeVFSFileInfo.xs, xs/GnomeVFSMime.xs, xs/GnomeVFSXfer.xs:
+	Move type converters to a central place.
+
+	* xs/GnomeVFSUtils.xs, xs/GnomeVFSXfer.xs: Make internal functions
+	static.
+
 2005/03/07	kaffeetisch
 
 	* Makefile.PL, META.yml, NEWS, README, VFS.pm: Stable release
