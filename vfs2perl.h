@@ -48,6 +48,18 @@ GType vfs2perl_gnome_vfs_async_handle_get_type (void) G_GNUC_CONST;
 
 #include "vfs2perl-gtypes.h"
 #include "vfs2perl-version.h"
+
+/* i'm just guessing here.  if you get a message about failed assertions
+ * that something is a GFlags type in GnomeVFSDirectory.t, then you probably
+ * need to set this to include your version.
+ */
+#if !VFS_CHECK_VERSION (2, 1, 0)
+# define VFS2PERL_BROKEN_FILE_PERMISSIONS
+# undef GNOME_TYPE_VFS_FILE_PERMISSIONS
+# define GNOME_TYPE_VFS_FILE_PERMISSIONS (_vfs2perl_gnome_vfs_file_permissions_get_type ())
+  GType _vfs2perl_gnome_vfs_file_permissions_get_type (void) G_GNUC_CONST;
+#endif
+
 #include "vfs2perl-autogen.h"
 
 /* ------------------------------------------------------------------------- */

@@ -1,3 +1,11 @@
+2003/11/25 23:04 (+0100) kaffeetisch
+
+	* vfs2perl.h
+	* xs/GnomeVFSFileInfo.xs: Apply muppet's patch to work around the
+	fact that some older versions of gnome-vfs shipped with a
+	definition of GnomeVFSFilePermissions that glib-mkenums doesn't
+	recognize as a GFlags aspirant.
+
 2003/11/25 00:15 (+0100) kaffeetisch
 
 	R vfs2perl.typemap
