@@ -248,6 +248,7 @@ gnome_vfs_get_mime_type (class, text_uri)
     CLEANUP:
 	g_free (RETVAL);
 
+# FIXME: implement.
 ###  const char *gnome_vfs_get_mime_type_for_data (gconstpointer data, int data_size)
 #const char *
 #gnome_vfs_get_mime_type_for_data (data, data_size)

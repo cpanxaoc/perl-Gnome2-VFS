@@ -84,7 +84,7 @@ is($info -> { size }, 4);
 
 ($result, $info) = Gnome2::VFS::URI -> new(TMP . "/blu") -> get_file_info(qw(get-mime-type));
 is($result, "ok");
-is($info -> { mime_type }, "text/plain");
+ok(defined($info -> { mime_type }));
 
 ($result, $info) = $handle -> get_file_info(qw(default));
 is($result, "ok");

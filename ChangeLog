@@ -1,3 +1,9 @@
+2004/01/29 17:00 (+0100) kaffeetisch
+
+	* t/GnomeVFSOps.t: Only check if the mime type is defined.
+
+	* xs/GnomeVFS.xs: Add a FIXME comment.
+
 2004/01/24 21:44 (-0500) rwmcfa1
 
 	* Makefile.PL: removed runtime_reqs stuff, replaced by the pkg-config 
