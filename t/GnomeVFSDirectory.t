@@ -1,10 +1,16 @@
 #!/usr/bin/perl -w
 use strict;
-use Gnome2::VFS -init;
+use Gnome2::VFS;
 
-use Test::More tests => 26;
+use Test::More;
 
 # $Header$
+
+plan -d "$ENV{ HOME }/.gnome" ?
+  (tests => 26) :
+  (skip_all => "You have no ~/.gnome");
+
+Gnome2::VFS -> init();
 
 ###############################################################################
 

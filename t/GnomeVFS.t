@@ -2,9 +2,13 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 1;
+use Test::More;
 
 # $Header$
+
+plan -d "$ENV{ HOME }/.gnome" ?
+  (tests => 1) :
+  (skip_all => "You have no ~/.gnome");
 
 ###############################################################################
 
