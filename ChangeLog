@@ -1,3 +1,7 @@
+2003/12/23 01:30 (+0100) kaffeetisch
+
+	* Makefile.PL: Don't call do_pod_files twice.
+
 2003/12/22 01:19 (+0100) kaffeetisch
 
 	* META.yml

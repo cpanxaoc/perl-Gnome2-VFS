@@ -92,8 +92,6 @@ our %pod_files = (
   Glib::MakeHelper->do_pod_files (@xs_files),
 );
 
-Glib::MakeHelper->do_pod_files (@xs_files);
-
 Gtk2::CodeGen->parse_maps ('vfs2perl');
 Gtk2::CodeGen->write_boot (ignore => qr/^Gnome2::VFS$/);
 
