@@ -1,3 +1,10 @@
+2004/02/12 20:11 (+0100) kaffeetisch
+
+	* Makefile.PL
+	* README
+	* VFS.pm: Use correct version numbers for the dependencies.
+	Version 0.94.
+
 2004/02/11 20:43 (+0100) kaffeetisch
 
 	* Makefile.PL

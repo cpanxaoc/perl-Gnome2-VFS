@@ -8,9 +8,9 @@ use File::Spec;
 # $Header$
 
 our %build_reqs = (
-  'perl-ExtUtils-Depends'   => '0.200',
-  'perl-ExtUtils-PkgConfig' => '0.103',
-  'perl-Glib'               => '1.034',
+  'perl-ExtUtils-Depends'   => '0.20',
+  'perl-ExtUtils-PkgConfig' => '1.03',
+  'perl-Glib'               => '1.035',
   'perl-Gtk2'               => '1.02',
   'GnomeVFS'                => '2.0.0',
 );
@@ -111,7 +111,6 @@ $vfs->add_c ("vfs2perl.c");
 $vfs->add_c ("build/vfs2perl-gtypes.c") if ($needs_gtypes);
 $vfs->add_pm ('VFS.pm' => '$(INST_LIBDIR)/VFS.pm');
 $vfs->add_typemaps (map {File::Spec->catfile(cwd(), $_)} 'build/vfs2perl.typemap', 'vfs.typemap');
-$vfs->add_headers ('vfs2perl.h');
 
 $vfs->install (qw(vfs2perl.h
                   build/vfs2perl-autogen.h

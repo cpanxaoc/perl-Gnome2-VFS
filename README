@@ -28,8 +28,8 @@ To install Gnome2::VFS, run the following commands:
 
 Gnome2::VFS depends on:
 
-  ExtUtils::Depends >= 0.200
-  ExtUtils::PkgConfig >= 0.103
-  Glib >= 1.034
+  ExtUtils::Depends >= 0.20
+  ExtUtils::PkgConfig >= 1.03
+  Glib >= 1.035
   Gtk2 >= 1.02
   libgnomevfs >= 2.0.0
