@@ -24,7 +24,7 @@ ok(not $uri -> is_local());
 
 SKIP: {
   skip("resolve_relative, it changed in 2.3.1", 1)
-    unless (join("", Gnome2::VFS -> get_version_info()) >= 231);
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 3, 1));
 
   is($uri -> resolve_relative("bla.html") -> to_string(), "http://www.freenet.de/bla.html");
 }
