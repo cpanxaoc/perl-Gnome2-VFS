@@ -1,3 +1,19 @@
+2004/02/10 17:06 (+0100) kaffeetisch
+
+	Applying a patch from muppet.
+
+	A copyright.pod
+	A doctypes
+	* MANIFEST
+	* Makefile.PL
+	* gnome2perl.h: Use the new features of ExtUtils::Depends and
+	ExtUtils::PkgConfig.  Depend on Gnome2::Canvas.  Use
+	'gnome2perl-versions.h' for the version macros.
+
+	* VFS.pm: Add the whole license statement to the documentation.
+
+	* downloader.pl: Use new Gtk2::CellRenderer derivation API.
+
 2004/01/30 00:53 (+0100) kaffeetisch
 
 	* README
