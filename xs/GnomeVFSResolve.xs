@@ -40,6 +40,12 @@ gnome_vfs_resolve (class, hostname)
 
 MODULE = Gnome2::VFS::Resolve	PACKAGE = Gnome2::VFS::Resolve::Handle	PREFIX = gnome_vfs_resolve_
 
+void
+DESTROY (handle)
+	GnomeVFSResolveHandle *handle
+    CODE:
+	gnome_vfs_resolve_free (handle);
+
 ##  gboolean gnome_vfs_resolve_next_address (GnomeVFSResolveHandle *handle, GnomeVFSAddress **address)
 GnomeVFSAddress_ornull *
 gnome_vfs_resolve_next_address (handle)

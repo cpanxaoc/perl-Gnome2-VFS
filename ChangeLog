@@ -1,3 +1,7 @@
+2005/03/16	kaffeetisch
+
+	* xs/GnomeVFSResolve.xs: Add a DESTROY xsub that frees the handle.
+
 2005/03/08	kaffeetisch
 
 	* doctypes, maps-2.0, maps-2.6, maps-2.8, vfs.typemap, vfs2perl.c,
