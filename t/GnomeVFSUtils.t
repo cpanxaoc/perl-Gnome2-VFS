@@ -24,8 +24,8 @@ Gnome2::VFS -> init();
 is(Gnome2::VFS -> format_file_size_for_display(1200000000), "1.1 GB");
 
 SKIP: {
-  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.1.3", 10)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 1, 3));
+  skip("escape_string, format_uri_for_display, gnome_vfs_make_uri_from_input, make_uri_canonical_strip_fragment, uris_match, get_uri_scheme and make_uri_from_shell_arg are new in 2.2.0", 10)
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 2, 0));
 
   is(Gnome2::VFS -> escape_string('%$§'), '%25%24%A7');
   is(Gnome2::VFS -> format_uri_for_display("/usr/bin/perl"), "/usr/bin/perl");
@@ -42,8 +42,8 @@ SKIP: {
 }
 
 SKIP: {
-  skip("make_uri_from_input_with_dirs is new in 2.3.1", 1)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 3, 1));
+  skip("make_uri_from_input_with_dirs is new in 2.4.0", 1)
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 4, 0));
 
   ok(defined(Gnome2::VFS -> make_uri_from_input_with_dirs("~/tmp", qw(homedir))));
 }
@@ -57,8 +57,8 @@ foreach (Gnome2::VFS -> escape_path_string('%$§'),
 is(Gnome2::VFS -> escape_slashes("/%/"), "%2F%25%2F");
 
 SKIP: {
-  skip ("make_uri_canonical is borken in versions prior to 2.1.0", 1)
-    unless (Gnome2::VFS -> CHECK_VERSION(2, 1, 0));
+  skip ("make_uri_canonical is borken in versions prior to 2.2.0", 1)
+    unless (Gnome2::VFS -> CHECK_VERSION(2, 2, 0));
 
   is(Gnome2::VFS -> make_uri_canonical("bla/bla.txt"), "file:///bla/bla.txt");
 }
