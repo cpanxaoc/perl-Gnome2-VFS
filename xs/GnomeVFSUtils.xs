@@ -26,7 +26,7 @@ char **SvGnomeVFSCharArray (SV *ref)
 {
 	char **result = NULL;
 
-	if (SvOK (ref))
+	if (SvOK (ref)) {
 		if (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV) {
 			AV *array = (AV *) SvRV (ref);
 			SV **string;
@@ -42,6 +42,7 @@ char **SvGnomeVFSCharArray (SV *ref)
 		}
 		else
 			croak ("the environment parameter must be an array reference");
+	}
 
 	return result;
 }
