@@ -1,5 +1,10 @@
 2005/03/07	kaffeetisch
 
+	* Makefile.PL, META.yml, NEWS, README, VFS.pm: Stable release
+	1.020.
+
+2005/03/07	kaffeetisch
+
 	* vfs2perl.c, vfs2per.h, t/GnomeVFSAddress.t, t/GnomeVFSDNSSD,
 	t/GnomeVFSDrive, t/GnomeVFSMime, t/GnomeVFSResolve.t,
 	t/GnomeVFSURI.t, t/GnomeVFSVolume, xs/GnomeVFSDrive.xs,

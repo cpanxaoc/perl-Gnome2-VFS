@@ -12,7 +12,7 @@ require DynaLoader;
 
 our @ISA = qw(DynaLoader);
 
-our $VERSION = '1.011';
+our $VERSION = '1.020';
 
 sub import {
   my $self = shift();
@@ -152,7 +152,7 @@ Torsten Schoenfeld E<lt>kaffeetisch@web.deE<gt>.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2003 by the gtk2-perl team (see the file AUTHORS)
+Copyright (C) 2003-2005 by the gtk2-perl team (see the file AUTHORS)
 
 This library is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
