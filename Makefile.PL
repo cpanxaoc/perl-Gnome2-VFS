@@ -54,8 +54,10 @@ if ($needs_gtypes) {
                       q(--fhead "#define __VFS2PERL_GTYPES_H__ 1\n\n" ) .
                       q(--fhead "#include <glib-object.h>\n\n" ) .
                       q(--fhead "G_BEGIN_DECLS\n\n" ) .
+                      q(--eprod "#ifndef GNOME_VFS_TYPE_@ENUMSHORT@\n" ) .
                       q(--eprod "#define GNOME_VFS_TYPE_@ENUMSHORT@ vfs2perl_@enum_name@_get_type()\n" ) .
                       q(--eprod "GType vfs2perl_@enum_name@_get_type (void);\n" ) .
+                      q(--eprod "#endif /* !GNOME_VFS_TYPE_@ENUMSHORT@ */\n" ) .
                       q(--ftail "G_END_DECLS\n\n" ) .
                       q(--ftail "#endif /* __VFS2PERL_GTYPES_H__ */\n" ) .
                       "@vfs_headers > build/vfs2perl-gtypes.h");

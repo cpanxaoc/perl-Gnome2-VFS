@@ -1,3 +1,9 @@
+2004/06/13 21:52 (+0200) kaffeetisch
+
+	* Makefile.PL: Add guards around our custom GType definitions to
+	avoid compiler warnings that occur when Gnome2::VFS is not
+	recompiled after libgnomevfs was updated.
+
 2004/03/29 17:15 (+0100) kaffeetisch
 
 	* NEWS
