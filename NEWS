@@ -1,3 +1,8 @@
+Overview of changes in Gnome2-VFS 1.011
+=======================================
+
+* Don't leak the GnomeVFSDrive and GnomeVFSVolume callbacks.
+
 Overview of changes in Gnome2-VFS 1.010
 =======================================
 
