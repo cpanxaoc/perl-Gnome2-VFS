@@ -1,3 +1,9 @@
+2003/12/20 14:34 (+0100) kaffeetisch
+
+	* xs/GnomeVFSAsync.xs: Add a commented out attempt to handle
+	callback destruction.  Comment out the thread locks as they caused
+	the async stuff to not work anymore.
+
 2003/12/19 18:20 (+0100) kaffeetisch
 
 	* Makefile.PL: Make the GType version check more robust.
