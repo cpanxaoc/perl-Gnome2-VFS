@@ -1,3 +1,7 @@
+2003/12/29 16:32 (-0500) rwmcfa1
+
+	* Makefile.PL: added a build dep version for Gtk2
+
 2003/12/22 23:55 (-0500) muppetman
 
 	* xs/GnomeVFS.xs: use braces to disambiguate the ifelse, and thereby

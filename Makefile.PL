@@ -10,7 +10,8 @@ use File::Spec;
 our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.1',
   'perl-ExtUtils-PkgConfig' => '0.1',
-  'perl-Glib'               => '1.01',
+  'perl-Glib'               => '1.02',
+  'perl-Gtk2'               => '1.02',
   'GnomeVFS'                => '2.0.0',
 );
 
@@ -24,8 +25,8 @@ unless (eval "use ExtUtils::Depends;"
   WriteMakefile(
     PREREQ_FATAL => 1,
     PREREQ_PM    => {
-      "Gtk2"                => $build_reqs{'perl-Gtk2'},
       "Glib"                => $build_reqs{'perl-Glib'},
+      "Gtk2"                => $build_reqs{'perl-Gtk2'},
       "ExtUtils::Depends"   => $build_reqs{'perl-ExtUtils-Depends'},
       "ExtUtils::PkgConfig" => $build_reqs{'perl-ExtUtils-PkgConfig'},
     },
