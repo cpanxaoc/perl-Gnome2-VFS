@@ -1,3 +1,8 @@
+2003/12/04 19:31 (+0100) kaffeetisch
+
+	* t/GnomeVFSUtils.t
+	* xs/GnomeVFSUtils.xs: Implement Gnome2::VFS::url_show_with_env.
+
 2003/12/02 22:14 (-0500) muppetman
 
 	* t/GnomeVFSUtils.t: updated the skip count

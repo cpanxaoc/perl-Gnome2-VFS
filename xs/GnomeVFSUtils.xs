@@ -20,6 +20,34 @@
 
 #include "vfs2perl.h"
 
+/* ------------------------------------------------------------------------- */
+
+char **SvGnomeVFSCharArray (SV *ref)
+{
+	char **result = NULL;
+
+	if (SvOK (ref))
+		if (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV) {
+			AV *array = (AV *) SvRV (ref);
+			SV **string;
+
+			int i, length = av_len (array);
+			result = g_new0 (char *, length + 2);
+
+			for (i = 0; i <= length; i++)
+				if ((string = av_fetch (array, i, 0)) && SvOK (*string))
+					result[i] = SvPV_nolen (*string);
+
+			result[length + 1] = NULL;
+		}
+		else
+			croak ("the environment parameter must be an array reference");
+
+	return result;
+}
+
+/* ------------------------------------------------------------------------- */
+
 MODULE = Gnome2::VFS::Utils	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
 =for object Gnome2::VFS::main
@@ -307,7 +335,7 @@ gnome_vfs_make_uri_from_shell_arg (class, uri)
 
 #endif
 
-#if VFS_CHECK_VERSION (2, 2, 5)
+#if VFS_CHECK_VERSION (2, 3, 1)
 
 ##  GnomeVFSResult gnome_vfs_url_show (const char *url) 
 GnomeVFSResult
@@ -316,11 +344,19 @@ gnome_vfs_url_show (class, url)
     C_ARGS:
 	url
 
-#endif
+##  GnomeVFSResult gnome_vfs_url_show_with_env (const char *url, char **envp) 
+GnomeVFSResult
+gnome_vfs_url_show_with_env (class, url, env_ref)
+	const char *url
+	SV *env_ref
+    PREINIT:
+	char **envp;
+    CODE:
+	warn;
+	envp = SvGnomeVFSCharArray (env_ref);
+	RETVAL = gnome_vfs_url_show_with_env (url, envp);
+	g_free (envp);
+    OUTPUT:
+	RETVAL
 
-# FIXME: implement?
-###  GnomeVFSResult gnome_vfs_url_show_with_env (const char *url, char **envp) 
-#GnomeVFSResult
-#gnome_vfs_url_show_with_env (url, envp)
-#	const char *url
-#	char **envp
+#endif

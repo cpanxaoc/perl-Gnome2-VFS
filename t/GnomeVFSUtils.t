@@ -16,7 +16,8 @@ Gnome2::VFS -> init();
 
 # Gnome2::VFS -> escape_set(...);
 # Gnome2::VFS -> icon_path_from_filename(...);
-# Gnome2::VFS -> url_show(...);
+# Gnome2::VFS -> url_show("http://www.bla.de");
+# Gnome2::VFS -> url_show_with_env("http://www.bla.de", [map { "$_=" . $ENV{ $_ } } (keys(%ENV))]);
 
 is(Gnome2::VFS -> format_file_size_for_display(1200000000), "1.1 GB");
 
