@@ -40,8 +40,10 @@ my %cfgs = (vfs => \%vfs_pkgcfg);
 
 mkdir 'build', 0777;
 
-my $version = join "", split /\./, $vfs_pkgcfg{modversion};
-my $needs_gtypes = ($version < 253);
+my ($major, $minor, $micro) = split /\./, $vfs_pkgcfg{modversion};
+my $needs_gtypes = ($major < 2 or
+                    $major == 2 && $minor < 5 or
+                    $major == 2 && $minor == 5 && $micro < 3);
 
 if ($needs_gtypes) {
   chomp(my $vfs_includes = `pkg-config --variable includedir gnome-vfs-2.0`);

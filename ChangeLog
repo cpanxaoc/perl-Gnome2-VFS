@@ -1,3 +1,14 @@
+2003/12/19 18:20 (+0100) kaffeetisch
+
+	* Makefile.PL: Make the GType version check more robust.
+
+	* vfs2perl.h
+	* xs/GnomeVFS.xs: Move SvEnvArray from Gnome2 here.
+
+	* t/GnomeVFSMime
+	* xs/GnomeVFSMime.xs: Many leakage related minor changes and some
+	commentary.  API doc.
+
 2003/12/18 20:42 (-0500) muppetman
 
 	* xs/GnomeVFS.xs: hush unused var warning in get_version_info.

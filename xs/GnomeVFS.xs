@@ -92,6 +92,30 @@ SvGnomeVFSURIGList (SV *ref)
 	return list;
 }
 
+char **SvEnvArray (SV *ref)
+{
+	char **result = NULL;
+
+	if (SvOK (ref))
+		if (SvRV (ref) && SvTYPE (SvRV (ref)) == SVt_PVAV) {
+			AV *array = (AV *) SvRV (ref);
+			SV **string;
+
+			int i, length = av_len (array);
+			result = g_new0 (char *, length + 2);
+
+			for (i = 0; i <= length; i++)
+				if ((string = av_fetch (array, i, 0)) && SvOK (*string))
+					result[i] = SvPV_nolen (*string);
+
+			result[length + 1] = NULL;
+		}
+		else
+			croak ("the environment parameter must be an array reference");
+
+	return result;
+}
+
 SV *
 newSVGnomeVFSFileInfoGList (GList *list)
 {

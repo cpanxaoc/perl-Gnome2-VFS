@@ -50,6 +50,7 @@ newSVGnomeVFSMimeType (const char *mime_type)
 
 /* ------------------------------------------------------------------------- */
 
+/* FIXME: leak? */
 SV *
 newSVGnomeVFSMimeApplication (GnomeVFSMimeApplication *application)
 {
@@ -75,12 +76,13 @@ newSVGnomeVFSMimeApplication (GnomeVFSMimeApplication *application)
 		hv_store (hash, "supported_uri_schemes", 21, newRV_noinc ((SV *) array), 0);
 	}
 
-	gnome_vfs_mime_application_free (application);
+	/* gnome_vfs_mime_application_free (application); */
 
 	return sv_bless (newRV_noinc ((SV *) hash),
 	                 gv_stashpv ("Gnome2::VFS::Mime::Application", 1));
 }
 
+/* FIXME: leak? */
 GnomeVFSMimeApplication *
 SvGnomeVFSMimeApplication (SV *object)
 {
@@ -163,33 +165,42 @@ newSVGnomeVFSMimeAction (GnomeVFSMimeAction *action)
 
 MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS::Mime	PREFIX = gnome_vfs_mime_
 
-# FIXME, FIXME, FIXME: why does it crash?
+=for apidoc
+
+=for arg ... of GnomeVFSMimeApplication's
+
+=cut
+# FIXME: leak.
 ##  gboolean gnome_vfs_mime_id_in_application_list (const char *id, GList *applications) 
 gboolean
-gnome_vfs_mime_id_in_application_list (class, id, first_application, ...)
+gnome_vfs_mime_id_in_application_list (class, id, ...)
 	const char *id
     PREINIT:
 	int i;
-	GList *applications = NULL;
+	GList *applications = NULL, *j;
     CODE:
 	for (i = 2; i < items; i++)
 		applications = g_list_append (applications, SvGnomeVFSMimeApplication (ST (i)));
 
 	RETVAL = gnome_vfs_mime_id_in_application_list (id, applications);
 
-	/* gnome_vfs_mime_application_list_free (applications);
-	for (j = applications; j != NULL; j = j->next)
-		if (j->data)
-			g_free (j->data); */
-
+	/* gnome_vfs_mime_application_list_free (applications); */
 	g_list_free (applications);
     OUTPUT:
 	RETVAL
 
-# FIXME, FIXME, FIXME: why does it crash?
+=for apidoc
+
+=for arg ... of GnomeVFSMimeApplication's
+
+Returns a boolean indicating whether anything was removed and the resulting
+list of GnomeVFSMimeApplication's.
+
+=cut
+# FIXME: leak.
 ##  GList * gnome_vfs_mime_remove_application_from_list (GList *applications, const char *application_id, gboolean *did_remove) 
 void
-gnome_vfs_mime_remove_application_from_list (class, application_id, first_application, ...)
+gnome_vfs_mime_remove_application_from_list (class, application_id, ...)
 	const char *application_id
     PREINIT:
 	int i;
@@ -204,16 +215,24 @@ gnome_vfs_mime_remove_application_from_list (class, application_id, first_applic
 	EXTEND (sp, 1);
 	PUSHs (sv_2mortal (newSVuv (did_remove)));
 
-	for (j = result; j != NULL; j = j->next)
+	for (j = result; j != NULL; j = j->next) {
 		XPUSHs (sv_2mortal (newSVGnomeVFSMimeApplication (j->data)));
+		/* gnome_vfs_mime_application_free (j->data); */
+	}
 
-	g_list_free (applications);
 	g_list_free (result);
 
-# FIXME, FIXME, FIXME: why does it crash?
+=for apidoc
+
+=for arg ... of GnomeVFSMimeApplication's
+
+Returns a list of application id's.
+
+=cut
+# FIXME: leak.
 ##  GList * gnome_vfs_mime_id_list_from_application_list (GList *applications) 
 void
-gnome_vfs_mime_id_list_from_application_list (class, fist_application, ...)
+gnome_vfs_mime_id_list_from_application_list (class, ...)
     PREINIT:
 	int i;
 	GList *applications = NULL, *ids, *j;
@@ -225,7 +244,7 @@ gnome_vfs_mime_id_list_from_application_list (class, fist_application, ...)
 
 	for (j = ids; j != NULL; j = j->next) {
 		XPUSHs (sv_2mortal (newSVpv (j->data, PL_na)));
-		g_free (j->data);
+		/* g_free (j->data); */
 	}
 
 	g_list_free (applications);
@@ -279,6 +298,8 @@ gnome_vfs_mime_get_default_action_type (mime_type)
 GnomeVFSMimeApplication *
 gnome_vfs_mime_get_default_application (mime_type)
 	GnomeVFSMimeType *mime_type
+    CLEANUP:
+	gnome_vfs_mime_application_free (RETVAL);
 
 # FIXME: Needs bonobo typemaps.
 ###  Bonobo_ServerInfo * gnome_vfs_mime_get_default_component (const char *mime_type) 
@@ -286,6 +307,11 @@ gnome_vfs_mime_get_default_application (mime_type)
 #gnome_vfs_mime_get_default_component (mime_type)
 #	const char *mime_type
 
+=for apidoc
+
+Returns a list of GnomeVFSMimeApplication's.
+
+=cut
 ##  GList * gnome_vfs_mime_get_short_list_applications (const char *mime_type) 
 void
 gnome_vfs_mime_get_short_list_applications (mime_type)
@@ -298,6 +324,7 @@ gnome_vfs_mime_get_short_list_applications (mime_type)
 	for (i = applications; i != NULL; i = i->next)
 		XPUSHs (sv_2mortal (newSVGnomeVFSMimeApplication (i->data)));
 
+	/* gnome_vfs_mime_application_list_free (applications); */
 	g_list_free (applications);
 
 # FIXME: Needs bonobo typemaps.
@@ -306,6 +333,11 @@ gnome_vfs_mime_get_short_list_applications (mime_type)
 #gnome_vfs_mime_get_short_list_components (mime_type)
 #	const char *mime_type
 
+=for apidoc
+
+Returns a list of GnomeVFSMimeApplication's.
+
+=cut
 ##  GList * gnome_vfs_mime_get_all_applications (const char *mime_type) 
 void
 gnome_vfs_mime_get_all_applications (mime_type)
@@ -318,6 +350,7 @@ gnome_vfs_mime_get_all_applications (mime_type)
 	for (i = applications; i != NULL; i = i->next)
 		XPUSHs (sv_2mortal (newSVGnomeVFSMimeApplication (i->data)));
 
+	/* gnome_vfs_mime_application_list_free (applications); */
 	g_list_free (applications);
 
 # FIXME: Needs bonobo typemaps.
@@ -378,9 +411,15 @@ gnome_vfs_mime_set_can_be_executable (mime_type, new_value)
 	GnomeVFSMimeType *mime_type
 	gboolean new_value
 
+=for apidoc
+
+=for arg ... of application id's
+
+=cut
+# FIXME: leak ...
 ##  GnomeVFSResult gnome_vfs_mime_set_short_list_applications (const char *mime_type, GList *application_ids) 
 GnomeVFSResult
-gnome_vfs_mime_set_short_list_applications (mime_type, first_application_id, ...)
+gnome_vfs_mime_set_short_list_applications (mime_type, ...)
 	GnomeVFSMimeType *mime_type
     PREINIT:
 	GList *application_ids = NULL;
@@ -440,9 +479,15 @@ gnome_vfs_mime_remove_extension (mime_type, extension)
 	GnomeVFSMimeType *mime_type
 	const char *extension
 
+=for apidoc
+
+=for arg ... of application id's
+
+=cut
+# FIXME: leak ...
 ##  GnomeVFSResult gnome_vfs_mime_extend_all_applications (const char *mime_type, GList *application_ids) 
 GnomeVFSResult
-gnome_vfs_mime_extend_all_applications (mime_type, first_application_id, ...)
+gnome_vfs_mime_extend_all_applications (mime_type, ...)
 	GnomeVFSMimeType *mime_type
     PREINIT:
 	GList *application_ids = NULL;
@@ -457,9 +502,15 @@ gnome_vfs_mime_extend_all_applications (mime_type, first_application_id, ...)
     OUTPUT:
 	RETVAL
 
+=for apidoc
+
+=for arg ... of application id's
+
+=cut
+# FIXME: leak ...
 ##  GnomeVFSResult gnome_vfs_mime_remove_from_all_applications (const char *mime_type, GList *application_ids) 
 GnomeVFSResult
-gnome_vfs_mime_remove_from_all_applications (mime_type, first_application_id, ...)
+gnome_vfs_mime_remove_from_all_applications (mime_type, ...)
 	GnomeVFSMimeType *mime_type
     PREINIT:
 	GList *application_ids = NULL;
@@ -488,6 +539,8 @@ gnome_vfs_mime_application_new_from_id (class, id)
 	const char *id
     C_ARGS:
 	id
+    CLEANUP:
+	gnome_vfs_mime_application_free (RETVAL);
 
 ##  GnomeVFSMimeApplication *gnome_vfs_mime_application_copy (GnomeVFSMimeApplication *application) 
 
@@ -495,9 +548,14 @@ gnome_vfs_mime_application_new_from_id (class, id)
 
 #if VFS_CHECK_VERSION (2, 3, 1)
 
+=for apidoc
+
+=for arg ... of URI strings
+
+=cut
 ##  GnomeVFSResult gnome_vfs_mime_application_launch (GnomeVFSMimeApplication *app, GList *uris) 
 GnomeVFSResult
-gnome_vfs_mime_application_launch (app, first_uri, ...)
+gnome_vfs_mime_application_launch (app, ...)
 	GnomeVFSMimeApplication *app
     PREINIT:
 	GList *uris = NULL;
@@ -512,13 +570,26 @@ gnome_vfs_mime_application_launch (app, first_uri, ...)
     OUTPUT:
 	RETVAL
 	
+# FIXME: leak?
+##  GnomeVFSResult gnome_vfs_mime_application_launch_with_env (GnomeVFSMimeApplication *app, GList *uris, char **envp) 
+GnomeVFSResult
+gnome_vfs_mime_application_launch_with_env (app, uri_ref, env_ref)
+	GnomeVFSMimeApplication *app
+	SV *uri_ref
+	SV *env_ref
+    PREINIT:
+	char **envp;
+	GList *uris;
+    CODE:
+	envp = SvEnvArray (env_ref);
+	uris = SvPVGList (uri_ref);
 
-###  GnomeVFSResult gnome_vfs_mime_application_launch_with_env (GnomeVFSMimeApplication *app, GList *uris, char **envp) 
-#GnomeVFSResult
-#gnome_vfs_mime_application_launch_with_env (app, uris, envp)
-#	GnomeVFSMimeApplication *app
-#	GList *uris
-#	char **envp
+	RETVAL = gnome_vfs_mime_application_launch_with_env (app, uris, envp);
+
+	g_free (envp);
+	g_list_free (uris);
+    OUTPUT:
+	RETVAL
 
 #endif
 

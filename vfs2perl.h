@@ -101,6 +101,8 @@ GList * SvPVGList (SV *ref);
 
 GList * SvGnomeVFSURIGList (SV *ref);
 
+char ** SvEnvArray (SV *ref);
+
 SV * newSVGnomeVFSFileInfoGList (GList *list);
 
 SV * newSVGnomeVFSGetFileInfoResultGList (GList *list);
