@@ -19,6 +19,7 @@
  */
 
 #include "vfs2perl.h"
+#include <gperl_marshal.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -74,8 +75,10 @@ gint
 vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
                                  GPerlCallback *callback)
 {
-	dSP;
 	gint retval;
+	dGPERL_CALLBACK_MARSHAL_SP;
+
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;

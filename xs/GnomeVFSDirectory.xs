@@ -19,6 +19,7 @@
  */
 
 #include "vfs2perl.h"
+#include <gperl_marshal.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -57,9 +58,11 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
                                GPerlCallback * callback,
                                gboolean *recurse)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
 	int n;
 	gboolean stop;
+
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;

@@ -19,6 +19,7 @@
  */
 
 #include "vfs2perl.h"
+#include <gperl_marshal.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -85,8 +86,10 @@ vfs2perl_monitor_callback (GnomeVFSMonitorHandle *handle,
                            GnomeVFSMonitorEventType event_type,
                            GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
 	int n;
+
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;

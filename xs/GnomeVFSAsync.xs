@@ -19,6 +19,7 @@
  */
 
 #include "vfs2perl.h"
+#include <gperl_marshal.h>
 
 /* ------------------------------------------------------------------------- */
 
@@ -55,7 +56,8 @@ vfs2perl_async_open_callback (GnomeVFSAsyncHandle *handle,
                               GnomeVFSResult result,
                               GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -84,7 +86,8 @@ vfs2perl_async_read_callback (GnomeVFSAsyncHandle *handle,
                               GnomeVFSFileSize bytes_read,
                               GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -116,7 +119,8 @@ vfs2perl_async_write_callback (GnomeVFSAsyncHandle *handle,
                                GnomeVFSFileSize bytes_written,
                                GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -147,7 +151,8 @@ vfs2perl_async_directory_load_callback (GnomeVFSAsyncHandle *handle,
                                         guint entries_read,
                                         GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -175,7 +180,8 @@ vfs2perl_async_get_file_info_callback (GnomeVFSAsyncHandle *handle,
                                        GList *results,
                                        GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -201,7 +207,8 @@ vfs2perl_async_xfer_progress_callback (GnomeVFSAsyncHandle *handle,
                                        GnomeVFSXferProgressInfo *info,
                                        GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
@@ -230,7 +237,8 @@ vfs2perl_async_find_directory_callback (GnomeVFSAsyncHandle *handle,
                                         GList *results,
                                         GPerlCallback *callback)
 {
-	dSP;
+	dGPERL_CALLBACK_MARSHAL_SP;
+	GPERL_CALLBACK_MARSHAL_INIT (callback);
 
 	ENTER;
 	SAVETMPS;
