@@ -42,13 +42,12 @@ gnome_vfs_get_volume_monitor (class)
 
 MODULE = Gnome2::VFS::VolumeMonitor	PACKAGE = Gnome2::VFS::VolumeMonitor	PREFIX = gnome_vfs_volume_monitor_
 
-#if 1 /* FIXME: #151244. */
+#if !VFS_CHECK_VERSION (2, 8, 1)
 
 void
 DESTROY (monitor)
     CODE:
-	/* do nada to avoid strange warnings.  this means we're leaking the
-	   monitor, but I can live with that for now. */
+	/* do nada to avoid finalizing the monitor. */
 
 #endif
 

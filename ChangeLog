@@ -1,3 +1,14 @@
+2005/02/10 22:18 (+0100) kaffeetisch
+
+	* VFS.pm: Do it like all the other cool kids and alter
+	dl_load_flags() to avoid warnings on Darwin.
+
+	* xs/GnomeVFSAsync.xs, xs/GnomeVFSFileInfo.xs: Whitespace fixes.
+
+	* xs/GnomeVFSVolumeMonitor.xs: Add version guards around the
+	custom DESTROY so it's only included if gnome-vfs is older than
+	2.8.1.
+
 2004/10/24 11:55 (-0400) rwmcfa1
 
 	* MANIFEST.SKIP: updates

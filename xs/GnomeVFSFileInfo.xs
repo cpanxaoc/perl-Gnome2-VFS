@@ -101,7 +101,7 @@ newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_CTIME, "ctime", newSViv (info->ctime));
 		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME, "symlink_name", newSVpv (info->symlink_name, PL_na));
 		VFS2PERL_CHECK_AND_STORE (GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE, "mime_type", newSVpv (info->mime_type, PL_na));
-		
+
 		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
 	}
 
@@ -144,7 +144,7 @@ SvGnomeVFSFileInfo (SV *object)
 		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_CTIME, "ctime", info->ctime, SvIV (*value));
 		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_SYMLINK_NAME, "symlink_name", info->symlink_name, SvPV_nolen (*value));
 		VFS2PERL_FETCH_AND_CHECK (GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE, "mime_type", info->mime_type, SvPV_nolen (*value));
-		
+
 		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
 	}
 

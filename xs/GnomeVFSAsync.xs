@@ -34,7 +34,7 @@ vfs2perl_async_callbacks_add (GnomeVFSAsyncHandle *handle, GPerlCallback *callba
 	G_LOCK (vfs2perl_async_callbacks);
 	{
 		GList *list;
-		
+
 		if (vfs2perl_async_callbacks == NULL)
 			vfs2perl_async_callbacks =
 			  g_hash_table_new_full (NULL,
@@ -42,10 +42,10 @@ vfs2perl_async_callbacks_add (GnomeVFSAsyncHandle *handle, GPerlCallback *callba
 			                         NULL,
 			                         (GDestroyNotify)
 			                           g_list_free);
-		
+
 		list = g_hash_table_lookup (vfs2perl_async_callbacks, handle);
 		list = g_list_append (list, callback);
-		
+
 		g_hash_table_insert (vfs2perl_async_callbacks, handle, list);
 	}
 	G_UNLOCK (vfs2perl_async_callbacks);
@@ -57,7 +57,7 @@ void vfs2perl_async_callbacks_destroy (GnomeVFSAsyncHandle *handle)
 	{
 		if (vfs2perl_async_callbacks != NULL) {
 			GList *list = g_hash_table_lookup (vfs2perl_async_callbacks, handle);
-		
+
 			if (list != NULL) {
 				/* GPerlCallback *callback = g_list_last (list)->data;
 
@@ -65,15 +65,15 @@ void vfs2perl_async_callbacks_destroy (GnomeVFSAsyncHandle *handle)
 					gperl_callback_destroy (callback); */
 
 				GList *i;
-		
+
 				for (i = list; i != NULL; i = i->next)
 					if (i->data != NULL)
 						gperl_callback_destroy ((GPerlCallback *) i->data);
-		
+
 				if (g_list_length (list) == 0)
 					g_hash_table_remove (vfs2perl_async_callbacks, handle);
 			}
-		
+
 			if (g_hash_table_size (vfs2perl_async_callbacks) == 0) {
 				g_hash_table_destroy (vfs2perl_async_callbacks);
 				vfs2perl_async_callbacks = NULL;
