@@ -1,3 +1,12 @@
+2004/08/08 15:15 (+0200) kaffeetisch
+
+	* Makefile.PL: Depend on Glib 1.053.
+
+	* maps-2.8, t/GnomeVFSMime, xs/GnomeVFS.xs, xs/GnomeVFSMime.xs:
+	Bind and test Gnome2::VFS::Mime::Type::get_all_desktop_entries,
+	::get_default_desktop_entry, ::is_equal, and
+	Gnome2::VFS::get_mime_type_for_data.
+
 2004/07/29 19:12 (+0200) kaffeetisch
 
 	* MANIFEST, vfs2perl.c, vfs2perl.h, t/GnomeVFSAddress.t,
