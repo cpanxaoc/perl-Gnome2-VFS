@@ -353,7 +353,6 @@ gnome_vfs_url_show_with_env (class, url, env_ref)
     PREINIT:
 	char **envp;
     CODE:
-	warn;
 	envp = SvGnomeVFSCharArray (env_ref);
 	RETVAL = gnome_vfs_url_show_with_env (url, envp);
 	g_free (envp);
