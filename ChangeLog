@@ -1,3 +1,12 @@
+2003/11/16 20:32 (-0500) muppetman
+
+	* xs/GnomeVFSAsync.xs, xs/GnomeVFSDirectory.xs, xs/GnomeVFSOps.xs,
+	xs/GnomeVFSXfer.xs: use the new GPerlCallback helper macros in
+	gperl_marshal.h
+
+	* examples/downloader.pl: start downloading when the user hits enter
+	in the url entry
+
 2003/11/16 02:44 (-0500) muppetman
 
 	* xs/GnomeVFSDirectory.xs, xs/GnomeVFSXfer.xs:
