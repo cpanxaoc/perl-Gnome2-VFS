@@ -1,0 +1,21 @@
+genmaps.pl
+LICENSE
+Makefile.PL
+MANIFEST			This list of files
+maps
+t/GnomeVFS.t
+t/GnomeVFSDirectory.t
+t/GnomeVFSOps.t
+t/GnomeVFSURI.t
+t/GnomeVFSXfer.t
+VFS.pm
+vfs2perl.h
+vfs2perl.typemap
+xs/GnomeVFS.xs
+xs/GnomeVFSApplicationRegistry.xs
+xs/GnomeVFSDirectory.xs
+xs/GnomeVFSInit.xs
+xs/GnomeVFSOps.xs
+xs/GnomeVFSURI.xs
+xs/GnomeVFSXfer.xs
+META.yml                                 Module meta-data (added by MakeMaker)

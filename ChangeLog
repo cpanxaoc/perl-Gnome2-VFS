@@ -1,0 +1,23 @@
+2003/10/19 15:55 (+0200) kaffeetisch
+
+	A ChangeLog
+	A LICENSE
+	A MANIFEST
+	A META.yml
+	A Makefile.PL
+	A VFS.pm
+	A genmaps.pl
+	A maps
+	A vfs2perl.h
+	A vfs2perl.typemap
+	A t/GnomeVFS.t
+	A t/GnomeVFSDirectory.t
+	A t/GnomeVFSOps.t
+	A t/GnomeVFSURI.t
+	A t/GnomeVFSXfer.t
+	A xs/GnomeVFS.xs
+	A xs/GnomeVFSDirectory.xs
+	A xs/GnomeVFSInit.xs
+	A xs/GnomeVFSOps.xs
+	A xs/GnomeVFSURI.xs
+	A xs/GnomeVFSXfer.xs: Initial import.
