@@ -137,7 +137,7 @@ vfs2perl_async_directory_load_callback (GnomeVFSAsyncHandle *handle,
 	EXTEND (SP, 4);
 	PUSHs (sv_2mortal (newSVGnomeVFSAsyncHandle (handle)));
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
-	PUSHs (sv_2mortal (newSVFileInfoGList (list)));
+	PUSHs (sv_2mortal (newSVGnomeVFSFileInfoGList (list)));
 	PUSHs (sv_2mortal (newSVuv (entries_read)));
 	if (callback->data)
 		XPUSHs (sv_2mortal (newSVsv (callback->data)));
@@ -164,7 +164,7 @@ vfs2perl_async_get_file_info_callback (GnomeVFSAsyncHandle *handle,
 
 	EXTEND (SP, 2);
 	PUSHs (sv_2mortal (newSVGnomeVFSAsyncHandle (handle)));
-	PUSHs (sv_2mortal (newSVFileInfoResultGList (results)));
+	PUSHs (sv_2mortal (newSVGnomeVFSGetFileInfoResultGList (results)));
 	if (callback->data)
 		XPUSHs (sv_2mortal (newSVsv (callback->data)));
 
@@ -176,11 +176,40 @@ vfs2perl_async_get_file_info_callback (GnomeVFSAsyncHandle *handle,
 	LEAVE;
 }
 
+void
+vfs2perl_async_xfer_progress_callback (GnomeVFSAsyncHandle *handle,
+                                       GnomeVFSXferProgressInfo *info,
+                                       GPerlCallback *callback)
+{
+	dSP;
+
+	ENTER;
+	SAVETMPS;
+
+	PUSHMARK (SP);
+
+	EXTEND (SP, 2);
+	PUSHs (sv_2mortal (newSVGnomeVFSAsyncHandle (handle)));
+	PUSHs (sv_2mortal (newSVGnomeVFSXferProgressInfo (info)));
+	if (callback->data)
+		XPUSHs (sv_2mortal (newSVsv (callback->data)));
+
+	PUTBACK;
+
+	call_sv (callback->func, G_DISCARD);
+
+	FREETMPS;
+	LEAVE;
+}
+
+extern gint vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
+                                             GPerlCallback *callback);
+
 /* ------------------------------------------------------------------------- */
 
 /* FIXME: does that AV leak? */
 SV *
-newSVFileInfoGList (GList *list)
+newSVGnomeVFSFileInfoGList (GList *list)
 {
 	AV *array = newAV ();
 
@@ -192,7 +221,7 @@ newSVFileInfoGList (GList *list)
 
 /* FIXME: leak? */
 SV *
-newSVFileInfoResultGList (GList *list)
+newSVGnomeVFSGetFileInfoResultGList (GList *list)
 {
 	AV *array = newAV ();
 
@@ -384,7 +413,7 @@ gnome_vfs_async_get_file_info (class, uri_ref, options, priority, func, data=NUL
 	SV *data
     CODE:
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, 0);
-	GList *uri_list = SvURIGList (uri_ref);
+	GList *uri_list = SvGnomeVFSURIGList (uri_ref);
 
 	gnome_vfs_async_get_file_info (&RETVAL,
 	                               uri_list,
@@ -435,6 +464,77 @@ gnome_vfs_async_load_directory (class, text_uri, options, items_per_notification
     OUTPUT:
 	RETVAL
 
+##  void gnome_vfs_async_load_directory_uri (GnomeVFSAsyncHandle **handle_return, GnomeVFSURI *uri, GnomeVFSFileInfoOptions options, guint items_per_notification, int priority, GnomeVFSAsyncDirectoryLoadCallback callback, gpointer callback_data) 
+GnomeVFSAsyncHandle *
+gnome_vfs_async_load_directory_uri (class, uri, options, items_per_notification, priority, func, data=NULL)
+	GnomeVFSURI *uri
+	GnomeVFSFileInfoOptions options
+	guint items_per_notification
+	int priority
+	SV *func
+	SV *data
+    CODE:
+	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, 0);
+
+	gnome_vfs_async_load_directory_uri (&RETVAL,
+	                                    uri,
+	                                    options,
+                                            items_per_notification,
+	                                    priority,
+	                                    (GnomeVFSAsyncDirectoryLoadCallback)
+	                                      vfs2perl_async_directory_load_callback,
+	                                    callback);
+
+	/* FIXME, FIXME, FIXME: what about callback destruction? */
+    OUTPUT:
+	RETVAL
+
+##  GnomeVFSResult gnome_vfs_async_xfer (GnomeVFSAsyncHandle **handle_return, GList *source_uri_list, GList *target_uri_list, GnomeVFSXferOptions xfer_options, GnomeVFSXferErrorMode error_mode, GnomeVFSXferOverwriteMode overwrite_mode, int priority, GnomeVFSAsyncXferProgressCallback progress_update_callback, gpointer update_callback_data, GnomeVFSXferProgressCallback progress_sync_callback, gpointer sync_callback_data) 
+void
+gnome_vfs_async_xfer (class, source_ref, target_ref, xfer_options, error_mode, overwrite_mode, priority, func_update, data_update, func_sync, data_sync=NULL)
+	SV *source_ref
+	SV *target_ref
+	GnomeVFSXferOptions xfer_options
+	GnomeVFSXferErrorMode error_mode
+	GnomeVFSXferOverwriteMode overwrite_mode
+	int priority
+	SV *func_update
+	SV *data_update
+	SV *func_sync
+	SV *data_sync
+    PREINIT:
+	GnomeVFSResult result;
+	GnomeVFSAsyncHandle *handle_return;
+    PPCODE:
+	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
+	GList *target_uri_list = SvGnomeVFSURIGList (target_ref);
+
+	GPerlCallback *callback_update = gperl_callback_new (func_update, data_update, 0, NULL, 0);
+	GPerlCallback *callback_sync = gperl_callback_new (func_sync, data_sync, 0, NULL, G_TYPE_INT);
+
+	result = gnome_vfs_async_xfer (&handle_return,
+	                               source_uri_list,
+	                               target_uri_list,
+	                               xfer_options,
+	                               error_mode,
+	                               overwrite_mode,
+	                               priority,
+	                               (GnomeVFSAsyncXferProgressCallback)
+	                                 vfs2perl_async_xfer_progress_callback,
+	                               callback_update,
+	                               (GnomeVFSXferProgressCallback)
+	                                 vfs2perl_xfer_progress_callback,
+	                               callback_sync);
+
+	g_list_free (source_uri_list);
+	g_list_free (target_uri_list);
+
+	EXTEND (sp, 2);
+	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
+	PUSHs (sv_2mortal (newSVGnomeVFSAsyncHandle (handle_return)));
+
+	/* FIXME, FIXME, FIXME: what about callback destruction? */
+
 ###  void gnome_vfs_async_create_as_channel (GnomeVFSAsyncHandle **handle_return, const gchar *text_uri, GnomeVFSOpenMode open_mode, gboolean exclusive, guint perm, int priority, GnomeVFSAsyncCreateAsChannelCallback callback, gpointer callback_data) 
 #void
 #gnome_vfs_async_create_as_channel (handle_return, text_uri, open_mode, exclusive, perm, priority, callback, callback_data)
@@ -458,32 +558,6 @@ gnome_vfs_async_load_directory (class, text_uri, options, items_per_notification
 #	int priority
 #	GnomeVFSAsyncCreateAsChannelCallback callback
 #	gpointer callback_data
-
-###  void gnome_vfs_async_load_directory_uri (GnomeVFSAsyncHandle **handle_return, GnomeVFSURI *uri, GnomeVFSFileInfoOptions options, guint items_per_notification, int priority, GnomeVFSAsyncDirectoryLoadCallback callback, gpointer callback_data) 
-#void
-#gnome_vfs_async_load_directory_uri (handle_return, uri, options, items_per_notification, priority, callback, callback_data)
-#	GnomeVFSAsyncHandle **handle_return
-#	GnomeVFSURI *uri
-#	GnomeVFSFileInfoOptions options
-#	guint items_per_notification
-#	int priority
-#	GnomeVFSAsyncDirectoryLoadCallback callback
-#	gpointer callback_data
-
-###  GnomeVFSResult gnome_vfs_async_xfer (GnomeVFSAsyncHandle **handle_return, GList *source_uri_list, GList *target_uri_list, GnomeVFSXferOptions xfer_options, GnomeVFSXferErrorMode error_mode, GnomeVFSXferOverwriteMode overwrite_mode, int priority, GnomeVFSAsyncXferProgressCallback progress_update_callback, gpointer update_callback_data, GnomeVFSXferProgressCallback progress_sync_callback, gpointer sync_callback_data) 
-#GnomeVFSResult
-#gnome_vfs_async_xfer (handle_return, source_uri_list, target_uri_list, xfer_options, error_mode, overwrite_mode, priority, progress_update_callback, update_callback_data, progress_sync_callback, sync_callback_data)
-#	GnomeVFSAsyncHandle **handle_return
-#	GList *source_uri_list
-#	GList *target_uri_list
-#	GnomeVFSXferOptions xfer_options
-#	GnomeVFSXferErrorMode error_mode
-#	GnomeVFSXferOverwriteMode overwrite_mode
-#	int priority
-#	GnomeVFSAsyncXferProgressCallback progress_update_callback
-#	gpointer update_callback_data
-#	GnomeVFSXferProgressCallback progress_sync_callback
-#	gpointer sync_callback_data
 
 ###  void gnome_vfs_async_find_directory (GnomeVFSAsyncHandle **handle_return, GList *near_uri_list, GnomeVFSFindDirectoryKind kind, gboolean create_if_needed, gboolean find_if_needed, guint permissions, int priority, GnomeVFSAsyncFindDirectoryCallback callback, gpointer user_data) 
 #void

@@ -109,7 +109,7 @@ vfs2perl_xfer_progress_callback (GnomeVFSXferProgressInfo *info,
 /* ------------------------------------------------------------------------- */
 
 GList *
-SvURIGList (SV *ref)
+SvGnomeVFSURIGList (SV *ref)
 {
 	int i;
 
@@ -174,8 +174,8 @@ gnome_vfs_xfer_uri_list (class, source_ref, target_ref, xfer_options, error_mode
 	SV *func
 	SV *data
     CODE:
-	GList *source_uri_list = SvURIGList (source_ref);
-	GList *target_uri_list = SvURIGList (target_ref);
+	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
+	GList *target_uri_list = SvGnomeVFSURIGList (target_ref);
 
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
 
@@ -204,7 +204,7 @@ gnome_vfs_xfer_delete_list (class, source_ref, error_mode, xfer_options, func, d
 	SV *func
 	SV *data
     CODE:
-	GList *source_uri_list = SvURIGList (source_ref);
+	GList *source_uri_list = SvGnomeVFSURIGList (source_ref);
 
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_INT);
 

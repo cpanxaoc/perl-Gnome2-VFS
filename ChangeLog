@@ -1,3 +1,16 @@
+2003/11/13 23:01 (+0100) kaffeetisch
+
+	* vfs2perl.h
+	* xs/GnomeVFSAsync.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSXfer.xs: Rename some helper functions to better suit
+	the naming convention.
+
+	* t/GnomeVFSAsync
+	* xs/GnomeVFSAsync.xs: Implement and test
+	gnome_vfs_async_load_directory_uri - YAPITA, especially when
+	trying to test it.
+
 2003/11/13 17:47 (+0100) kaffeetisch
 
 	* Makefile.PL: Install the manpage as Gnome2::VFS.3pm, not as

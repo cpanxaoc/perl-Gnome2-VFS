@@ -31,11 +31,18 @@
 #include "vfs2perl-version.h"
 #include "vfs2perl-autogen.h"
 
+/* ------------------------------------------------------------------------- */
+
 SV * newSVGnomeVFSFileSize (GnomeVFSFileSize size);
 GnomeVFSFileSize SvGnomeVFSFileSize (SV *size);
 
 SV * newSVGnomeVFSFileOffset (GnomeVFSFileOffset offset);
 GnomeVFSFileOffset SvGnomeVFSFileOffset (SV *offset);
+
+/* ------------------------------------------------------------------------- */
+
+const char * SvGnomeVFSApplication (SV *object);
+SV * newSVGnomeVFSApplication (const char *app_id);
 
 GnomeVFSURI * SvGnomeVFSURI (SV *object);
 SV * newSVGnomeVFSURI (GnomeVFSURI *uri);
@@ -43,8 +50,15 @@ SV * newSVGnomeVFSURI (GnomeVFSURI *uri);
 GnomeVFSFileInfo * SvGnomeVFSFileInfo (SV *object);
 SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);
 
+SV * newSVGnomeVFSXferProgressInfo (GnomeVFSXferProgressInfo *info);
+
+/* ------------------------------------------------------------------------- */
+
 GnomeVFSHandle * SvGnomeVFSHandle (SV *object);
 SV * newSVGnomeVFSHandle (GnomeVFSHandle *handle);
+
+GnomeVFSDirectoryHandle * SvGnomeVFSDirectoryHandle (SV *object);
+SV * newSVGnomeVFSDirectoryHandle (GnomeVFSDirectoryHandle *handle);
 
 GnomeVFSAsyncHandle * SvGnomeVFSAsyncHandle (SV *object);
 SV * newSVGnomeVFSAsyncHandle (GnomeVFSAsyncHandle *handle);
@@ -52,16 +66,16 @@ SV * newSVGnomeVFSAsyncHandle (GnomeVFSAsyncHandle *handle);
 GnomeVFSMonitorHandle * SvGnomeVFSMonitorHandle (SV *object);
 SV * newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle);
 
-GnomeVFSDirectoryHandle * SvGnomeVFSDirectoryHandle (SV *object);
-SV * newSVGnomeVFSDirectoryHandle (GnomeVFSDirectoryHandle *handle);
+/* ------------------------------------------------------------------------- */
 
-SV * newSVGnomeVFSXferProgressInfo (GnomeVFSXferProgressInfo *info);
+GList * SvPVGList (SV *ref);
 
-GList * SvGList (SV *ref);
-GList * SvURIGList (SV *ref);
+GList * SvGnomeVFSURIGList (SV *ref);
 
-SV * newSVFileInfoGList (GList *list);
+SV * newSVGnomeVFSFileInfoGList (GList *list);
 
-SV * newSVFileInfoResultGList (GList *list);
+SV * newSVGnomeVFSGetFileInfoResultGList (GList *list);
+
+/* ------------------------------------------------------------------------- */
 
 #endif /* _VFS2PERL_H_ */

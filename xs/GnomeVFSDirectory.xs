@@ -95,7 +95,7 @@ vfs2perl_directory_visit_func (const gchar *rel_path,
 /* ------------------------------------------------------------------------- */
 
 GList *
-SvGList (SV *ref)
+SvPVGList (SV *ref)
 {
 	int i;
 
@@ -203,7 +203,7 @@ gnome_vfs_directory_visit_files (class, text_uri, file_ref, info_options, visit_
 	SV *data
     CODE:
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
-	GList *file_list = SvGList (file_ref);
+	GList *file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files (text_uri,
 	                                          file_list,
@@ -228,7 +228,7 @@ gnome_vfs_directory_visit_files_at_uri (class, uri, file_ref, info_options, visi
 	SV *data
     CODE:
 	GPerlCallback *callback = gperl_callback_new (func, data, 0, NULL, G_TYPE_BOOLEAN);
-	GList *file_list = SvGList (file_ref);
+	GList *file_list = SvPVGList (file_ref);
 
 	RETVAL = gnome_vfs_directory_visit_files_at_uri (uri,
 	                                                 file_list,
