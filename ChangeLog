@@ -1,3 +1,22 @@
+2003/11/09 03:02 (+0100) kaffeetisch
+
+	* Makefile.PL: Remove const_cccmd hack, MakeHelper does it for us.
+
+	* VFS.pm: Fix bug in the SYNOPSIS.
+
+	* t/GnomeVFSOps.t: Adapt to the recent changes in flags handling.
+
+	* xs/GnomeVFSApplicationRegistry.xs: Put get_applications in the
+	correct package.
+
+	* xs/GnomeVFSOps.xs: Fix Gnome2::VFS::read and Gnome2::VFS::write
+	to work correctly when dealing with binary data.
+
+	* MANIFEST
+	R t/GnomeVFSApplicationRegistry.t
+	A t/GnomeVFSApplicationRegistry: Disable this test since it seems
+	to be very fragile.
+
 2003/11/07 20:48 (+0100) kaffeetisch
 
 	* xs/GnomeVFSOps.xs
