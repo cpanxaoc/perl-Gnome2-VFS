@@ -1,3 +1,26 @@
+2003/12/12 23:29 (+0100) kaffeetisch
+
+	A README
+	* MANIFEST: Add a README.
+
+	* VFS.pm: Remove license boilerplate.
+
+	* vfs2perl.h: Add a SvGnomeVFSMimeApplication prototype to silence
+	compiler warnings.
+
+	* t/GnomeVFSApplicationRegistry
+	* t/GnomeVFSAsync
+	* t/GnomeVFSDirectory.t
+	* t/GnomeVFSFileInfo.t
+	* t/GnomeVFSOps.t
+	* t/GnomeVFSURI.t
+	* t/GnomeVFSUtils.t
+	* t/GnomeVFSXfer.t: Use the -init parameter instead of calling the
+	init method manually.
+
+	* xs/GnomeVFSApplicationRegistry.xs
+	* xs/GnomeVFSOps.xs: Add API doc.
+
 2003/12/04 19:31 (+0100) kaffeetisch
 
 	* t/GnomeVFSUtils.t

@@ -88,6 +88,7 @@ SV * newSVGnomeVFSMimeType (const char *mime_type);
 /* ------------------------------------------------------------------------- */
 
 SV * newSVGnomeVFSMimeApplication (GnomeVFSMimeApplication *application);
+GnomeVFSMimeApplication * SvGnomeVFSMimeApplication (SV *object);
 
 GnomeVFSFileInfo * SvGnomeVFSFileInfo (SV *object);
 SV * newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info);

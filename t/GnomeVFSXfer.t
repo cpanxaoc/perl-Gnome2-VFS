@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-use Gnome2::VFS;
+use Gnome2::VFS -init;
 
 use Test::More tests => 68;
 
@@ -14,10 +14,6 @@ use constant TMP => cwd() . "/tmp";
 unless (-e TMP) {
   mkdir(TMP) or die ("Urgh, couldn't create the scratch directory: $!");
 }
-
-###############################################################################
-
-Gnome2::VFS -> init();
 
 ###############################################################################
 

@@ -7,6 +7,7 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 maps
 META.yml			Module meta-data (added by MakeMaker)
+README
 t/GnomeVFS.t
 t/GnomeVFSApplicationRegistry
 t/GnomeVFSAsync

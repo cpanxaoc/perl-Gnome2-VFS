@@ -278,6 +278,11 @@ gnome_vfs_tell (handle)
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSViv (offset_return)));
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSFileInfo.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_get_file_info_from_handle (GnomeVFSHandle *handle, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
 GnomeVFSResult
 gnome_vfs_get_file_info (handle, options)
@@ -327,6 +332,11 @@ gnome_vfs_uri_open (uri, open_mode)
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSHandle (handle)));
 
+=for apidoc
+
+Returns a GnomeVFSResult and a GnomeVFSHandle.
+
+=cut
 ##  GnomeVFSResult gnome_vfs_create_uri (GnomeVFSHandle **handle, GnomeVFSURI *uri, GnomeVFSOpenMode open_mode, gboolean exclusive, guint perm) 
 GnomeVFSResult
 gnome_vfs_uri_create (uri, open_mode, exclusive, perm)

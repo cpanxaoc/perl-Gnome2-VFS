@@ -76,6 +76,11 @@ gnome_vfs_application_registry_reload (class)
     C_ARGS:
 	/* void */
 
+=for apidoc
+
+Returns a list of valid application id's that can handle this MIME type.
+
+=cut
 ##  GList *gnome_vfs_application_registry_get_applications(const char *mime_type) 
 void
 gnome_vfs_application_registry_get_applications (class, mime_type=NULL)
@@ -95,6 +100,11 @@ gboolean
 gnome_vfs_application_registry_exists (app_id)
 	GnomeVFSApplication *app_id
 
+=for apidoc
+
+Returns a list of valid keys for that application.
+
+=cut
 ##  GList *gnome_vfs_application_registry_get_keys (const char *app_id) 
 void
 gnome_vfs_application_registry_get_keys (app_id)
@@ -158,6 +168,11 @@ gnome_vfs_application_registry_unset_key (app_id, key)
 	GnomeVFSApplication *app_id
 	const char *key
 
+=for apidoc
+
+Returns a list of MIME types this application can handle.
+
+=cut
 ##  GList *gnome_vfs_application_registry_get_mime_types (const char *app_id) 
 void
 gnome_vfs_application_registry_get_mime_types (app_id)
