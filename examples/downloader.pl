@@ -91,6 +91,9 @@ my $button = Gtk2::Button -> new("Download");
 $button -> signal_connect(clicked => sub {
   start_new_download($entry -> get_text());
 });
+$entry -> signal_connect(activate => sub {
+  $button->clicked;
+});
 
 $hbox -> pack_start($entry, 1, 1, 0);
 $hbox -> pack_start($button, 0, 0, 0);
