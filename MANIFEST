@@ -12,6 +12,7 @@ t/GnomeVFSApplicationRegistry
 t/GnomeVFSAsync
 t/GnomeVFSDirectory.t
 t/GnomeVFSFileInfo.t
+t/GnomeVFSMime.t
 t/GnomeVFSOps.t
 t/GnomeVFSURI.t
 t/GnomeVFSUtils.t
@@ -25,6 +26,7 @@ xs/GnomeVFSAsync.xs
 xs/GnomeVFSDirectory.xs
 xs/GnomeVFSFileInfo.xs
 xs/GnomeVFSInit.xs
+xs/GnomeVFSMime.xs
 xs/GnomeVFSOps.xs
 xs/GnomeVFSURI.xs
 xs/GnomeVFSUtils.xs
