@@ -1,3 +1,16 @@
+2003/12/18 20:42 (-0500) muppetman
+
+	* xs/GnomeVFS.xs: hush unused var warning in get_version_info.
+
+	* xs/GnomeVFSAsync.xs: looks like a couple of
+	s/VFS2PERL_GNOME_TYPE/GNOME_VFS_TYPE/ slipped through the cracks.
+
+	* xs/GnomeVFSDirectory.xs, xs/GnomeVFSOps.xs: if using PPCODE, the
+	return type should be void.  this hushes some 'unused var RETVAL'
+	warnings.
+
+	* xs/GnomeVFSUtils.xs: disambiguating braces hush compiler warnings.
+
 2003/12/12 23:29 (+0100) kaffeetisch
 
 	A README
