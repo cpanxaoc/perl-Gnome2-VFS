@@ -15,11 +15,6 @@ our %build_reqs = (
   'GnomeVFS'                => '2.0.0',
 );
 
-# minimum required version of dependancies we need to run
-our %runtime_reqs = (
-	'GnomeVFS'	=> undef,
-);
-
 unless (eval "use ExtUtils::Depends;"
            . "use ExtUtils::PkgConfig;"
            . "use Glib '$build_reqs{'perl-Glib'}';"
@@ -41,8 +36,6 @@ unless (eval "use ExtUtils::Depends;"
 
 my %vfs_pkgcfg = ExtUtils::PkgConfig->find("gnome-vfs-2.0 >= $build_reqs{GnomeVFS}");
 my %cfgs = (vfs => \%vfs_pkgcfg);
-
-$runtime_reqs{'GnomeVFS'} = $vfs_pkgcfg{modversion};
 
 ###############################################################################
 
@@ -155,7 +148,6 @@ sub postamble {
   return Glib::MakeHelper->postamble_clean ()
        . Glib::MakeHelper->postamble_docs (@main::xs_files)
        . Glib::MakeHelper->postamble_rpms (
-		'GNOME_VFS_RUN' => $runtime_reqs{'GnomeVFS'},
 		'GNOME_VFS' => $build_reqs{'GnomeVFS'},
 		'PERL_EXTUTILS_DEPENDS' => 
 			$build_reqs{'perl-ExtUtils-Depends'},
