@@ -42,7 +42,7 @@ newSVGnomeVFSDirectoryHandle (GnomeVFSDirectoryHandle *handle)
 
 	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
 
-	rv = newRV (object);
+	rv = newRV_noinc (object);
 	stash = gv_stashpv ("Gnome2::VFS::Directory::Handle", 1);
 
 	return sv_bless (rv, stash);

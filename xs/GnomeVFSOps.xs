@@ -42,7 +42,7 @@ newSVGnomeVFSHandle (GnomeVFSHandle *handle)
 
 	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
 
-	rv = newRV (object);
+	rv = newRV_noinc (object);
 	stash = gv_stashpv ("Gnome2::VFS::Handle", 1);
 
 	return sv_bless (rv, stash);
@@ -70,7 +70,7 @@ newSVGnomeVFSMonitorHandle (GnomeVFSMonitorHandle *handle)
 
 	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) handle, 0);
 
-	rv = newRV (object);
+	rv = newRV_noinc (object);
 	stash = gv_stashpv ("Gnome2::VFS::Monitor::Handle", 1);
 
 	return sv_bless (rv, stash);
@@ -194,7 +194,6 @@ gnome_vfs_create_symbolic_link (class, uri, target_reference)
     C_ARGS:
 	uri, target_reference
 
-# FIXME: does that leak?
 ##  GnomeVFSResult gnome_vfs_get_file_info (const gchar *text_uri, GnomeVFSFileInfo *info, GnomeVFSFileInfoOptions options) 
 void
 gnome_vfs_get_file_info (class, text_uri, options)
@@ -209,7 +208,7 @@ gnome_vfs_get_file_info (class, text_uri, options)
 	EXTEND (sp, 2);
 	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
 	PUSHs (sv_2mortal (newSVGnomeVFSFileInfo (info)));
-	g_free(info);
+	gnome_vfs_file_info_unref (info);
 
 ##  GnomeVFSResult gnome_vfs_truncate (const gchar *text_uri, GnomeVFSFileSize length) 
 GnomeVFSResult

@@ -1,3 +1,29 @@
+2003/10/31 20:12 (+0100) kaffeetisch
+
+	Memory leak hunting.
+
+	* xs/GnomeVFSApplicationRegistry.xs
+	* xs/GnomeVFSDirectory.xs
+	* xs/GnomeVFSFileInfo.xs
+	* xs/GnomeVFSOps.xs
+	* xs/GnomeVFSURI.xs
+	* xs/GnomeVFSXfer.xs: Use newRV_noinc instead of newRV_inc or
+	newRV all over the place to plug some biiiig memory leaks.  The
+	extra reference count incrementation prevented the destruction
+	handlers from being called at all.
+
+	* xs/GnomeVFSOps.xs: Use gnome_vfs_file_info_unref instead of
+	g_free to free GnomeVFSFileInfo's.
+
+	* xs/GnomeVFSURI.xs: Use gnome_vfs_uri_unref on the URI upon
+	destruction of the SV.
+
+	* xs/GnomeVFSUtils.xs: Add a CLEANUP rule to virtually every
+	function.
+
+	* MANIFEST: Remove build/* which was accidentally added in the
+	last commit.
+
 2003/10/30 16:25 (+0100) kaffeetisch
 
 	* vfs2perl.h

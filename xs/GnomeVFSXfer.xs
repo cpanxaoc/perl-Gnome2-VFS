@@ -54,7 +54,7 @@ newSVGnomeVFSXferProgressInfo (GnomeVFSXferProgressInfo *info)
 			hv_store (hv, "duplicate_name", 14, newSVGChar (info->duplicate_name), 0);
 	}
 
-	return newRV_inc ((SV*) hv);
+	return newRV_noinc ((SV*) hv);
 }
 
 /* ------------------------------------------------------------------------- */

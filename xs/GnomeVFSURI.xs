@@ -40,7 +40,7 @@ newSVGnomeVFSURI (GnomeVFSURI *uri)
 
 	sv_magic (object, 0, PERL_MAGIC_ext, (const char *) uri, 0);
 
-	rv = newRV (object);
+	rv = newRV_noinc (object);
 	stash = gv_stashpv ("Gnome2::VFS::URI", 1);
 
 	return sv_bless (rv, stash);
@@ -57,6 +57,11 @@ DESTROY (rv)
 
 	if (!rv || !SvOK (rv) || !SvROK (rv) || !(mg = mg_find (SvRV (rv), PERL_MAGIC_ext)))
 		return;
+
+	uri = (GnomeVFSURI *) mg->mg_ptr;
+
+	if (uri && uri->ref_count > 0)
+		gnome_vfs_uri_unref ((GnomeVFSURI *) mg->mg_ptr);
 
 	sv_unmagic (SvRV (rv), PERL_MAGIC_ext);
 
@@ -235,6 +240,7 @@ gnome_vfs_uri_extract_short_path_name (uri)
 #gnome_vfs_uri_hash (p)
 #	gconstpointer p
 
+# FIXME, FIXME, FIXME: memory leak!
 ##  GList *gnome_vfs_uri_list_parse (const gchar* uri_list) 
 void
 gnome_vfs_uri_list_parse (class, uri_list)
@@ -245,7 +251,7 @@ gnome_vfs_uri_list_parse (class, uri_list)
 	list = gnome_vfs_uri_list_parse (uri_list);
 	for (; list != NULL; list = list->next) {
 		XPUSHs (sv_2mortal (newSVGnomeVFSURI (list->data)));
-		g_free (list->data);
+		/* Can't do that: g_free (list->data); */
 	}
 	gnome_vfs_uri_list_free (list);
 

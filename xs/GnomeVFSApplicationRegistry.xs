@@ -42,7 +42,7 @@ newSVGnomeVFSApplication (const char *app_id)
 
 	sv_magic (object, 0, PERL_MAGIC_ext, app_id, 0);
 
-	rv = newRV (object);
+	rv = newRV_noinc (object);
 	stash = gv_stashpv ("Gnome2::VFS::Application", 1);
 
 	return sv_bless (rv, stash);

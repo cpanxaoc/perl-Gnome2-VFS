@@ -76,7 +76,7 @@ newSVGnomeVFSFileInfo (GnomeVFSFileInfo *info)
 		/* FIXME: what about GNOME_VFS_FILE_INFO_FIELDS_ACCESS? */
 	}
 
-	return sv_bless (newRV ((SV *) object),
+	return sv_bless (newRV_noinc ((SV *) object),
 	                 gv_stashpv ("Gnome2::VFS::FileInfo", 1));
 }
 

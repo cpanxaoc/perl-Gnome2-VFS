@@ -4,14 +4,6 @@ MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 Makefile.PL
 VFS.pm
-build/IFiles.pm
-build/boot.xsh
-build/register.xsh
-build/vfs2perl-autogen.h
-build/vfs2perl-gtypes.c
-build/vfs2perl-gtypes.h
-build/vfs2perl-version.h
-build/vfs2perl.typemap
 genmaps.pl
 maps
 t/GnomeVFS.t
