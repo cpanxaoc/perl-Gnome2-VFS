@@ -1,3 +1,9 @@
+Overview of changes in Gnome2-VFS 1.001
+=======================================
+
+* Made all version checks refer to stable releases.
+* Made the test suite more robust.
+
 Overview of changes in Gnome2-VFS 1.00
 ======================================
 
