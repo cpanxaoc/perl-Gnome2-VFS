@@ -22,7 +22,7 @@
 
 /* ------------------------------------------------------------------------- */
 
-#ifdef VFS2PERL_BROKEN_FILEPERMISSIONS
+#ifdef VFS2PERL_BROKEN_FILE_PERMISSIONS
 
 /*
  * GnomeVFSFilePermissions is supposed to be a GFlags type, but on some
@@ -70,7 +70,7 @@ _vfs2perl_gnome_vfs_file_permissions_get_type (void)
 	return type;
 }
 
-#endif /* VFS2PERL_BROKEN_FILEPERMISSIONS */
+#endif /* VFS2PERL_BROKEN_FILE_PERMISSIONS */
 
 /* ------------------------------------------------------------------------- */
 

@@ -1,3 +1,9 @@
+2003/11/26 12:33 (-0500) muppetman
+
+	* vfs2perl.h
+	* xs/GnomeVFSFileInfo.xs: repair bits of the patch that got out
+	of sync.  works properly on gnome 2.0 now.
+
 2003/11/25 23:04 (+0100) kaffeetisch
 
 	* vfs2perl.h
