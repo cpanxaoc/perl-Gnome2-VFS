@@ -2,7 +2,7 @@
 use strict;
 use Gnome2::VFS;
 
-use Test::More tests => 40;
+use Test::More tests => 59;
 
 # $Header$
 
@@ -92,6 +92,22 @@ is(Gnome2::VFS -> unlink("/tmp/blu"), "ok");
 
 ###############################################################################
 
+my $monitor;
+
+($result, $monitor) = Gnome2::VFS::Monitor -> add("/tmp", qw(directory), sub {
+  my ($handle, $monitor_uri, $info_uri, $event_type) = @_;
+
+  isa_ok($handle, "Gnome2::VFS::Monitor::Handle");
+  is($monitor_uri, "file:///tmp");
+  is($info_uri, "file:///tmp/ulb");
+  ok($event_type eq "created" or $event_type eq "deleted");
+});
+
+is($result, "ok");
+isa_ok($monitor, "Gnome2::VFS::Monitor::Handle");
+
+###############################################################################
+
 is(Gnome2::VFS -> make_directory("/tmp/ulb", 0755), "ok");
 is(Gnome2::VFS -> remove_directory("/tmp/ulb"), "ok");
 
@@ -102,18 +118,15 @@ is($uri -> remove_directory(), "ok");
 
 ###############################################################################
 
-# XXX: I get 'error-not-supported'. presumably needs FAM.
-# my $monitor;
+# shortly enter the main loop so that the monitor receives the events.
+Glib::Idle -> add(sub {
+  Gtk2 -> main_quit();
+  return 0;
+});
 
-# ($result, $monitor) = Gnome2::VFS::Monitor -> add("/tmp/", qw(directory), sub {
-#   my ($handle, $monitor_uri, $info_uri, $event_type) = @_;
-#   # XXX: how do I get here?
-# });
+Gtk2 -> main();
 
-# is($result, "ok");
-# isa_ok($monitor, "Gnome2::VFS::Monitor::Handle");
-
-# is($monitor -> cancel(), "ok");
+is($monitor -> cancel(), "ok");
 
 ###############################################################################
 

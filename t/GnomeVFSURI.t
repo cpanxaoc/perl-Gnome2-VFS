@@ -21,11 +21,17 @@ ok($uri -> is_parent(Gnome2::VFS::URI -> new("http://www.freenet.de/tmp/argh.htm
 ok(not $uri -> has_parent());
 
 is($uri -> to_string(qw(toplevel_method)), "www.freenet.de");
-is($uri -> resolve_relative("bla.html") -> to_string(), "http://www.freenet.de/bla.html");
 is($uri -> append_string("ble.html") -> to_string(), "http://www.freenet.de/ble.html");
 is($uri -> append_path("bli.html") -> to_string(), "http://www.freenet.de/bli.html");
 is($uri -> append_file_name("blo.html") -> to_string(), "http://www.freenet.de/blo.html");
 ok(not $uri -> is_local());
+
+SKIP: {
+  skip("resolve_relative, it changed in 2.3.1", 1)
+    unless (join("", Gnome2::VFS -> get_version_info()) >= 231);
+
+  is($uri -> resolve_relative("bla.html") -> to_string(), "http://www.freenet.de/bla.html");
+}
 
 ###############################################################################
 

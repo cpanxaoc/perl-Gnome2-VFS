@@ -1,3 +1,17 @@
+2003/10/20 17:15 (+0200) kaffeetisch
+
+	* t/GnomeVFSOps.t: Implemented Gnome2::VFS::Monitor tests.  They
+	need FAM, so I don't know if it's a good idea to enable them by
+	default.  Time will tell.
+
+	* xs/GnomeVFS.xs: Implement gnome_vfs_get_version_info.
+
+	* t/GnomeVFSURI.t: Skip resolve_relative test on versions older
+	than 2.3.1.
+
+	* xs/GnomeVFSURI.xs: Remove version check in
+	gnome_vfs_uri_resolve_relative as it was pointless.
+
 2003/10/19 15:55 (+0200) kaffeetisch
 
 	A ChangeLog

@@ -26,6 +26,15 @@ BOOT:
 #include "register.xsh"
 #include "boot.xsh"
 
+void
+gnome_vfs_get_version_info (class)
+	SV * class
+    PPCODE:
+	EXTEND (SP, 3);
+	PUSHs (sv_2mortal (newSViv (VFS_MAJOR_VERSION)));
+	PUSHs (sv_2mortal (newSViv (VFS_MINOR_VERSION)));
+	PUSHs (sv_2mortal (newSViv (VFS_MICRO_VERSION)));
+
 ##  GnomeVFSResult gnome_vfs_find_directory (GnomeVFSURI *near_uri, GnomeVFSFindDirectoryKind kind, GnomeVFSURI **result, gboolean create_if_needed, gboolean find_if_needed, guint permissions)
 void
 gnome_vfs_find_directory (class, near_uri, kind, create_if_needed, find_if_needed, permissions)

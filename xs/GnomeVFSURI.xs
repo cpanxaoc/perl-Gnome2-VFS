@@ -73,11 +73,7 @@ gnome_vfs_uri_resolve_relative (base, relative_reference)
 	const GnomeVFSURI *base
 	const gchar *relative_reference
     CODE:
-#if VFS_CHECK_VERSION(1,9,1)
 	RETVAL = gnome_vfs_uri_resolve_relative (base, relative_reference);
-#else
-	RETVAL = gnome_vfs_uri_relative_new (base, relative_reference);
-#endif
     OUTPUT:
 	RETVAL
 
