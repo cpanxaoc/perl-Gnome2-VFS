@@ -16,7 +16,6 @@ my $monitor = Gnome2::VFS::Mime::Monitor -> get();
 isa_ok($monitor, "Gnome2::VFS::Mime::Monitor");
 
 my $type = Gnome2::VFS::Mime::Type -> new("text/html");
-
 my $application = $type -> get_default_application();
 
 SKIP: {

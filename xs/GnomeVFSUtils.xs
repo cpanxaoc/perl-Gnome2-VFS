@@ -201,16 +201,27 @@ gnome_vfs_is_primary_thread (class)
     C_ARGS:
 	/* void */
 
-# FIXME: implement.
-###  GnomeVFSResult gnome_vfs_read_entire_file (const char *uri, int *file_size, char **file_contents) 
-#GnomeVFSResult
-#gnome_vfs_read_entire_file (uri, file_size, file_contents)
-#	const char *uri
-#	int *file_size
-#	char **file_contents
-#	
-
 #if VFS_CHECK_VERSION (2, 1, 3)
+
+=for apidoc
+
+Returns a GnomeVFSResult, the file size and the file content.
+
+=cut
+##  GnomeVFSResult gnome_vfs_read_entire_file (const char *uri, int *file_size, char **file_contents) 
+void
+gnome_vfs_read_entire_file (class, uri)
+	const char *uri
+    PREINIT:
+	GnomeVFSResult result;
+	int file_size = 0;
+	char *file_contents = NULL;
+    PPCODE:
+	result = gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
+	EXTEND (sp, 3);
+	PUSHs (sv_2mortal (newSVGnomeVFSResult (result)));
+	PUSHs (sv_2mortal (newSViv (file_size)));
+	PUSHs (sv_2mortal (newSVpv (file_contents, file_size)));
 
 ##  char * gnome_vfs_format_uri_for_display (const char *uri) 
 char *

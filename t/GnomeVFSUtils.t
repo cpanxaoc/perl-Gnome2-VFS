@@ -4,7 +4,7 @@ use Gnome2::VFS;
 
 use Cwd qw(cwd);
 
-use Test::More tests => 24;
+use Test::More tests => 27;
 
 # $Header$
 
@@ -31,6 +31,11 @@ SKIP: {
   ok(Gnome2::VFS -> uris_match("http://gtk2-perl.sf.net", "http://gtk2-perl.sf.net"));
   is(Gnome2::VFS -> get_uri_scheme("http://gtk2-perl.sf.net"), "http");
   is(Gnome2::VFS -> make_uri_from_shell_arg("/~/bla"), "file:///~/bla");
+
+  my ($result, $size, $content) = Gnome2::VFS -> read_entire_file(cwd() . "/" . $0);
+  is($result, "ok");
+  like($size, qr/^\d+$/);
+  like($content, qr(^#!/usr/bin/perl));
 }
 
 SKIP: {

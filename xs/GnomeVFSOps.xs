@@ -460,6 +460,8 @@ gnome_vfs_monitor_add (class, text_uri, monitor_type, func, data=NULL)
     PPCODE:
 	callback = vfs2perl_monitor_callback_create (func, data);
 
+	/* FIXME: destroy that callback somehow. */
+
 	result = gnome_vfs_monitor_add (&handle,
 	                                text_uri,
 	                                monitor_type,
@@ -479,14 +481,6 @@ MODULE = Gnome2::VFS::Ops	PACKAGE = Gnome2::VFS::Monitor::Handle	PREFIX = gnome_
 GnomeVFSResult
 gnome_vfs_monitor_cancel (handle)
 	GnomeVFSMonitorHandle *handle
-    CODE:
-	/* FIXME, FIXME, FIXME: why do I get «dereferencing pointer to incomplete type» here?
-	if (handle && handle->user_data)
-		gperl_callback_destroy ((GPerlCallback *) handle->user_data); */
-
-	RETVAL = gnome_vfs_monitor_cancel (handle);
-    OUTPUT:
-	RETVAL
 
 # --------------------------------------------------------------------------- #
 

@@ -1,3 +1,15 @@
+2003/12/01 23:42 (+0100) kaffeetisch
+
+	* t/GnomeVFSMime: Remove a blank.
+
+	* xs/GnomeVFSMime.xs: Enable some currently leaking methods.
+
+	* xs/GnomeVFSOps.xs: Update comments.
+
+	* t/GnomeVFSUtils.t
+	* xs/GnomeVFSUtils.xs: Implement and test
+	Gnome2::VFS::read_entire_file.
+
 2003/11/30 16:41 (+0100) kaffeetisch
 
 	* xs/GnomeVFSMime.xs: In SvGnomeVFSMimeApplication, check if a
