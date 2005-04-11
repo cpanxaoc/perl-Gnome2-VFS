@@ -1,5 +1,9 @@
 2005/04/11	kaffeetisch
 
+	* META.yml, NEWS, VFS.pm: Stable release 1.021.
+
+2005/04/11	kaffeetisch
+
 	Merge from HEAD:
 
 	* VFS.pm: Documentation fixes.
