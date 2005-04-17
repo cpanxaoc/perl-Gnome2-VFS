@@ -1,3 +1,7 @@
+2005/04/17	kaffeetisch
+
+	* META.yml, NEWS, VFS.pm: Merge from stable-1-02.
+
 2005/03/21	kaffeetisch
 
 	* VFS.pm, t/GnomeVFS.t: Export the following constants on demand
