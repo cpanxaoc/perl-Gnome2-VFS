@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 by the gtk2-perl team
+ * Copyright (C) 2003-2005 by the gtk2-perl team
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -322,6 +322,12 @@ gnome_vfs_truncate (handle, length)
 	RETVAL = gnome_vfs_truncate_handle (handle, length);
     OUTPUT:
 	RETVAL
+
+#if VFS_CHECK_VERSION (2, 11, 0) /* FIXME: 2.12. */
+
+GnomeVFSResult gnome_vfs_forget_cache (GnomeVFSHandle *handle, GnomeVFSFileOffset offset, GnomeVFSFileSize size);
+
+#endif
 
 # --------------------------------------------------------------------------- #
 

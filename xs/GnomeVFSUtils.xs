@@ -255,6 +255,12 @@ gnome_vfs_make_uri_from_input_with_dirs (class, uri, dirs)
 
 #endif
 
+#if VFS_CHECK_VERSION (2, 11, 0) /* FIXME: 2.12. */
+
+char_own * gnome_vfs_make_uri_from_input_with_trailing_ws (const char *location);
+
+#endif
+
 #if VFS_CHECK_VERSION (2, 2, 0)
 
 ##  char * gnome_vfs_make_uri_canonical_strip_fragment (const char *uri) 

@@ -7,7 +7,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 46) :
+  (tests => 47) :
   (skip_all => "You have no ~/.gnome");
 
 Gnome2::VFS -> init();
@@ -80,6 +80,13 @@ is_deeply([$handle -> read(4)], ["ok", 4, "aaa!"]);
 is($handle -> close(), "ok");
 
 # FIXME: warn $handle -> truncate(3);
+
+SKIP: {
+  skip "forget_cache is new in 2.12", 1
+    unless Gnome2::VFS -> CHECK_VERSION(2, 11, 0); # FIXME: 2.12.
+
+  is($handle -> forget_cache(), "ok");
+}
 
 ###############################################################################
 
