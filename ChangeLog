@@ -1,5 +1,9 @@
 2005/04/25	kaffeetisch
 
+	* META.yml, NEWS, VFS.pm: Unstable release 1.030.
+
+2005/04/25	kaffeetisch
+
 	* t/GnomeVFSFileInfo.t: The Test::More bug has been fixed, remove
 	the TODO block.
 
