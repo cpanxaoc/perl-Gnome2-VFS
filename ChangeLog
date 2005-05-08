@@ -1,3 +1,6 @@
+2005/05/08	borup
+
+	* Added examples/monitor.pl: simple example of a monitor.
 2005/04/25	kaffeetisch
 
 	* META.yml, NEWS, VFS.pm: Unstable release 1.030.
