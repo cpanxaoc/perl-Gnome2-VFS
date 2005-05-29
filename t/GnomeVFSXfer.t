@@ -6,8 +6,6 @@ use Test::More;
 
 # $Header$
 
-plan skip_all => "Currently broken"; # FIXMEx
-
 plan -d "$ENV{ HOME }/.gnome" ?
   (tests => 68) :
   (skip_all => "You have no ~/.gnome");

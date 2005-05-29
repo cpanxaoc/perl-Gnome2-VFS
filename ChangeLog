@@ -1,6 +1,22 @@
+2005/05/29	kaffeetisch
+
+	* Makefile.PL: Specify PREREQ_PM in the WriteMakefile call so
+	META.yml gets generated correctly.
+
+	* t/GnomeVFSOps.t: Fix the forget_cache test.  Add a truncate
+	test.
+
+	* t/GnomeVFSXfer.t: This seems to work again, so get rid of the
+	skip_all.
+
+	* xs/GnomeVFSUtils.xs: Fix
+	gnome_vfs_make_uri_from_input_with_trailing_ws by adding the class
+	argument.
+
 2005/05/08	borup
 
 	* Added examples/monitor.pl: simple example of a monitor.
+
 2005/04/25	kaffeetisch
 
 	* META.yml, NEWS, VFS.pm: Unstable release 1.030.
