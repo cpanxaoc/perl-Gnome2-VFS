@@ -1,3 +1,11 @@
+Overview of changes in Gnome2-VFS 1.031
+=======================================
+
+* Add an example demonstrating Gnome2::VFS::Monitor.
+* Fix minor test suite issues.
+* Fix Gnome2::VFS::make_uri_from_input_with_trailing_ws by adding the missing
+  class parameter.
+
 Overview of changes in Gnome2-VFS 1.030
 =======================================
 
@@ -8,21 +16,21 @@ Overview of changes in Gnome2-VFS 1.030
   GNOME_VFS_URI_PATH_STR.
 
 * Add Gnome2::VFS::Mime::Type::get_default_application_for_uri,
-Gnome2::VFS::Mime::Type::get_all_applications_for_uri,
-Gnome2::VFS::Mime::Application::new_from_desktop_id,
-Gnome2::VFS::Mime::Application::get_desktop_id,
-Gnome2::VFS::Mime::Application::get_desktop_file_path,
-Gnome2::VFS::Mime::Application::get_name,
-Gnome2::VFS::Mime::Application::get_generic_name,
-Gnome2::VFS::Mime::Application::get_icon,
-Gnome2::VFS::Mime::Application::get_exec,
-Gnome2::VFS::Mime::Application::get_binary_name,
-Gnome2::VFS::Mime::Application::supports_uris,
-Gnome2::VFS::Mime::Application::requires_terminal,
-Gnome2::VFS::Mime::Application::supports_startup_notification and
-Gnome2::VFS::Mime::Application::get_startup_wm_class,
-Gnome2::VFS::Handle::forget_cache and
-Gnome2::VFS::make_uri_from_input_with_trailing_ws.
+  Gnome2::VFS::Mime::Type::get_all_applications_for_uri,
+  Gnome2::VFS::Mime::Application::new_from_desktop_id,
+  Gnome2::VFS::Mime::Application::get_desktop_id,
+  Gnome2::VFS::Mime::Application::get_desktop_file_path,
+  Gnome2::VFS::Mime::Application::get_name,
+  Gnome2::VFS::Mime::Application::get_generic_name,
+  Gnome2::VFS::Mime::Application::get_icon,
+  Gnome2::VFS::Mime::Application::get_exec,
+  Gnome2::VFS::Mime::Application::get_binary_name,
+  Gnome2::VFS::Mime::Application::supports_uris,
+  Gnome2::VFS::Mime::Application::requires_terminal,
+  Gnome2::VFS::Mime::Application::supports_startup_notification and
+  Gnome2::VFS::Mime::Application::get_startup_wm_class,
+  Gnome2::VFS::Handle::forget_cache and
+  Gnome2::VFS::make_uri_from_input_with_trailing_ws.
 
 Overview of changes in Gnome2-VFS 1.021
 =======================================
