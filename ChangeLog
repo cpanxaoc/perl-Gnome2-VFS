@@ -1,5 +1,9 @@
 2005/06/23	kaffeetisch
 
+	* META.yml, NEWS, VFS.pm: Stable release 1.022.
+
+2005/06/23	kaffeetisch
+
 	Merge from HEAD:
 
 	* t/GnomeVFSFileInfo.t: Use is() instead of is_deeply() to test
