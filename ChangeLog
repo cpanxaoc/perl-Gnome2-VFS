@@ -1,4 +1,10 @@
-2005/06/06	kaffeetisch
+2005/09/05	kaffeetisch
+
+	* MANIFEST, META.yml: Remove META.yml.
+
+	* NEWS, VFS.pm: Stable release 1.040.
+
+2005/06/22	kaffeetisch
 
 	* t/GnomeVFSFileInfo.t: Use is() instead of is_deeply() to test
 	flags values since the latter was changed to always use the string
