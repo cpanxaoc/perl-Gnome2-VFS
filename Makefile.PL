@@ -10,14 +10,12 @@ use File::Spec;
 our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.20',
   'perl-ExtUtils-PkgConfig' => '1.03',
-  'perl-Glib'               => '1.06',
-  'perl-Gtk2'               => '1.02',
+  'perl-Glib'               => '1.100',
   'GnomeVFS'                => '2.0.0',
 );
 
 our %PREREQ_PM = (
   "Glib"                => $build_reqs{'perl-Glib'},
-  "Gtk2"                => $build_reqs{'perl-Gtk2'},
   "ExtUtils::Depends"   => $build_reqs{'perl-ExtUtils-Depends'},
   "ExtUtils::PkgConfig" => $build_reqs{'perl-ExtUtils-PkgConfig'},
 );
@@ -25,9 +23,8 @@ our %PREREQ_PM = (
 unless (eval "use ExtUtils::Depends '$build_reqs{'perl-ExtUtils-Depends'}';"
            . "use ExtUtils::PkgConfig '$build_reqs{'perl-ExtUtils-PkgConfig'}';"
            . "use Glib '$build_reqs{'perl-Glib'}';"
-           . "use Gtk2 '$build_reqs{'perl-Gtk2'}';"
            . "use Glib::MakeHelper;"
-	   . "use Gtk2::CodeGen;"
+	   . "use Glib::CodeGen;"
            . "1") {
   warn "$@\n";
   WriteMakefile(
@@ -102,8 +99,8 @@ my %pod_files = (
   Glib::MakeHelper->do_pod_files (@xs_files),
 );
 
-Gtk2::CodeGen->parse_maps ('vfs2perl', input => [<maps-*\.*>]);
-Gtk2::CodeGen->write_boot (xs_files => \@xs_files,
+Glib::CodeGen->parse_maps ('vfs2perl', input => [<maps-*\.*>]);
+Glib::CodeGen->write_boot (xs_files => \@xs_files,
                            ignore => qr/^Gnome2::VFS$/);
 
 ExtUtils::PkgConfig->write_version_macros (
@@ -155,6 +152,5 @@ sub MY::postamble {
 		'PERL_EXTUTILS_PKGCONFIG' => 
 			$build_reqs{'perl-ExtUtils-PkgConfig'},
 		'PERL_GLIB' => $build_reqs{'perl-Glib'},
-		'PERL_GTK' => $build_reqs{'perl-Gtk2'},
 	);
 }
