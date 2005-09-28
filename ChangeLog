@@ -1,4 +1,10 @@
-2005/09/17	rwmcfa1o
+2005/09/28	kaffeetisch
+
+	* t/GnomeVFSOps.t, t/GnomeVFSUtils.t, xs/GnomeVFSOps.xs,
+	xs/GnomeVFSUtils.xs: Make all version checks refer to stable
+	releases.
+
+2005/09/17	rwmcfa1
 
 	* perl-Gnome2-VFS.spec.in: remove Gtk2 build and run-time deps.
 

@@ -323,7 +323,7 @@ gnome_vfs_truncate (handle, length)
     OUTPUT:
 	RETVAL
 
-#if VFS_CHECK_VERSION (2, 11, 0) /* FIXME: 2.12. */
+#if VFS_CHECK_VERSION (2, 12, 0)
 
 GnomeVFSResult gnome_vfs_forget_cache (GnomeVFSHandle *handle, GnomeVFSFileOffset offset, GnomeVFSFileSize size);
 

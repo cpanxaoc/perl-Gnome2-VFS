@@ -81,7 +81,7 @@ is($handle -> truncate(0), "error-not-supported");
 
 SKIP: {
   skip "forget_cache is new in 2.12", 1
-    unless Gnome2::VFS -> CHECK_VERSION(2, 11, 0); # FIXME: 2.12.
+    unless Gnome2::VFS -> CHECK_VERSION(2, 12, 0);
 
   is($handle -> forget_cache(0, 0), "ok");
 }
