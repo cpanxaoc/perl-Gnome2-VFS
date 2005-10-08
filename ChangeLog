@@ -1,3 +1,8 @@
+2005/10/08	kaffeetisch
+
+	* t/GnomeVFSFileInfo.t: Use is_deeply() or the >= operator on
+	flags values.
+
 2005/09/28	kaffeetisch
 
 	* t/GnomeVFSOps.t, t/GnomeVFSUtils.t, xs/GnomeVFSOps.xs,

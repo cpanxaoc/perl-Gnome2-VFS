@@ -39,8 +39,8 @@ is($info -> get_mime_type(), $info -> { mime_type });
 
 is($info -> { name }, $0);
 is($info -> { type }, "regular");
-is($info -> { permissions }, [qw(user-read user-write)]);
-is($info -> { flags }, "local");
+is_deeply(\@{ $info -> { permissions } }, [qw(user-read user-write)]);
+ok($info -> { flags } >= ["local"]);
 is($info -> { size }, 23);
 is($info -> { mime_type }, "text/plain");
 
