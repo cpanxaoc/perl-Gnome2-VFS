@@ -1,9 +1,9 @@
 Overview of changes in Gnome2-VFS 1.050
 =======================================
 
-* Fix a test suite issue.  [Torsten]
+* Fix a test suite issue.
 * Add Gnome2::VFS::Address::equal, Gnome2::VFS::Address::match and
-  Gnome2::VFS::get_slow_mime_type.  [Torsten]
+  Gnome2::VFS::get_slow_mime_type.
 
 Overview of changes in Gnome2-VFS 1.041
 =======================================
