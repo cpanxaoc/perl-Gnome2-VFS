@@ -1,3 +1,11 @@
+2005/12/12	kaffeetisch
+
+	* t/GnomeVFSAddress.t, xs/GnomeVFSAddress.xs: Wrap
+	gnome_vfs_address_equal and gnome_vfs_address_match.
+
+	* t/GnomeVFSMime, xs/GnomeVFSMime.xs: Wrap
+	gnome_vfs_get_slow_mime_type.
+
 2005/10/08	kaffeetisch
 
 	* t/GnomeVFSFileInfo.t: Use is_deeply() or the >= operator on

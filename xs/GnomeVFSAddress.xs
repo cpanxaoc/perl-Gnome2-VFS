@@ -46,3 +46,11 @@ gnome_vfs_address_to_string (address)
 ##  Not really usable from Perl, are they?
 ##  GnomeVFSAddress *gnome_vfs_address_new_from_sockaddr (struct sockaddr *sa, int len)
 ##  struct sockaddr *gnome_vfs_address_get_sockaddr (GnomeVFSAddress *address, guint16 port, int *len)
+
+#if VFS_CHECK_VERSION (2, 13, 1) /* FIXME: 2.14 */
+
+gboolean gnome_vfs_address_equal (const GnomeVFSAddress *a, const GnomeVFSAddress *b);
+
+gboolean gnome_vfs_address_match (const GnomeVFSAddress *a, const GnomeVFSAddress *b, guint prefix);
+
+#endif

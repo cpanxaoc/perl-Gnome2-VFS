@@ -25,7 +25,7 @@
 
 /* ------------------------------------------------------------------------- */
 
-/*
+#if 0
 
 struct Bonobo_ServerInfo_type
 {
@@ -53,7 +53,7 @@ newSVGnomeVFSMimeAction (GnomeVFSMimeAction *action)
 	...
 }
 
-*/
+#endif
 
 /* ------------------------------------------------------------------------- */
 
@@ -636,7 +636,7 @@ gnome_vfs_mime_monitor_get (class)
 # --------------------------------------------------------------------------- #
 
 MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
- 
+
 ##  char *gnome_vfs_get_mime_type (const char *text_uri)
 char_own *
 gnome_vfs_get_mime_type (class, text_uri)
@@ -656,3 +656,12 @@ gnome_vfs_get_mime_type_for_data (class, data)
 	RETVAL = gnome_vfs_get_mime_type_for_data (real_data, data_size);
     OUTPUT:
 	RETVAL
+
+#if VFS_CHECK_VERSION (2, 13, 1) /* FIXME: 2.14 */
+
+# char * gnome_vfs_get_slow_mime_type (const char *text_uri);
+char_own * gnome_vfs_get_slow_mime_type (class, const char *text_uri)
+    C_ARGS:
+	text_uri
+
+#endif

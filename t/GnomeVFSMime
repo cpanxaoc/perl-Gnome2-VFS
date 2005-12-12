@@ -7,7 +7,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 16) :
+  (tests => 17) :
   (skip_all => "You have no ~/.gnome");
 
 Gnome2::VFS -> init();
@@ -74,6 +74,7 @@ TODO: {
 # is($type -> get_default_action_type(), "none");
 
 ok(defined Gnome2::VFS -> get_mime_type("/usr/bin/perl"));
+ok(defined Gnome2::VFS -> get_slow_mime_type("/usr/bin/perl"), "slow mime type");
 is(Gnome2::VFS -> get_mime_type_for_data("<html></html>"), "text/html");
 
 SKIP: {
