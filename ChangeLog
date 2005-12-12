@@ -1,5 +1,9 @@
 2005/12/12	kaffeetisch
 
+	* NEWS, VFS.pm: Unstable release 1.050.
+
+2005/12/12	kaffeetisch
+
 	* t/GnomeVFSAddress.t, xs/GnomeVFSAddress.xs: Wrap
 	gnome_vfs_address_equal and gnome_vfs_address_match.
 
