@@ -25,8 +25,12 @@ isa_ok($address, "Gnome2::VFS::Address");
 like($address -> get_family_type(), qr/^\d+$/);
 is($address -> to_string(), "127.0.0.1");
 
-ok($address -> equal($address));
-ok($address -> match($address, 4));
+SKIP: {
+  skip "forget_cache is new in 2.12", 2
+    unless Gnome2::VFS -> CHECK_VERSION(2, 13, 1);
+  ok($address -> equal($address));
+  ok($address -> match($address, 4));
+}
 
 ###############################################################################
 

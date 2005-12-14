@@ -1,3 +1,8 @@
+2005/12/13	rwmcfa1
+
+	* t/GoneVFSAddress.t: skip equal and match tests unless version is >
+	2.13.1
+
 2005/12/12	kaffeetisch
 
 	* NEWS, VFS.pm: Unstable release 1.050.
