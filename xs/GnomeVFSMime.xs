@@ -665,3 +665,27 @@ char_own * gnome_vfs_get_slow_mime_type (class, const char *text_uri)
 	text_uri
 
 #endif
+
+#if VFS_CHECK_VERSION (2, 13, 4) /* FIXME: 2.14 */
+
+# const char * gnome_vfs_get_mime_type_for_name (const char *filename);
+const char *
+gnome_vfs_get_mime_type_for_name (class, const char *filename)
+    C_ARGS:
+	filename
+
+# const char * gnome_vfs_get_mime_type_for_name_and_data (const char *filename, gconstpointer data, gssize data_size);
+const char *
+gnome_vfs_get_mime_type_for_name_and_data (class, filename, data)
+	const char *filename
+	SV *data
+    PREINIT:
+	STRLEN data_size;
+	gconstpointer real_data;
+    CODE:
+	real_data = SvPV (data, data_size);
+	RETVAL = gnome_vfs_get_mime_type_for_name_and_data (filename, real_data, data_size);
+    OUTPUT:
+	RETVAL
+
+#endif

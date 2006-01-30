@@ -1,3 +1,13 @@
+2006/01/30	kaffeetisch
+
+	* Makefile.PL, NEWS, VFS.pm: Unstable release 1.051.
+
+2006/01/30	kaffeetisch
+
+	* t/GnomeVFSMime, xs/GnomeVFSMime.xs: Wrap
+	gnome_vfs_get_mime_type_for_name and
+	gnome_vfs_get_mime_type_for_name_and_data.
+
 2005/12/13	rwmcfa1
 
 	* t/GoneVFSAddress.t: skip equal and match tests unless version is >

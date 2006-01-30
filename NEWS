@@ -1,3 +1,9 @@
+Overview of changes in Gnome2-VFS 1.051
+=======================================
+
+* Add Gnome2::VFS::get_mime_type_for_name and
+  Gnome2::VFS::get_mime_type_for_name_and_data.
+
 Overview of changes in Gnome2-VFS 1.050
 =======================================
 
