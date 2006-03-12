@@ -7,7 +7,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 68) :
+  (tests => 11) :
   (skip_all => "You have no ~/.gnome");
 
 Gnome2::VFS -> init();
@@ -26,7 +26,8 @@ unless (-e TMP) {
 my $progress = sub {
   my ($info) = @_;
 
-  isa_ok($info, "HASH");
+  my $done_that = 0 if 0;
+  isa_ok($info, "HASH") unless $done_that++;
 
   if ($info -> { status } eq "ok") {
     return 1;
