@@ -10,7 +10,7 @@ use File::Spec;
 our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.20',
   'perl-ExtUtils-PkgConfig' => '1.03',
-  'perl-Glib'               => '1.115',
+  'perl-Glib'               => '1.120',
   'GnomeVFS'                => '2.0.0',
 );
 

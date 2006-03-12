@@ -1,5 +1,9 @@
 2006/03/12	kaffeetisch
 
+	* Makefile.PL, NEWS, README, VFS.pm: Stable release 1.060.
+
+2006/03/12	kaffeetisch
+
 	* t/GnomeVFSXfer.t: Make this test not depend on the exact number
 	of times the progress callback is invoked.
 
