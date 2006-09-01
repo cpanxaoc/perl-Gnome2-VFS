@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
+use Glib qw(TRUE FALSE);
 use Gnome2::VFS;
 
 use Test::More;
@@ -7,7 +8,7 @@ use Test::More;
 # $Header$
 
 plan -d "$ENV{ HOME }/.gnome" ?
-  (tests => 26) :
+  (tests => 38) :
   (skip_all => "You have no ~/.gnome");
 
 Gnome2::VFS -> init();
@@ -57,11 +58,11 @@ my $callback = sub {
   is($info -> { name }, $node);
   ok($will_loop == 0 || $will_loop == 1);
 
-  return (0, 1);
+  return (TRUE, FALSE);
 };
 
-Gnome2::VFS -> create(TMP . "/bla", "write", 1, 0644);
-Gnome2::VFS -> create(TMP . "/blu", "write", 1, 0644);
+Gnome2::VFS -> create(TMP . "/bla", "write", TRUE, 0644);
+Gnome2::VFS -> create(TMP . "/blu", "write", TRUE, 0644);
 
 is(Gnome2::VFS::Directory -> visit(TMP,
                                    qw(default),

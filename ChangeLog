@@ -1,3 +1,7 @@
+2006-09-01	kaffeetisch
+
+	* t/GnomeVFSDirectory.t: Fix a test failure.  (#351698)
+
 2006/03/12	kaffeetisch
 
 	* Makefile.PL, NEWS, README, VFS.pm: Stable release 1.060.
