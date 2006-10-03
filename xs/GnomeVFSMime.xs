@@ -637,6 +637,9 @@ gnome_vfs_mime_monitor_get (class)
 
 MODULE = Gnome2::VFS::Mime	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::Mime
+=cut
+
 ##  char *gnome_vfs_get_mime_type (const char *text_uri)
 char_own *
 gnome_vfs_get_mime_type (class, text_uri)

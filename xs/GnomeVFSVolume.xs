@@ -164,6 +164,9 @@ gnome_vfs_volume_get_hal_udi (volume)
 
 MODULE = Gnome2::VFS::Volume	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::Volume
+=cut
+
 ##  void gnome_vfs_connect_to_server (char *uri, char *display_name, char *icon)
 void
 gnome_vfs_connect_to_server (class, uri, display_name, icon)

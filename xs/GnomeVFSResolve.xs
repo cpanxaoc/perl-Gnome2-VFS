@@ -22,6 +22,9 @@
 
 MODULE = Gnome2::VFS::Resolve	PACKAGE = Gnome2::VFS	PREFIX = gnome_vfs_
 
+=for object Gnome2::VFS::Resolve
+=cut
+
 ##  GnomeVFSResult gnome_vfs_resolve (const char *hostname, GnomeVFSResolveHandle **handle)
 void
 gnome_vfs_resolve (class, hostname)
