@@ -1,3 +1,7 @@
+2006-11-25	kaffeetisch
+
+	* NEWS, VFS.pm: Stable release 1.061.
+
 2006-10-03	kaffeetisch
 
 	* xs/GnomeVFSMime.xs, xs/GnomeVFSResolve.xs, xs/GnomeVFSVolume.xs:
