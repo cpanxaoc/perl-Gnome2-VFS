@@ -150,3 +150,9 @@ gnome_vfs_drive_get_hal_udi (drive)
 	GnomeVFSDrive *drive
 
 #endif /* 2.8 */
+
+#if VFS_CHECK_VERSION (2, 16, 0)
+
+gboolean gnome_vfs_drive_needs_eject (GnomeVFSDrive *drive);
+
+#endif

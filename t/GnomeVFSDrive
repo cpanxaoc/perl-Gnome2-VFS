@@ -14,7 +14,7 @@ unless (Gnome2::VFS -> CHECK_VERSION(2, 6, 0)) {
   plan(skip_all => "This is new in 2.6");
 }
 
-plan(tests => 12);
+plan(tests => 13);
 
 Gnome2::VFS -> init();
 
@@ -55,6 +55,8 @@ SKIP: {
 # use Gtk2 -init;
 # Glib::Timeout -> add(1000, sub { Gtk2 -> main_quit(); 0; });
 # Gtk2 -> main();
+
+ok(!$drive -> needs_eject());
 
 ###############################################################################
 
