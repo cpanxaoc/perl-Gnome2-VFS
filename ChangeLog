@@ -1,5 +1,12 @@
 2007-07-08	kaffeetisch
 
+	* MANIFEST.SKIP
+	* NEWS
+	* VFS.pm
+	* copyright.pod: Unstable release 1.070.
+
+2007-07-08	kaffeetisch
+
 	* t/GnomeVFSURI.t
 	* xs/GnomeVFSURI.xs: Wrap gnome_vfs_uri_resolve_symbolic_link.
 
