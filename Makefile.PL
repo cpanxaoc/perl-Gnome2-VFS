@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 use Cwd;
 use File::Spec;
 
-# $Header$
+# $Id$
 
 our %build_reqs = (
   'perl-ExtUtils-Depends'   => '0.20',

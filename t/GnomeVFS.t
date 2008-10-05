@@ -2,7 +2,7 @@
 use strict;
 use Test::More;
 
-# $Header$
+# $Id$
 
 plan -d "$ENV{ HOME }/.gnome" ?
   (tests => 3) :

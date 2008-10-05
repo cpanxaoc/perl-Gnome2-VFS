@@ -1,4 +1,4 @@
-# $Header$
+# $Id$
 
 package Gnome2::VFS;
 

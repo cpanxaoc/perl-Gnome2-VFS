@@ -5,7 +5,7 @@ use Gnome2::VFS;
 
 use Test::More;
 
-# $Header$
+# $Id$
 
 plan -d "$ENV{ HOME }/.gnome" ?
   (tests => 38) :
