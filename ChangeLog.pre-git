@@ -1,9 +1,8 @@
 === ChangeLog discontinued ===
 
 	With the move to git, we stop maintaining a separate ChangeLog and
-	rely on proper commit messages instead.
-
-	http://git.gnome.org/browse/perl-Gnome2-VFS/
+	rely on proper commit messages instead.  Web view of changes:
+	<http://git.gnome.org/browse/perl-Gnome2-VFS/>.
 
 2008-02-24  Torsten Schoenfeld  <kaffeetisch@gmx.de>
 
