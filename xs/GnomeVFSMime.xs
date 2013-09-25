@@ -137,7 +137,7 @@ gnome_vfs_mime_id_list_from_application_list (class, ...)
 	ids = gnome_vfs_mime_id_list_from_application_list (applications);
 
 	for (j = ids; j != NULL; j = j->next) {
-		XPUSHs (sv_2mortal (newSVpv (j->data, PL_na)));
+		XPUSHs (sv_2mortal (newSVpv (j->data, 0)));
 		/* g_free (j->data); */
 	}
 
@@ -462,7 +462,7 @@ gnome_vfs_mime_get_all_desktop_entries (mime_type)
 
 	for (i = result; i; i = i->next) {
 		if (i->data) {
-			XPUSHs (sv_2mortal (newSVpv (i->data, PL_na)));
+			XPUSHs (sv_2mortal (newSVpv (i->data, 0)));
 			g_free (i->data);
 		}
 	}
