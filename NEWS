@@ -1,3 +1,9 @@
+Overview of changes in Gnome2-VFS 1.083
+=======================================
+
+* Fix a logic error in the args checking of Gnome2::VFS::read
+* Update FSF address; resolves RT#89039
+
 Overview of changes in Gnome2-VFS 1.082
 =======================================
 
